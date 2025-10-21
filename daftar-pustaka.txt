@@ -1,10 +1,9 @@
 @report{BPPT2020,
-   author = {{Kelompok Kerja Penyusun Strategi Nasional untuk Kecerdasan Artifisial}},
-   institution = {Badan Pengkajian dan Penerapan Teknologi},
+   author = {Badan Pengkajian dan Penerapan Teknologi},
    title = {AI TOWARDS INDONESIA VISION 2045},
    year = {2020},
 }
-@article{Halkiopoulos2024,
+@generic{Halkiopoulos2024,
    abstract = {This paper reviews the literature on integrating AI in e-learning, from the viewpoint of cognitive neuropsychology, for Personalized Learning (PL) and Adaptive Assessment (AA). This review follows the PRISMA systematic review methodology and synthesizes the results of 85 studies that were selected from an initial pool of 818 records across several databases. The results indicate that AI can improve students’ performance, engagement, and motivation; at the same time, some challenges like bias and discrimination should be noted. The review covers the historic development of AI in education, its theoretical grounding, and its practical applications within PL and AA with high promise and ethical issues of AI-powered educational systems. Future directions are empirical validation of effectiveness and equity, development of algorithms that reduce bias, and exploration of ethical implications regarding data privacy. The review identifies the transformative potential of AI in developing personalized and adaptive learning (AL) environments, thus, it advocates continued development and exploration as a means to improve educational outcomes.},
    author = {Constantinos Halkiopoulos and Evgenia Gkintoni},
    doi = {10.3390/electronics13183762},

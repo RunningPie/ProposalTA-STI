@@ -167,7 +167,7 @@
     
     \vspace*{3cm}
     
-    {\Large\bfseries PERANCANGAN SISTEM INFORMASI AKADEMIK BERBASIS WEB}\\
+    {\Large\bfseries Implementasi Integrasi Penilaian Personal dan Sosial dalam Sistem Pembelajaran Adaptif yang Sejalan dengan Strategi Nasional Kecerdasan Artifisial}\\
      \vspace{4cm}
 
     {\Large \textbf{Proposal Tugas Akhir}}\\
@@ -338,25 +338,34 @@
 
 % --- Latar Belakang ---
 \section{Latar Belakang}
-Latar Belakang menjelaskan dasar pemikiran, motivasi, kebutuhan, alasan, atau urgensi pemilihan masalah tugas akhir. Subbab ini berisi penjelasan ringkas tentang kondisi atau situasi yang ada saat ini terkait dengan topik yang dibahas. Tujuan utamanya adalah untuk memberikan informasi secukupnya kepada pembaca agar memahami topik yang akan dibahas. Dalam subbab ini, jelaskan hal-hal berikut ini:
-\begin{enumerate}
-\item	Kondisi atau situasi topik yang dibahas beserta permasalahannya, misalnya tentang pengelolaan informasi di puskesmas daerah pedesaan dan masalah yang dihadapi.
-\item	Berbagai solusi yang telah diterapkan atau solusi yang tersedia dan memungkinkan untuk diterapkan untuk menyelesaikan masalah tersebut.
-\end{enumerate}
+Pembelajaran yang dipersonalisasi dan adaptif sedang mendorong perubahan dalam pendidikan tinggi dari yang awalnya menggunakan pendekatan pedagogis yang berpusat pada pengajar menjadi pendekatan yang berpusat pada siswa \autocite{Ryoo2021}. Menurut \textcite{Halkiopoulos2024}, pergeseran ini terjadi karena pengembangan \textit{personalized learning} (PL), yang didefinisikan sebagai pendidikan yang disesuaikan dengan keterampilan, pengetahuan, dan preferensi individu saat belajar, suatu perkembangan yang sangat dipengaruhi oleh keberadaan \textit{artificial intelligence} (AI). Pembelajaran terpersonalisasi ini memerlukan sistem \textit{e-learning} yang dapat menyesuaikan konten dan urutan penyampaiannya dengan kemampuan pelajar, suatu tugas kustomisasi yang bisa dikerjakan sangat baik oleh AI. Salah satu aspek utama lingkungan modern terpersonalisasi seperti ini adalah hadirnya \textit{adaptive assessment} (AA), suatu sistem penilaian adaptif yang secara terus-menerus menyesuaikan proses penilaiannya sesuai dengan tingkat kesulitan konten dan berdasarkan pada kinerja, preferensi, serta pengetahuan yang diekspresikan oleh peserta didik \autocite{Halkiopoulos2024}. Para peneliti dari bidang pendidikan dan ilmu komputer saat ini telah berusaha mengoptimalkan desain lingkungan pembelajaran adaptif yang kompleks ini dengan menggunakan teknik penambangan data, \textit{machine learning}, dan \textit{deep learning} yang canggih. Teknologi-teknologi ini diperlukan karena lingkungan pembelajaran adaptif perlu mengatasi tantangan personalisasi dalam proses pembelajaran manusia di dunia nyata \autocite{Minn2022}.\\
+
+Memahami potensi transformatif kecerdasan buatan dalam pendidikan, pemerintah Indonesia telah merumuskan Strategi Nasional Kecerdasan Artifisial (Stranas KA) untuk periode 2020--2045 melalui kelompok kerja yang dibentuk oleh Badan Pengkajian dan Penerapan Teknologi \autocite{BPPT2020}. Strategi nasional ini secara eksplisit mengidentifikasi pendidikan dan penelitian sebagai salah satu dari lima bidang prioritas utama untuk pengembangan dan implementasi AI. Dokumen strategi ini menyerukan urgensi untuk meninggalkan pendekatan pedagogis yang bersifat “\textit{one size fits all}” dan secara khusus menyoroti perlunya mengeksplorasi pengembangan sistem penilaian yang adaptif sebagai solusi.\\
+
+Beberapa teknik sudah diterapkan dalam upaya asesmen adaptif, salah satu pendekatan yang banyak digunakan adalah \textit{knowledge tracing} (KT), suatu teknik yang menggunakan data dinamis dari interaksi siswa untuk melacak perkembangan pengetahuan seiring berjalannya waktu. Ada juga model yang lebih lawas seperti \textit{Bayesian Knowledge Tracing} (BKT) yang memodelkan penguasaan keterampilan sebagai transisi antara keadaan “telah dipelajari” dan “belum dipelajari”. Selain dua teknik tersebut, saat ini ada metode yang lebih canggih dan modern, dikenal dengan \textit{Deep Knowledge Tracing} (DKT), suatu metode yang menggunakan \textit{Recurrent Neural Network} (RNN) untuk menghasilkan pelacakan perkembangan pengetahuan seperti KT, tetapi dengan akurasi yang lebih tinggi. Meski DKT ini lebih canggih dan akurat, kompleksitasnya membuat metode ini sulit diinterpretasikan dan secara umum bekerja seperti \textit{blackbox} \autocite{Minn2022}. Alternatif yang lebih praktis dan mudah diinterpretasikan adalah sistem \textit{Elo-rating} seperti dalam permainan catur. Pendekatan ini memodelkan penilaian sebagai interaksi atau “kompetisi” antara siswa dan \textit{item} pembelajaran, dalam hal ini keduanya diberi peringkat numerik yang diperbarui setelah setiap interaksi. Metode ini efisien secara komputasi, mudah diimplementasikan, dan memberikan perkiraan yang andal bahkan dengan ukuran sampel yang kecil \autocite{Vesin2022}.\\
+
+Teknik-teknik yang dibahas di atas semuanya unggul dalam satu hal, yaitu menciptakan pembelajaran yang dipersonalisasi untuk siswa secara individual, tetapi ada risiko bahwa personalisasi yang berlebihan dapat menyebabkan siswa yang sebenarnya bisa memperoleh manfaat dari pembelajaran dalam komunitas, justru merasa terasingkan. Hal ini kemungkinan akan menghalangi manfaat yang bisa diperoleh siswa dari aspek komunal pembelajaran, suatu dilema yang secara inheren sulit diatasi oleh model-model yang berfokus pada individu seperti DKT dan sistem \textit{Elo-rating} \autocite{Halkiopoulos2024}. Strategi Nasional KA Indonesia menekankan pentingnya ekosistem kolaboratif dalam penerapan inovasi kecerdasan artifisial, yang melibatkan pemerintah, industri, akademisi, dan komunitas, yang disebut sebagai kolaborasi “\textit{Quadruple-Helix}” \autocite{BPPT2020}. Sehingga ini menunjukkan bahwa dalam rangka mengembangkan pendidikan berbasis AI dengan asesmen adaptif, sesuai dengan Stranas KA 2020--2045, perlu adanya sistem yang dapat mengelola dan mengoptimalkan interaksi dalam pembelajaran terpersonalisasi dengan skenario yang lebih luas, tidak lagi hanya berfokus pada seorang siswa tunggal.
+% \item	Kondisi atau situasi topik yang dibahas beserta permasalahannya, misalnya tentang pengelolaan informasi di puskesmas daerah pedesaan dan masalah yang dihadapi.
+% \item	Berbagai solusi yang telah diterapkan atau solusi yang tersedia dan memungkinkan untuk diterapkan untuk menyelesaikan masalah tersebut.
+% \end{enumerate}
 
 % --- Rumusan Masalah ---
 \section{Rumusan Masalah}
-Rumusan Masalah berisi masalah utama yang dibahas dalam tugas akhir. Rumusan masalah yang baik memiliki struktur sebagai berikut:
-\begin{enumerate}
-\item	Pokok persoalan dari kondisi atau situasi yang ada saat ini. Dengan kata lain, jelaskan kelemahan atau kekurangan dari kondisi, situasi, atau solusi yang dijelaskan pada latar belakang. Ini merupakan pokok rumusan masalah.
-\item	Elaborasi lebih lanjut urgensi penyelesaian masalah tersebut (mengapa penting untuk diselesaikan dan akibat yang dapat terjadi jika tidak diselesaikan).
-\item	Usulan singkat terkait dengan solusi yang ditawarkan untuk menyelesaikan persoalan.
-Penting untuk diperhatikan bahwa persoalan yang dideskripsikan pada subbab ini akan dipertanggungjawabkan di bab Evaluasi (apakah terselesaikan atau tidak).
-\end{enumerate}
+Dari uraian pada latar belakang, terlihat bahwa ada kesenjangan teknologi yang jelas, yaitu ketiadaan suatu perangkat lunak yang dapat mengelola dan mengoptimalkan interaksi dalam pembelajaran terpersonalisasi dengan skenario yang lebih luas, tidak lagi hanya berfokus pada seorang siswa tunggal. Sistem yang seperti ini diperlukan, tidak hanya untuk mewujudkan pembelajaran yang terpersonalisasi, tetapi juga untuk mengelola dan mengoptimasi pembelajaran sosial dalam dinamika berkelompok. Maka dari itu, permasalahan utama yang ingin diselesaikan adalah \textbf{“Bagaimana cara mengimplementasikan teknik asesmen adaptif dalam suatu sistem perangkat lunak berbasis kecerdasan buatan yang memerhatikan aspek pembelajaran sosial dan selaras dengan Stranas KA Indonesia 2020-2045?”}
+% \begin{enumerate}
+% \item	Pokok persoalan dari kondisi atau situasi yang ada saat ini. Dengan kata lain, jelaskan kelemahan atau kekurangan dari kondisi, situasi, atau solusi yang dijelaskan pada latar belakang. Ini merupakan pokok rumusan masalah.
+% \item	Elaborasi lebih lanjut urgensi penyelesaian masalah tersebut (mengapa penting untuk diselesaikan dan akibat yang dapat terjadi jika tidak diselesaikan).
+% \item	Usulan singkat terkait dengan solusi yang ditawarkan untuk menyelesaikan persoalan.
+% Penting untuk diperhatikan bahwa persoalan yang dideskripsikan pada subbab ini akan dipertanggungjawabkan di bab Evaluasi (apakah terselesaikan atau tidak).
+% \end{enumerate}
 
 % --- Tujuan ---
 \section{Tujuan}
-Tuliskan tujuan utama dan/atau tujuan detail yang akan dicapai dalam pelaksanaan tugas akhir. Fokuskan pada hasil akhir yang ingin diperoleh setelah tugas akhir diselesaikan, terkait dengan penyelesaian persoalan pada rumusan masalah. Penting untuk diperhatikan bahwa tujuan yang dideskripsikan pada subbab ini akan dipertanggungjawabkan di akhir pelaksanaan tugas akhir apakah tercapai atau tidak. Tuliskan kriteria keberhasilan tugas akhir ini.
+Tujuan utama dari tugas akhir ini adalah \textbf{membangun dan mengevaluasi purwarupa sistem perangkat lunak berbasis kecerdasan buatan yang memerhatikan aspek pembelajaran sosial dan selaras dengan Stranas KA Indonesia 2020-2045}. Lebih lanjut, tujuan utama tersebut bisa diturunkan menjadi tujuan-tujuan yang lebih spesifik menjadi:
+\begin{enumerate}
+\item Mengintegrasikan algoritma asesmen adaptif ke dalam suatu purwarupa sistem sehingga dapat secara dinamis mengkalkulasikan penilaian performa pengguna dalam penugasan individual maupun interaksi berkelompok.
+\item Mengevaluasi purwarupa sistem pada sampel populasi pengguna untuk mengevaluasi fungsionalitas dan efektivitas sistem dalam asesmen adaptif.
+\end{enumerate}
 
 % --- Batasan Masalah ---
 \section{Batasan Masalah}
@@ -441,7 +450,7 @@ E = mc^2
 % ============================================================================================
 \chapter{ANALISIS MASALAH}
 \section{Analisis Kondisi Saat Ini}
-Menurut \textcite{laudon2020}, gambarkan terlebih dahulu model konseptual sistem yang ada saat ini. Model konseptual ini berisi berbagai komponen atau subsitem dan interaksi antarsubsistem tersebut. Setelah itu, berikan penjelasan tentang masalah yang ada pada sistem tersebut. Paragraf berikut berisi contoh penjabaran masalah sistem informasi fasilitas kesehatan untuk pasien \autocite{pressman2019}. 
+Menurut \textcite{BPPT2020}, gambarkan terlebih dahulu model konseptual sistem yang ada saat ini. Model konseptual ini berisi berbagai komponen atau subsitem dan interaksi antarsubsistem tersebut. Setelah itu, berikan penjelasan tentang masalah yang ada pada sistem tersebut. Paragraf berikut berisi contoh penjabaran masalah sistem informasi fasilitas kesehatan untuk pasien \autocite{Halkiopoulos2024}. 
 \section{Analisis Kebutuhan}
 \lipsum[4]
 \subsection{Identifikasi Masalah Pengguna}

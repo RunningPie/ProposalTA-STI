@@ -1,0 +1,229 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{cms/global//global/global/global}
+    \entry{Halkiopoulos2024}{article}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=b96f01c6402938478daf2034c86c6050}{%
+           family={Halkiopoulos},
+           familyi={H\bibinitperiod},
+           given={Constantinos},
+           giveni={C\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=672d15eea76a4c4846d11de0f4881e0f}{%
+           family={Gkintoni},
+           familyi={G\bibinitperiod},
+           given={Evgenia},
+           giveni={E\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Multidisciplinary Digital Publishing Institute (MDPI)}%
+      }
+      \strng{namehash}{fbacfecd8975e317eb029c612dad1c7d}
+      \strng{fullhash}{fbacfecd8975e317eb029c612dad1c7d}
+      \strng{fullhashraw}{fbacfecd8975e317eb029c612dad1c7d}
+      \strng{bibnamehash}{fbacfecd8975e317eb029c612dad1c7d}
+      \strng{authorbibnamehash}{fbacfecd8975e317eb029c612dad1c7d}
+      \strng{authornamehash}{fbacfecd8975e317eb029c612dad1c7d}
+      \strng{authorfullhash}{fbacfecd8975e317eb029c612dad1c7d}
+      \strng{authorfullhashraw}{fbacfecd8975e317eb029c612dad1c7d}
+      \field{sortinit}{H}
+      \field{sortinithash}{23a3aa7c24e56cfa16945d55545109b5}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{author}
+      \field{abstract}{This paper reviews the literature on integrating AI in e-learning, from the viewpoint of cognitive neuropsychology, for Personalized Learning (PL) and Adaptive Assessment (AA). This review follows the PRISMA systematic review methodology and synthesizes the results of 85 studies that were selected from an initial pool of 818 records across several databases. The results indicate that AI can improve students’ performance, engagement, and motivation; at the same time, some challenges like bias and discrimination should be noted. The review covers the historic development of AI in education, its theoretical grounding, and its practical applications within PL and AA with high promise and ethical issues of AI-powered educational systems. Future directions are empirical validation of effectiveness and equity, development of algorithms that reduce bias, and exploration of ethical implications regarding data privacy. The review identifies the transformative potential of AI in developing personalized and adaptive learning (AL) environments, thus, it advocates continued development and exploration as a means to improve educational outcomes.}
+      \field{issn}{20799292}
+      \field{issue}{18}
+      \field{journaltitle}{Electronics (Switzerland)}
+      \field{month}{9}
+      \field{title}{Leveraging AI in E-Learning: Personalized Learning and Adaptive Assessment through Cognitive Neuropsychology—A Systematic Analysis}
+      \field{volume}{13}
+      \field{year}{2024}
+      \verb{doi}
+      \verb 10.3390/electronics13183762
+      \endverb
+      \keyw{adaptive assessment (AA),artificial intelligence (AI),brain-based learning,cognitive neuropsychology,e-learning,intelligent tutoring systems (ITS),machine learning (ML),neuropsychological assessment,personalized learning (PL),student engagement}
+    \endentry
+    \entry{BPPT2020}{report}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=7fb21d43204fd4761999f9851d4ab82b}{%
+           family={{Kelompok Kerja Penyusun Strategi Nasional untuk Kecerdasan Artifisial}},
+           familyi={K\bibinitperiod}}}%
+      }
+      \list{institution}{1}{%
+        {Badan Pengkajian dan Penerapan Teknologi}%
+      }
+      \strng{namehash}{7fb21d43204fd4761999f9851d4ab82b}
+      \strng{fullhash}{7fb21d43204fd4761999f9851d4ab82b}
+      \strng{fullhashraw}{7fb21d43204fd4761999f9851d4ab82b}
+      \strng{bibnamehash}{7fb21d43204fd4761999f9851d4ab82b}
+      \strng{authorbibnamehash}{7fb21d43204fd4761999f9851d4ab82b}
+      \strng{authornamehash}{7fb21d43204fd4761999f9851d4ab82b}
+      \strng{authorfullhash}{7fb21d43204fd4761999f9851d4ab82b}
+      \strng{authorfullhashraw}{7fb21d43204fd4761999f9851d4ab82b}
+      \field{sortinit}{K}
+      \field{sortinithash}{c02bf6bff1c488450c352b40f5d853ab}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{AI TOWARDS INDONESIA VISION 2045}
+      \field{year}{2020}
+    \endentry
+    \entry{Minn2022}{article}{}{}
+      \name{author}{1}{}{%
+        {{un=0,uniquepart=base,hash=c9900bd41654b523dbc1405a405854bf}{%
+           family={Minn},
+           familyi={M\bibinitperiod},
+           given={Sein},
+           giveni={S\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier B.V.}%
+      }
+      \strng{namehash}{c9900bd41654b523dbc1405a405854bf}
+      \strng{fullhash}{c9900bd41654b523dbc1405a405854bf}
+      \strng{fullhashraw}{c9900bd41654b523dbc1405a405854bf}
+      \strng{bibnamehash}{c9900bd41654b523dbc1405a405854bf}
+      \strng{authorbibnamehash}{c9900bd41654b523dbc1405a405854bf}
+      \strng{authornamehash}{c9900bd41654b523dbc1405a405854bf}
+      \strng{authorfullhash}{c9900bd41654b523dbc1405a405854bf}
+      \strng{authorfullhashraw}{c9900bd41654b523dbc1405a405854bf}
+      \field{sortinit}{M}
+      \field{sortinithash}{4625c616857f13d17ce56f7d4f97d451}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{author}
+      \field{abstract}{The growth of online learning, enabled by the availability on the Internet of different forms of didactic materials such as MOOCs and Intelligent Tutoring Systems (ITS), in turn, increases the relevance of personalized instructions for students in an adaptive learning environment. There are increasing interests as well as many challenges in the application of Artificial Intelligence (AI) techniques in educational settings to provide adaptive learning content to learners. Knowledge assessment is necessary for providing an adaptive learning environment. A student model serves as a fundamental building block of knowledge assessment in an adaptive learning environment. This paper intends to review the development of dominant families of student models with psychometric theory in early educational research, recent adaptations, and advances with machine learning and deep learning techniques. Our review covers not only the important families of student models but also why they were invented from both theoretical and practical viewpoints with AI and educational perspectives. We believe that the discussion covered in this review will be a valuable reference of introductory insights to AI for educational researchers, as well as an endeavor of introducing basic psychometric perspectives to AI experts for knowledge assessment in the field of learning science. Finally, we provide recent challenges and some potential directions for developing efficient knowledge assessment techniques in future adaptive learning ecosystems.}
+      \field{issn}{2666920X}
+      \field{journaltitle}{Computers and Education: Artificial Intelligence}
+      \field{month}{1}
+      \field{title}{AI-assisted knowledge assessment techniques for adaptive learning environments}
+      \field{volume}{3}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.1016/j.caeai.2022.100050
+      \endverb
+      \keyw{Adaptive learning environments,Cognitive diagnosis modelling,Educational data mining,Formative assessment,Intelligent tutoring systems,Knowledge tracing,Summative assessment}
+    \endentry
+    \entry{Ryoo2021}{report}{}{}
+      \name{author}{2}{}{%
+        {{un=0,uniquepart=base,hash=0dbeb5c313a0ee0feb48187de52ffe0f}{%
+           family={Ryoo},
+           familyi={R\bibinitperiod},
+           given={Jungwoo},
+           giveni={J\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=10820b85cd9237d0ed673770952552de}{%
+           family={Winkelmann},
+           familyi={W\bibinitperiod},
+           given={Kurt},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+      }
+      \strng{namehash}{a7f7fd38eceee893f7c1e14e984e0ff3}
+      \strng{fullhash}{a7f7fd38eceee893f7c1e14e984e0ff3}
+      \strng{fullhashraw}{a7f7fd38eceee893f7c1e14e984e0ff3}
+      \strng{bibnamehash}{a7f7fd38eceee893f7c1e14e984e0ff3}
+      \strng{authorbibnamehash}{a7f7fd38eceee893f7c1e14e984e0ff3}
+      \strng{authornamehash}{a7f7fd38eceee893f7c1e14e984e0ff3}
+      \strng{authorfullhash}{a7f7fd38eceee893f7c1e14e984e0ff3}
+      \strng{authorfullhashraw}{a7f7fd38eceee893f7c1e14e984e0ff3}
+      \field{sortinit}{R}
+      \field{sortinithash}{5e1c39a9d46ffb6bebd8f801023a9486}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Innovative Learning Environments in STEM Higher Education}
+      \field{year}{2021}
+      \verb{urlraw}
+      \verb http://www.springer.com/series/8921
+      \endverb
+      \verb{url}
+      \verb http://www.springer.com/series/8921
+      \endverb
+    \endentry
+    \entry{Vesin2022}{article}{}{}
+      \name{author}{4}{}{%
+        {{un=0,uniquepart=base,hash=7ebdabff5e148235e04be229a11931af}{%
+           family={Vesin},
+           familyi={V\bibinitperiod},
+           given={Boban},
+           giveni={B\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=e846e09b003d99eaa3eac69e664d381b}{%
+           family={Mangaroska},
+           familyi={M\bibinitperiod},
+           given={Katerina},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=4871ae5ab8966e95894a2db5a56cea2c}{%
+           family={Akhuseyinoglu},
+           familyi={A\bibinitperiod},
+           given={Kamil},
+           giveni={K\bibinitperiod},
+           givenun=0}}%
+        {{un=0,uniquepart=base,hash=79694b122919072abdc613b05de2f742}{%
+           family={Giannakos},
+           familyi={G\bibinitperiod},
+           given={Michail},
+           giveni={M\bibinitperiod},
+           givenun=0}}%
+      }
+      \list{publisher}{1}{%
+        {Association for Computing Machinery}%
+      }
+      \strng{namehash}{aa3c73417037bb8744c373f5bc8876dd}
+      \strng{fullhash}{c44b7297f0b9b1d18eefff3975af7629}
+      \strng{fullhashraw}{c44b7297f0b9b1d18eefff3975af7629}
+      \strng{bibnamehash}{c44b7297f0b9b1d18eefff3975af7629}
+      \strng{authorbibnamehash}{c44b7297f0b9b1d18eefff3975af7629}
+      \strng{authornamehash}{aa3c73417037bb8744c373f5bc8876dd}
+      \strng{authorfullhash}{c44b7297f0b9b1d18eefff3975af7629}
+      \strng{authorfullhashraw}{c44b7297f0b9b1d18eefff3975af7629}
+      \field{sortinit}{V}
+      \field{sortinithash}{afb52128e5b4dc4b843768c0113d673b}
+      \field{extradatescope}{labelyear}
+      \field{labeldatesource}{}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{author}
+      \field{abstract}{Online learning systems should support students preparedness for professional practice by equipping them with the necessary skills while keeping them engaged and active. In that regard, the development of online learning systems that support students' development and engagement with programming is a challenging process. Early career computer science professionals are required not only to understand and master numerous programming concepts but also to efficiently learn how to apply them in different contexts. A prerequisite for an effective and engaging learning process is the existence of adaptive and flexible learning environments that are beneficial for both students and teachers. Students can benefit from personalized content adapted to their individual goals, knowledge, and needs; while teachers can be relieved from the pressure to uniformly and promptly evaluate hundreds of student assignments. This study proposes and puts into practice a method for evaluating learning content difficulty and students' knowledge proficiency utilizing a modified Elo-rating method. The proposed method effectively pairs learning content difficulty with students' proficiency, and creates personalized recommendations based on the generated ratings. The method was implemented in a programming tutoring system and tested with interactive learning content for object oriented-programming. By collecting quantitative and qualitative data from students who used the system for one semester, the findings reveal that the proposed method can generate recommendations that are relevant to students and has the potential to assist teachers in grading students by providing a more holistic understanding of their progress over time.}
+      \field{issn}{19466226}
+      \field{issue}{3}
+      \field{journaltitle}{ACM Transactions on Computing Education}
+      \field{month}{6}
+      \field{title}{Adaptive Assessment and Content Recommendation in Online Programming Courses: On the Use of Elo-rating}
+      \field{volume}{22}
+      \field{year}{2022}
+      \verb{doi}
+      \verb 10.1145/3511886
+      \endverb
+      \keyw{E-learning,intelligent tutoring systems,personalisation,programming,ranking students}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
