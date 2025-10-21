@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.4) (preloaded format=xelatex 2025.10.21)  21 OCT 2025 16:56
+This is XeTeX, Version 3.141592653-2.6-0.999997 (MiKTeX 25.4) (preloaded format=xelatex 2025.10.21)  21 OCT 2025 20:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -949,8 +949,6 @@ File: ganesha.jpg Graphic file (type bmp)
 
 ]
 
-[2]
-
 [1] (ProposalTA.toc
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <12> on input line 2.
@@ -1014,13 +1012,13 @@ penilaian performa peng-
 
 
 [3]
-Overfull \hbox (6.58292pt too wide) in paragraph at lines 379--380
+Overfull \hbox (6.58292pt too wide) in paragraph at lines 387--388
 []\TU/TimesNewRoman(0)/m/n/12 Langkah-langkah pencarian, pengelompokan, dan pen
 apisan literatur atau sum-
  []
 
 
-Overfull \hbox (0.90164pt too wide) in paragraph at lines 379--380
+Overfull \hbox (0.90164pt too wide) in paragraph at lines 387--388
 \TU/TimesNewRoman(0)/m/n/12 ber informasi untuk mengumpulkan informasi yang rel
 evan tentang topik yang
  []
@@ -1028,58 +1026,60 @@ evan tentang topik yang
 
 
 [4]
+
+[5]
 Bab II.
 
 
-[5
+[6
 
 ]
 File: gambar1.png Graphic file (type bmp)
 <gambar1.png>
 
 
-[6]
-
 [7]
+
+[8]
 Bab III.
 
 
-[8
+[9
 
 ]
-
-[9]
 
 [10]
+
+[11]
 Bab IV.
-
-
-[11
-
-]
-Bab V.
 
 
 [12
 
 ]
-Overfull \hbox (0.58945pt too wide) in paragraph at lines 495--495
+Bab V.
+
+
+[13
+
+]
+Overfull \hbox (0.58945pt too wide) in paragraph at lines 503--503
 [][]\TU/TimesNewRoman(0)/m/n/12 Vesin, Boban, Katerina Mangaroska, Kamil Akhuse
 yinoglu, dan Michail Giannakos.
  []
 
 
 
-[13
-
-
-]
-
 [14
+
 
 ]
 
 [15
+
+]
+
+[16
 
 ] (ProposalTA.aux)
  ***********
