@@ -7,3 +7,6 @@
 *.toc
 *.synctex.gz
 *.xdv
+*.lof
+*.bcf
+*.lot
