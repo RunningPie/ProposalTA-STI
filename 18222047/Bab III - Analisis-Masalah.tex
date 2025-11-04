@@ -73,10 +73,9 @@ seperti yang diimplementasikan dalam antarmuka MasteryGrids
 \begin{figure}[H] % Sesuai dengan Gambar 1a dari Brusilovsky et al. (2016), hlm. 3
     \centering
     \captionsetup{justification=centering}
-    % Ganti 'path/to/image.png' dengan path sebenarnya ke gambar Anda
     \includegraphics[width=1.0\textwidth]
     {image/brusilovsky_fig1a.png}
-    \caption{Model Konseptual Antarmuka Pembelajaran ]
+    \caption{Model Konseptual Antarmuka Pembelajaran
     Sosial (OSSM) (diadaptasi dari \textcite{Brusilovsky2016})}
     \label{fig:model-konseptual-sosial}
 \end{figure}
@@ -156,7 +155,7 @@ Untuk menjembatani kesenjangan ini dan memenuhi mandat Stranas KA untuk
 "ekosistem kolaboratif" \autocite{BPPT2020}, diperlukan sebuah sistem
 perangkat lunak dengan kebutuhan fungsional sebagai berikut:
 
-\begin{itemize}
+\begin{enumerate}[R1.]
     \item \textbf{Kebutuhan untuk Pemodelan Kemahiran Individu.}
     Sistem harus mampu memodelkan dan melacak perolehan pengetahuan individu
     \autocite{Minn2022}. Sistem memerlukan mekanisme untuk "memperkirakan
@@ -191,7 +190,7 @@ perangkat lunak dengan kebutuhan fungsional sebagai berikut:
     pembelajar yang terintegrasi, yang tidak hanya "mencerminkan kinerja
     individu, tetapi juga pencapaian sekelompok pembelajar" \autocite{Othman2016}.
     
-    \item \textbf{Kebutuhan untuk Mesin Adaptasi Holistik.}
+    \item \textbf{Kebutuhan untuk Mesin Adaptasi Terintegrasi.}
     Model kemahiran terintegrasi yang dihasilkan (dari Kebutuhan 4)
     harus digunakan untuk memberikan adaptasi yang bermakna.
     Sistem harus dapat menggunakan skor gabungan ini sebagai
@@ -206,14 +205,131 @@ perangkat lunak dengan kebutuhan fungsional sebagai berikut:
         secara dinamis \autocite{Nalli2022}.
     \end{enumerate}
 
-\end{itemize}
+\end{enumerate}
 
-\subsection{Identifikasi Masalah Pengguna}
-\lipsum[5]
 \subsection{Kebutuhan Fungsional}
-\lipsum[6]
+\label{ssec:kebutuhan_fungsional}
+Kebutuhan fungsional (\textit{functional requirements}) mendefinisikan
+fungsionalitas atau layanan spesifik yang harus mampu dilakukan oleh sistem.
+Kebutuhan ini diturunkan langsung dari analisis kebutuhan \textit{high-level}
+(R1-R5) pada Subbab \ref{sec:analisis_kebutuhan} untuk menjembatani kesenjangan
+integrasi yang ada. Kebutuhan fungsional sistem diidentifikasi pada Tabel
+\ref{tbl:kebutuhan-fungsional}.
+
+% Menggunakan longtable untuk Kebutuhan Fungsional
+% Kolom: l = left-aligned (Kode), p{...} = paragraph (Deskripsi) dengan lebar 80% dari \textwidth
+\begin{longtable}{@{\extracolsep{\fill}} l p{0.8\textwidth}}
+\caption{Kebutuhan Fungsional (FR) Sistem}\label{tbl:kebutuhan-fungsional} \\
+\toprule
+\textbf{Kode} & \textbf{Deskripsi Kebutuhan Fungsional} \\
+\midrule
+\endfirsthead
+
+% Header untuk halaman selanjutnya
+\caption*{Tabel \ref{tbl:kebutuhan-fungsional} Kebutuhan Fungsional (FR) Sistem (lanjutan)} \\
+\toprule
+\textbf{Kode} & \textbf{Deskripsi Kebutuhan Fungsional} \\
+\midrule
+\endhead
+
+% Footer untuk halaman biasa
+\midrule
+\multicolumn{2}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\bottomrule
+\endfoot
+
+% Footer untuk halaman terakhir
+\bottomrule
+\endlastfoot
+
+% === Data Tabel Kebutuhan Fungsional ===
+\multicolumn{2}{l}{\textbf{Modul Pengguna (Mahasiswa)}} \\
+\addlinespace[0.3em] % Memberi sedikit spasi
+FR-01 & Sistem harus menyediakan fungsionalitas bagi mahasiswa untuk mendaftar (\textit{register}) dan masuk (\textit{login}) ke dalam sistem secara aman. \\
+FR-02 & Sistem harus dapat menyajikan daftar tugas asesmen (misalnya, latihan pengkodean, kuis) dan materi pembelajaran yang relevan kepada mahasiswa. \\
+FR-03 & Sistem harus menyediakan antarmuka bagi mahasiswa untuk mengunggah atau mengumpulkan hasil pekerjaan mereka untuk dinilai oleh sistem. \\
+FR-04 & Sistem harus dapat menugaskan mahasiswa untuk menilai hasil pekerjaan mahasiswa lain dan menyediakan antarmuka (misalnya, rubrik) untuk memasukkan penilaian tersebut \autocite{Ihichr2024}. \\
+FR-05 & Sistem harus menampilkan model kemahiran individu kepada mahasiswa (misalnya, kemajuan mereka per topik) untuk mendorong refleksi \autocite{Brusilovsky2016}. \\
+FR-06 & Sistem harus dapat menampilkan perbandingan sosial, seperti membandingkan kemajuan individu dengan kemajuan rata-rata kelompok atau rekan lain, untuk meningkatkan pembelajaran \autocite{Brusilovsky2016}. \\
+\addlinespace[0.8em] % Spasi antar grup
+
+\multicolumn{2}{l}{\textbf{Modul Pengelola (Dosen)}} \\
+\addlinespace[0.3em]
+FR-07 & Sistem harus menyediakan antarmuka bagi dosen untuk membuat, mengubah, dan menghapus materi pembelajaran serta bank soal/tugas asesmen. \\
+FR-08 & Sistem harus memungkinkan dosen untuk menginisiasi dan mengonfigurasi aktivitas sosial, seperti menentukan bobot \textit{peer assessment} atau memicu pembentukan kelompok. \\
+FR-09 & Sistem harus menyediakan dasbor bagi dosen untuk memantau kemajuan kemahiran seluruh mahasiswa, baik secara individu maupun kelompok. \\
+\addlinespace[0.8em]
+
+\multicolumn{2}{l}{\textbf{Modul Sistem (Logika Inti)}} \\
+\addlinespace[0.3em]
+FR-10 & Sistem harus memiliki modul algoritma untuk menghitung dan memperbarui skor kemahiran individu mahasiswa secara dinamis setiap kali mereka menyelesaikan tugas \autocite{Vesin2022}. \\
+FR-11 & Sistem harus memiliki modul algoritma untuk menghitung skor kinerja sosial mahasiswa (misalnya, berdasarkan kualitas \textit{peer assessment} yang mereka berikan). \\
+FR-12 & Sistem harus mampu \textbf{menggabungkan secara algoritmik} skor kemahiran individu (dari FR-10) dan skor kinerja sosial (dari FR-11) untuk menghasilkan satu model kemahiran yang terintegrasi. \\
+FR-13 & Sistem harus menggunakan skor kemahiran terintegrasi (dari FR-12) sebagai \textit{input} untuk merekomendasikan tugas atau materi pembelajaran berikutnya yang paling sesuai dengan tingkat kemahiran siswa \autocite{Vesin2022}. \\
+FR-14 & Sistem harus dapat menggunakan data dari model kemahiran terintegrasi untuk merekomendasikan atau memicu intervensi sosial secara adaptif, seperti pembentukan kelompok yang heterogen \autocite{Nalli2022}. \\
+\end{longtable}
+
+
 \subsection{Kebutuhan Nonfungsional}
-\lipsum[7]
+\label{ssec:kebutuhan_nonfungsional}
+Kebutuhan nonfungsional (\textit{non-functional requirements}) mendefinisikan kriteria kualitas, batasan, dan atribut operasional dari sistem yang akan dibangun. Kebutuhan ini dirangkum pada Tabel \ref{tbl:kebutuhan-nonfungsional}.
+
+\begin{longtable}{@{\extracolsep{\fill}} l p{0.8\textwidth}}
+\caption{Kebutuhan Nonfungsional (NFR) Sistem}\label{tbl:kebutuhan-nonfungsional} \\
+\toprule
+\textbf{Kode} & \textbf{Deskripsi Kebutuhan Nonfungsional} \\
+\midrule
+\endfirsthead
+
+% Header untuk halaman selanjutnya
+\caption*{Tabel \ref{tbl:kebutuhan-nonfungsional} Kebutuhan Nonfungsional (NFR) Sistem (lanjutan)} \\
+\toprule
+\textbf{Kode} & \textbf{Deskripsi Kebutuhan Nonfungsional} \\
+\midrule
+\endhead
+
+% Footer untuk halaman biasa
+\midrule
+\multicolumn{2}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\bottomrule
+\endfoot
+
+% Footer untuk halaman terakhir
+\bottomrule
+\endlastfoot
+
+% === Data Tabel Kebutuhan Nonfungsional ===
+NFR-01 & \textbf{(Usability)} Antarmuka pengguna harus intuitif dan mudah dioperasikan oleh mahasiswa dan dosen tanpa memerlukan pelatihan teknis mendalam. \\
+NFR-02 & \textbf{(Usability)} Visualisasi model kemahiran (individu dan sosial) harus jelas dan mudah dipahami untuk secara efektif mendorong refleksi pembelajar \autocite{Brusilovsky2016}. \\
+NFR-03 & \textbf{(Performance)} Sistem harus mampu memberikan umpan balik (skor kemahiran baru dan rekomendasi tugas baru) secara \textit{real-time} atau hampir \textit{real-time} (misalnya, dalam < 5 detik) setelah mahasiswa menyelesaikan sebuah aktivitas. \\
+NFR-04 & \textbf{(Scalability)} Arsitektur sistem harus mampu menangani beban kerja setidaknya untuk satu kelas (misalnya, 50 pengguna) yang berinteraksi secara bersamaan selama periode pengumpulan data. \\
+NFR-05 & \textbf{(Security)} Data pribadi dan riwayat asesmen mahasiswa harus dilindungi dan hanya dapat diakses oleh mahasiswa yang bersangkutan dan dosen pengampu mata kuliah. \\
+NFR-06 & \textbf{(Maintainability)} Perangkat lunak harus dibangun dengan arsitektur modular yang memisahkan logika antarmuka pengguna, logika asesmen individu, dan logika kolaborasi, untuk mempermudah pengembangan, pengujian, dan pemeliharaan. \\
+NFR-07 & \textbf{(Portability)} Sistem harus dapat diakses melalui peramban web (\textit{web browser}) modern (seperti Chrome, Firefox, Safari) tanpa memerlukan instalasi perangkat lunak tambahan di sisi klien. \\
+\end{longtable}
+
+
+\subsection{Pemetaan Kebutuhan}
+\label{ssec:pemetaan_kebutuhan}
+Untuk memastikan bahwa semua kebutuhan \textit{high-level} (RX) yang telah diidentifikasi pada Subbab \ref{sec:analisis_kebutuhan} telah ditangani, Tabel \ref{tbl:pemetaan-kebutuhan} memetakan setiap kebutuhan \textit{high-level} tersebut ke kebutuhan fungsional (FR) spesifik yang akan diimplementasikan. Kebutuhan nonfungsional (NFR) yang telah diidentifikasi pada Tabel \ref{tbl:kebutuhan-nonfungsional} berlaku untuk sistem secara keseluruhan.
+
+\begin{table}[H] % Menggunakan [h] agar tabel ditempatkan 'di sini'
+    \centering
+    \captionsetup{justification=centering}
+    \caption{Pemetaan Kebutuhan \textit{High-Level} (RX) ke Kebutuhan Fungsional (FR)}
+    \label{tbl:pemetaan-kebutuhan}
+    \begin{tabular}{@{\extracolsep{\fill}} l p{0.65\textwidth}} % Mengatur lebar kolom kedua
+    \toprule
+    \textbf{Kebutuhan \textit{High-Level} (RX)} & \textbf{Kebutuhan Fungsional Terkait (FR)} \\
+    \midrule
+    R1: Pemodelan Kemahiran Individu & FR-05, FR-10 \\
+    R2: Fasilitasi Interaksi Kolaboratif & FR-01, FR-02, FR-03, FR-04, FR-07, FR-08 \\
+    R3: Penilaian Kinerja Kolaboratif & FR-04, FR-11 \\
+    R4: Integrasi Model Penilaian & FR-12 \\
+    R5: Mesin Adaptasi Terintegrasi & FR-06, FR-09, FR-13, FR-14 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
 
 \section{Analisis Pemilihan Solusi}
 \subsection{Alternatif Solusi}
