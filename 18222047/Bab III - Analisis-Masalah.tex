@@ -4,10 +4,142 @@
 % fungsional dan nonfungsional, analisis berbagai alternatif solusi yang dapat ditawarkan, dan
 % metode pemilihan solusi yang diusulkan.
 % ============================================================================================
+
 \chapter{ANALISIS MASALAH}
 \label{chap:analisis-masalah}
+
 \section{Analisis Kondisi Saat Ini}
-Menurut \textcite{laudon2020}, gambarkan terlebih dahulu model konseptual sistem yang ada saat ini. Model konseptual ini berisi berbagai komponen atau subsitem dan interaksi antarsubsistem tersebut. Setelah itu, berikan penjelasan tentang masalah yang ada pada sistem tersebut. Paragraf berikut berisi contoh penjabaran masalah sistem informasi fasilitas kesehatan untuk pasien \autocite{pressman2019}. 
+\label{sec:kondisi_saat_ini}
+Kondisi saat ini dalam teknologi pembelajaran adaptif masih bergerak dalam ekosistem
+yang terfragmentasi, di suatu ekosistem yang cenderung berfokus secara eksklusif pada
+satu dari dua aliran utama: (1) asesmen adaptif yang berfokus pada individu, atau
+(2) fasilitasi pembelajaran yang berfokus pada sosial/kolaboratif.
+Jarang sekali kedua aliran ini terintegrasi secara algoritmik.
+
+\subsection{Aliran 1: Sistem Asesmen Adaptif Individual}
+Model konseptual yang dominan untuk asesmen adaptif saat ini adalah siklus yang
+berpusat pada pembelajar tunggal. Sebuah contoh representatif dari alur kerja ini
+diimplementasikan dalam sistem ProTuS oleh \textcite{Vesin2022}, seperti yang
+ditunjukkan pada Gambar \ref{fig:model-konseptual-individu}.
+
+\textsc{\begin{figure}[H] % Sesuai dengan Gambar 1 dari Vesin et al. (2022), hlm. 6
+    \centering
+    \captionsetup{justification=centering}
+        \includegraphics[width=0.9\textwidth]
+        {image/vesin_fig1.png}
+    \caption{Model Konseptual Alur Proses Sistem Adaptif
+    Individual (diadaptasi dari \textcite{Vesin2022})}
+    \label{fig:model-konseptual-individu}
+\end{figure}}
+
+Menurut \textcite{Vesin2022} alur proses dalam model ini terdiri dari tiga tahap
+yang diulang secara terus-menerus:
+\begin{enumerate}
+    \item \textbf{Sesi Pembelajaran (\textit{Learning Sessions}):} Siswa berinteraksi
+    dengan sumber daya pembelajaran yang disediakan, seperti membaca materi
+    atau menyelesaikan latihan pengkodean.
+    \item \textbf{Asesmen Adaptif (\textit{Adaptive Assessment}):} Saat siswa
+    menyelesaikan aktivitas, sistem memperbarui peringkat mereka berdasarkan
+    kinerja individu. Peringkat siswa
+    (\textit{student ratings}) dan tingkat kesulitan konten
+    (\textit{difficulty level of content}) dihitung menggunakan metode seperti
+    \textit{Elo-rating} yang dimodifikasi.
+    \item \textbf{Rekomendasi (\textit{Recommendation}):} Sistem kemudian 
+    merekomendasikan aktivitas pembelajaran lebih lanjut yang sesuai dengan
+    kemahiran siswa saat ini.
+\end{enumerate}
+
+Masalah pada model ini adalah bahwa keseluruhan siklus bersifat individualistis.
+Algoritma asesmen (misalnya, \textit{Elo-rating} yang dimodifikasi) menghitung
+keberhasilan siswa murni berdasarkan parameter individual, seperti
+"jumlah upaya yang berhasil/gagal", "persentase/tingkat keberhasilan
+\textit{unit test}", dan "waktu yang dibutuhkan untuk menyelesaikan latihan"
+\autocite{Vesin2022}. Model ini tidak memiliki mekanisme untuk memasukkan
+atau mengukur nilai dari interaksi sosial.
+
+\subsection{Aliran 2: Sistem Pembelajaran Sosial (Terpisah)}
+Secara paralel, penelitian lain telah mengembangkan sistem yang
+berfokus pada aspek sosial dari pembelajaran, namun
+seringkali terpisah dari \textit{loop} asesmen adaptif algoritmik.
+
+\subsubsection{Visualisasi Sosial (OSSM)}
+Salah satu pendekatan populer adalah
+\textit{Open Social Student Modeling} (OSSM),
+seperti yang diimplementasikan dalam antarmuka MasteryGrids
+(Gambar \ref{fig:model-konseptual-sosial}). Model ini
+"melengkapi aspek kognitif OSM dengan aspek sosial"
+\autocite{Brusilovsky2016}.
+
+\begin{figure}[H] % Sesuai dengan Gambar 1a dari Brusilovsky et al. (2016), hlm. 3
+    \centering
+    \captionsetup{justification=centering}
+    % Ganti 'path/to/image.png' dengan path sebenarnya ke gambar Anda
+    \includegraphics[width=1.0\textwidth]
+    {image/brusilovsky_fig1a.png}
+    \caption{Model Konseptual Antarmuka Pembelajaran ]
+    Sosial (OSSM) (diadaptasi dari \textcite{Brusilovsky2016})}
+    \label{fig:model-konseptual-sosial}
+\end{figure}
+
+Fungsi utama model ini menurut \textcite{Brusilovsky2016} adalah "visualisasi",
+sistem ini memungkinkan siswa untuk "mengeksplorasi"
+model-model rekan siswa dan/atau model kelas yang diagregasi.
+Antarmukanya menampilkan baris perbandingan
+"Me vs group" (Saya vs grup) dan baris "Group" (Grup).
+Studi ini menemukan bahwa visualisasi ini
+"meningkatkan pembelajaran, terutama untuk siswa dengan
+pengetahuan awal yang lebih rendah".
+Namun, dalam model ini, aspek sosial adalah \textit{output}
+yang disajikan kepada siswa untuk motivasi, bukan \textit{input}
+yang secara dinamis mengubah perhitungan model kemahiran inti
+\autocite{Brusilovsky2016}.
+
+\subsubsection{Formasi Kelompok (AI Clustering)}
+Pendekatan sosial lainnya yang didukung AI berfokus pada aktivitas kolaboratif
+yaitu penelitian oleh \textcite{Nalli2022}. Dalam model ini, AI tidak digunakan
+untuk menilai,
+melainkan untuk persiapan. Sistem menggunakan perangkat lunak cerdas dengan
+teknik \textit{clustering} untuk membantu guru dalam realisasi kelompok
+heterogen. Tujuannya adalah untuk "memastikan
+heterogenitas" dengan memasukkan setidaknya satu siswa dari setiap klaster
+profil perilaku ke dalam kelompok yang sama. Dalam
+hal ini, AI bertindak sebagai alat bantu administratif \textit{sebelum}
+pembelajaran kolaboratif dimulai, bukan sebagai mekanisme asesmen adaptif
+\textit{selama} proses berlangsung.
+
+\subsection{Masalah Kesenjangan Integrasi pada Kondisi Saat Ini}
+\label{ssec:masalah_integrasi}
+Analisis terhadap kondisi saat ini menunjukkan kesenjangan teknologi yang jelas:
+sistem asesmen adaptif individual (Aliran 1) dan sistem pembelajaran sosial
+(Aliran 2) berkembang secara terpisah.
+\begin{itemize}
+    \item Model asesmen adaptif seperti yang diusulkan oleh
+    \textcite{Vesin2022} sangat efektif dalam mempersonalisasi konten untuk
+    satu siswa, tetapi mengabaikan data sosial.
+    \item Model sosial seperti yang diusulkan oleh \textcite{Brusilovsky2016}
+    dan \textcite{Nalli2022} berhasil menggunakan data sosial untuk visualisasi
+    motivasi atau pembentukan kelompok, tetapi tidak mengintegrasikan data ini
+    kembali ke dalam algoritma asesmen adaptif inti.
+\end{itemize}
+
+Fokus eksklusif pada individu ini dapat menyebabkan "personalisasi berlebih"
+(\textit{over-individualization}), yang berisiko "mengasingkan" pembelajar
+yang mendapat manfaat dari "aspek komunal pembelajaran"
+\autocite{Halkiopoulos2024}. Tinjauan sistematis oleh \textcite{Ihichr2024}
+juga mengungkap bahwa mayoritas sistem asesmen adaptif masih berfokus eksklusif
+pada pelacakan pengetahuan individu.
+
+Masalah utamanya adalah kurangnya sistem yang menjembatani kesenjangan ini.
+Belum ada implementasi perangkat lunak yang secara dinamis menggabungkan skor
+kemahiran \textbf{individu} (misalnya, dari \textit{Elo-rating}) dengan metrik
+kinerja
+\textbf{sosial} (misalnya, kualitas kontribusi dalam \textit{peer assessment})
+untuk menghasilkan satu model kemahiran yang lebih menyeluruh dan terintegrasi.
+Sistem seperti ini
+diperlukan untuk mewujudkan visi Stranas KA Indonesia, yang tidak hanya menuntut
+"pengembangan sistem penilaian adaptif" \autocite{BPPT2020} tetapi juga
+menekankan pentingnya "ekosistem kolaboratif \textit{Quadruple-Helix}"
+\autocite{BPPT2020}.
 \section{Analisis Kebutuhan}
 \lipsum[4]
 \subsection{Identifikasi Masalah Pengguna}
