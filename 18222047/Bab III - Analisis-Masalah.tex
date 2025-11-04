@@ -140,8 +140,74 @@ diperlukan untuk mewujudkan visi Stranas KA Indonesia, yang tidak hanya menuntut
 "pengembangan sistem penilaian adaptif" \autocite{BPPT2020} tetapi juga
 menekankan pentingnya "ekosistem kolaboratif \textit{Quadruple-Helix}"
 \autocite{BPPT2020}.
+
 \section{Analisis Kebutuhan}
-\lipsum[4]
+\label{sec:analisis_kebutuhan}
+Berdasarkan analisis kondisi saat ini pada Subbab \ref{sec:kondisi_saat_ini},
+masalah utama yang teridentifikasi adalah adanya kesenjangan integrasi antara
+sistem asesmen adaptif individual dan sistem pembelajaran sosial. Sistem yang
+ada saat ini cenderung terfragmentasi dan hanya berfokus pada salah satu aspek,
+yang berisiko menimbulkan "personalisasi berlebih"
+(\textit{over-individualization}) dan mengabaikan "aspek komunal
+pembelajaran" \autocite{Halkiopoulos2024}.
+
+Untuk menjembatani kesenjangan ini dan memenuhi mandat Stranas KA untuk
+"pengembangan sistem penilaian adaptif" \autocite{BPPT2020} dalam
+"ekosistem kolaboratif" \autocite{BPPT2020}, diperlukan sebuah sistem
+perangkat lunak dengan kebutuhan fungsional sebagai berikut:
+
+\begin{itemize}
+    \item \textbf{Kebutuhan untuk Pemodelan Kemahiran Individu.}
+    Sistem harus mampu memodelkan dan melacak perolehan pengetahuan individu
+    \autocite{Minn2022}. Sistem memerlukan mekanisme untuk "memperkirakan
+    tingkat kompetensi siswa dan tingkat kesulitan konten pendidikan". Model
+    kemahiran individu ini harus dapat diperbarui
+    secara dinamis seiring waktu berdasarkan kinerja siswa dalam mengerjakan
+    tugas-tugas \autocite{Vesin2022}.
+
+    \item \textbf{Kebutuhan untuk Fasilitasi Interaksi Kolaboratif.}
+    Untuk mengatasi risiko "personalisasi berlebih"
+    \autocite{Halkiopoulos2024}, sistem harus dapat mendukung aktivitas
+    kolaboratif secara daring. Sistem harus mampu
+    mengelola proses interaksi sosial, yang dapat mencakup fungsionalitas
+    untuk "realisasi kelompok heterogen" \autocite{Nalli2022} dan
+    fasilitasi proses \textit{peer assessment} (penilaian sejawat), yang
+    memberikan lingkungan tempat siswa dengan status yang sama saling
+    menilai \autocite{Ihichr2024}.
+    
+    \item \textbf{Kebutuhan untuk Penilaian Kinerja Kolaboratif.}
+    Sistem tidak hanya memfasilitasi, tetapi juga harus mampu menilai kinerja
+    siswa dalam konteks sosial. Sistem memerlukan mekanisme untuk mengukur
+    kontribusi individu dalam aktivitas kelompok \autocite{Ryoo2021} atau
+    mengukur kualitas dari \textit{peer assessment} yang mereka berikan.
+    Ini penting karena penelitian menunjukkan bahwa siswa mendapat lebih
+    banyak manfaat dari bertindak sebagai penilai \autocite{Ihichr2024}.
+    
+    \item \textbf{Kebutuhan untuk Integrasi Model Penilaian.}
+    Ini adalah kebutuhan inti untuk menjembatani kesenjangan yang ada.
+    Sistem harus mampu \textbf{mengintegrasikan secara algoritmik} antara
+    metrik kemahiran individu (dari Kebutuhan 1) dan metrik kinerja sosial
+    (dari Kebutuhan 3). Tujuannya adalah untuk menghasilkan satu model
+    pembelajar yang terintegrasi, yang tidak hanya "mencerminkan kinerja
+    individu, tetapi juga pencapaian sekelompok pembelajar" \autocite{Othman2016}.
+    
+    \item \textbf{Kebutuhan untuk Mesin Adaptasi Holistik.}
+    Model kemahiran terintegrasi yang dihasilkan (dari Kebutuhan 4)
+    harus digunakan untuk memberikan adaptasi yang bermakna.
+    Sistem harus dapat menggunakan skor gabungan ini sebagai
+    \textit{input} untuk \textit{loop} adaptif, yang kemudia
+    memberikan luaran berupa:
+    \begin{enumerate}[a)]
+        \item Rekomendasi konten yang dipersonalisasi, seperti merekomendasikan
+        \textit{item} konten berikutnya berdasarkan tingkat kesulitan yang
+        sesuai \autocite{Vesin2022}; dan
+        \item Intervensi sosial yang adaptif, seperti memfasilitasi perbandingan
+        sosial \autocite{Brusilovsky2016} atau mengoptimalkan komposisi kelompok
+        secara dinamis \autocite{Nalli2022}.
+    \end{enumerate}
+
+\end{itemize}
+
 \subsection{Identifikasi Masalah Pengguna}
 \lipsum[5]
 \subsection{Kebutuhan Fungsional}
