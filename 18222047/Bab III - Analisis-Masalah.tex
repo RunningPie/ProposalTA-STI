@@ -333,6 +333,241 @@ Untuk memastikan bahwa semua kebutuhan \textit{high-level} (RX) yang telah diide
 
 \section{Analisis Pemilihan Solusi}
 \subsection{Alternatif Solusi}
-\lipsum[8]
+\label{ssec:alternatif_solusi}
+Berdasarkan analisis kebutuhan pada Subbab \ref{sec:analisis_kebutuhan}, solusi
+yang diperlukan harus mampu menjembatani kesenjangan antara asesmen individual
+dan asesmen sosial. Tujuan utamanya adalah membangun sistem yang tidak hanya
+memodelkan kemahiran individu (R1) dan memfasilitasi interaksi sosial (R2),
+tetapi juga menilai kinerja sosial tersebut (R3), mengintegrasikan kedua jenis
+penilaian itu (R4), dan menggunakan model terintegrasi tersebut untuk memberikan
+adaptasi yang holistik (R5).
+
+Untuk mencapai tujuan ini, terdapat beberapa alternatif keputusan desain yang
+dapat diambil pada tiga dimensi utama: (1) teknik asesmen kemahiran individu,
+(2) teknik interaksi dan asesmen sosial, dan (3) arsitektur integrasi.
+
+\subsubsection{Alternatif Teknik Asesmen Kemahiran Individu (R1)}
+\label{sssec:alternatif_asesmen_individu}
+Komponen ini bertugas untuk "memperkirakan tingkat kompetensi siswa dan
+tingkat kesulitan konten pendidikan" \autocite{Vesin2022}. Berdasarkan
+studi literatur (Subbab \ref{sec:teknik_algoritma_aa}), beberapa teknik utama
+dapat dipertimbangkan:
+
+\begin{itemize}
+
+    \item \textbf{\textit{Item Response Theory} (IRT):} Pendekatan psikometri
+    klasik yang memodelkan probabilitas jawaban benar berdasarkan kemahiran
+    siswa ($\theta$) dan parameter soal (kesulitan, diskriminasi, tebakan)
+    \autocite{Handayani2025, Ihichr2024}. Kelemahannya adalah model
+    dasarnya mengasumsikan pengetahuan statis (tidak belajar selama tes)
+    \autocite{Minn2022}, serta membutuhkan kalibrasi data dalam jumlah besar
+    dan komputasinya berat untuk pembaruan \textit{real-time}
+    \autocite{Vesin2022}.
+
+    \item \textbf{\textit{Hidden Markov Models} (HMM) dan \textit{Bayesian
+    Knowledge Tracing} (BKT):} 
+    Alternatif ini dikelompokkan bersama karena BKT pada dasarnya adalah
+    penerapan atau kasus khusus dari HMM yang diaplikasikan untuk konteks
+    pelacakan pengetahuan \autocite{Minn2022}. BKT menggunakan model Markov
+    untuk memodelkan transisi keadaan pengetahuan siswa (variabel tersembunyi)
+    dari "belum dipelajari" ke "sudah dipelajari" \autocite{Minn2022, Ihichr2024}.
+    \textbf{Kelebihan:} Secara eksplisit memodelkan "pembelajaran" ($P(T)$)
+    seiring berjalannya waktu. 
+    \textbf{Kekurangan:} Model BKT standar biasanya hanya memodelkan satu
+    keterampilan per \textit{item} dan mengasumsikan keterampilan yang dipelajari
+    tidak pernah dilupakan \autocite{Ihichr2024}.
+    
+    \item \textbf{\textit{Deep Knowledge Tracing} (DKT):} Menggunakan
+    \textit{Recurrent Neural Networks} (RNN) untuk melacak pengetahuan siswa.
+    Meskipun akurat, model ini berfungsi sebagai \textit{black box} sehingga
+    sulit untuk memberikan penjelasan yang bermakna secara psikologis dan
+    komputasinya berat \autocite{Minn2022}. Hal ini berpotensi bertentangan
+    dengan Batasan Masalah (Subbab \ref{sec:batasan_masalah}) yang menuntut
+    solusi yang "mudah diinterpretasikan" dan tidak "kompleks".
+    
+    \item \textbf{Sistem \textit{Elo-rating}:} Memodelkan asesmen sebagai
+    "kompetisi" antara siswa ("pemain") dan \textit{item} konten
+    ("lawan"). Kelebihannya adalah sangat efisien
+    secara komputasi, sederhana untuk diimplementasikan, dan dapat memberikan
+    estimasi yang akurat bahkan dengan ukuran sampel kecil.
+    Model dasarnya dapat dimodifikasi untuk mempertimbangkan parameter tambahan
+    seperti jumlah upaya dan waktu \autocite{Vesin2022}.
+
+\end{itemize}
+
+\subsubsection{Alternatif Teknik Interaksi dan Asesmen Sosial (R2 \& R3)}
+\label{sssec:alternatif_asesmen_sosial}
+Komponen ini harus memfasilitasi interaksi (R2) sekaligus
+menyediakan metrik yang dapat dinilai (R3) untuk mengukur kinerja sosial.
+Tinjauan literatur memberikan beberapa alternatif aktivitas sosial yang
+terbukti berdampak pada hasil belajar, yang dapat diimplementasikan dan
+dinilai:
+
+\begin{itemize}
+    \item \textbf{Penilaian Sejawat (\textit{Peer Assessment}):}
+    Aktivitas ini didefinisikan sebagai proses yang menempatkan penilai
+    (\textit{assessor}) dan yang dinilai (\textit{assessed}) dalam
+    status yang sama dan saling menilai hasil belajar atau kualitas
+    pekerjaan satu sama lain \autocite{Ihichr2024}. Manfaat pedagogis
+    dari \textit{peer assessment} telah terbukti signifikan, namun mekanisme
+    persisnya menjadi kunci. Sebuah studi mendalam oleh \textcite{Lu2012}
+    menyelidiki apakah manfaat tersebut berasal dari \textbf{menerima} umpan balik
+    atau \textbf{memberikan} umpan balik. Temuan studi tersebut sangat
+    jelas: manfaat terbesar tidak diterima oleh siswa yang menerima umpan balik,
+    melainkan oleh siswa yang \textbf{memberikan} umpan balik. Secara spesifik,
+    ditemukan bahwa jumlah umpan balik kognitif yang \textbf{diberikan} oleh
+    seorang penilai (\textit{Cognitive Feedback to Peers} / CTP) secara
+    signifikan memprediksi skor proyek akhir dari penilai itu
+    sendiri \autocite{Lu2012}. Hal ini diyakini terjadi karena penilai harus
+    "terlibat dalam aktivitas kognitif yang lebih menuntut" dan "mendapatkan
+    wawasan tentang pekerjaan mereka sendiri dengan menilai dan mengkritik
+    pekerjaan rekan-rekan mereka". Sebaliknya, studi yang
+    sama menemukan bahwa jumlah umpan balik kognitif yang \textbf{diterima}
+    (\textit{Cognitive Feedback from Peers} / CFP) \textit{tidak}
+    memprediksi skor proyek akhir penerima secara signifikan \autocite{Lu2012}.
+    
+    \textit{\textbf{Metrik Asesmen:}} Berdasarkan temuan ini, sistem dapat
+    dirancang untuk menilai kinerja sosial (R3) dengan mengukur
+    \textbf{kualitas dan kuantitas umpan balik kognitif yang \textit{diberikan}
+    oleh siswa} sebagai metrik utama untuk menilai keterlibatan sosial mereka
+    yang berkontribusi pada pembelajaran mereka sendiri.
+    
+    \item \textbf{Formasi Kelompok Berbasis Atribut Pembelajar:}
+    Alternatif ini berfokus pada penggunaan AI untuk memfasilitasi interaksi
+    (R2) dengan cara membentuk kelompok yang optimal di awal. Dalam pendekatan ini,
+    asesmen sosial (R3) bersifat prediktif, bukan performatif. Tujuannya adalah
+    untuk "mendorong formasi kelompok yang heterogen untuk memaksimalkan
+    keragaman kognitif dan mendorong refleksi kritis" \autocite{Halkiopoulos2024}.
+    Implementasi teknis dari hal ini telah dieksplorasi oleh \textcite{Nalli2022}
+    yang menggunakan "teknik \textit{clustering}" untuk membantu dosen dalam
+    "realisasi kelompok heterogen" berdasarkan "profil perilaku" siswa dari data
+    log Moodle \autocite{Nalli2022}. Penelitian serupa oleh \textcite{Maina2017}
+    secara spesifik mengusulkan penggunaan teknik \textit{machine learning}
+    (K-Means \textit{clustering}) untuk mengelompokkan pembelajar berdasarkan
+    "tingkat kompetensi kolaborasi" (\textit{collaboration competence level})
+    mereka, yang ditentukan dari data interaksi yang telah dikumpulkan
+    sebelumnya \autocite{Maina2017}.
+    
+    \textit{\textbf{Metrik Asesmen:}} Sistem akan menilai "profil" siswa
+    berdasarkan data historis (misalnya, "forum posts, forum replies and forum
+    rating" \autocite{Maina2017}) atau gaya belajar. Kinerja sosial (R3) tidak
+    diukur secara \textit{real-time}, melainkan sistem menggunakan profil ini
+    untuk \textbf{menghasilkan pengelompokan yang optimal} sebagai \textit{output}
+    utamanya.
+    
+    \item \textbf{Sesi Diskusi Terbuka (Analisis Forum):}
+    Alternatif ini berfokus pada fasilitasi interaksi (R2) melalui forum diskusi
+    atau \textit{Computer-Supported Collaborative Work} (CSCW) \autocite{Ryoo2021}.
+    Manfaat pedagogis dari diskusi terbuka telah divalidasi sebelumnya, dalam
+    sebuah studi oleh \textcite{DaifAllah2016} didapatkan bahwa partisipasi aktif
+    dalam "Sesi Diskusi Terbuka" yang terstruktur dan dilakukan di lingkungan
+    yang santai dan non-tradisional (di luar kelas) secara signifikan
+    meningkatkan "kemampuan komunikatif lisan" (\textit{oral communicative
+    abilities}) dan "kepercayaan diri" (\textit{self-confidence}) siswa
+    \autocite{DaifAllah2016}. Tantangannya terletak pada bagaimana menilai
+    aktivitas ini (R3) secara otomatis.
+    
+    \textit{\textbf{Metrik Asesmen:}} Mengadopsi pendekatan dari
+    \textcite{Maina2017}, kinerja sosial siswa dalam forum dapat diukur
+    menggunakan kombinasi metrik kuantitatif dan kualitatif sederhana.
+    Sistem dapat melacak \textbf{jumlah \textit{post} forum} (kontribusi ide baru)
+    dan \textbf{jumlah balasan forum} (interdependensi) sebagai indikator
+    kuantitatif.
+    Sistem dapat bergantung pada \textbf{penilaian forum (\textit{forum
+    rating}) yang diberikan oleh instruktur} atau rekan
+    sejawat, yang kemudian dapat dimasukkan ke dalam model
+    kemahiran sosial siswa.
+
+    \item \textbf{Pendampingan Sejawat (\textit{Peer Mentoring}):}
+    Alternatif ini memfasilitasi interaksi sosial (R2) dengan cara yang
+    lebih terstruktur satu lawan satu, sehingga menciptakan sistem yang bisa
+    memfasilitasi pembentukan pasangan mentor-mentee di antara siswa.
+    Sebuah tinjauan sistematis oleh \textcite{Le2024} mengonfirmasi bahwa skema
+    \textit{peer mentoring} memiliki manfaat signifikan yang dapat diukur pada
+    empat aspek, termasuk "kinerja akademik" (\textit{academic performance}) dan
+    "integrasi sosial" (\textit{social integration}) \autocite{Le2024}.
+    Manfaat ini tidak hanya berdampak pada \textit{mentee} (penerima pendampingan)
+    tetapi juga pada mentor itu sendiri, yang mengembangkan keterampilan
+    kepemimpinan dan pemahaman materi yang lebih dalam.
+    
+    \textit{\textbf{Metrik Asesmen:}} Kinerja sosial (R3) dari seorang
+    \textbf{mentor} dapat dinilai secara tidak langsung. Sistem dapat mengukur
+    efektivitas seorang mentor dengan melacak \textbf{peningkatan kemahiran
+    (skor R1) dari \textit{mentee}} yang didampinginya dari waktu ke waktu.
+
+\end{itemize}
+
+\subsubsection{Alternatif Strategi Integrasi dan Adaptasi (R4 \& R5)}
+\label{sssec:alternatif_integrasi}
+Kesenjangan utama yang diidentifikasi di Subbab \ref{sec:integrasi_penilaian_personal_sosial} adalah kurangnya integrasi algoritmik antara model personal dan sosial. Berdasarkan studi literatur, terdapat beberapa arsitektur alternatif yang \textit{feasible} untuk mengimplementasikan integrasi ini (R4) dan menghasilkan adaptasi holistik (R5).
+
+\begin{itemize}
+    \item \textbf{Alternatif A: Arsitektur Integrasi Visual (OSSM)}
+    
+    Solusi ini berfokus pada \textit{interface} (antarmuka) sebagai sarana
+    integrasi, berdasarkan arsitektur \textit{Open Social Student Modeling}
+    (OSSM) \autocite{Brusilovsky2016}.
+    
+    \textbf{Strategi Integrasi (R4):} Integrasi terjadi di
+    \textbf{lapisan visual}. Sistem menghitung skor individu (R1)
+    dan metrik sosial (misal, rata-rata grup) secara \textbf{terpisah}.
+    Keduanya kemudian divisualisasikan berdampingan (misalnya, sebagai
+    antarmuka "MasteryGrids" yang menunjukkan baris "Saya vs Grup")
+    \autocite{Brusilovsky2016}.
+    
+    \textbf{Strategi Adaptasi (R5):} Adaptasi algoritmik (rekomendasi konten, R5a)
+    tetap didasarkan murni pada skor individu (R1). Adaptasi sosial (R5b)
+    bersifat \textbf{pasif} sehingga sistem bergantung pada motivasi dan refleksi
+    siswa yang muncul setelah melihat perbandingan sosial tersebut. Ini adalah
+    solusi \textit{feasible} yang telah terbukti "meningkatkan pembelajaran,
+    terutama untuk siswa dengan pengetahuan awal yang lebih rendah"
+    \autocite{Brusilovsky2016}.
+
+    \item \textbf{Alternatif B: Arsitektur Integrasi Statis (Formasi Kelompok)}
+    
+    Solusi ini berfokus pada \textit{persiapan} kolaborasi,
+    berdasarkan penelitian seperti oleh \textcite{Maina2017} dan
+    \textcite{Nalli2022}.
+    
+    \textbf{Strategi Integrasi (R4):} Integrasi bersifat \textbf{statis} dan
+    terjadi di awal. Sistem menggunakan data asesmen individu (R1, misal: skor
+    kuis) dan/atau data profil (misal: gaya belajar, "tingkat kompetensi
+    kolaborasi") sebagai \textit{input} untuk algoritma \textit{machine
+    learning} (seperti K-Means \textit{clustering}) \autocite{Maina2017}.
+    
+    \textbf{Strategi Adaptasi (R5):} \textit{Output} dari integrasi ini
+    adalah \textbf{rekomendasi formasi kelompok} (adaptasi sosial, R5b) yang
+    heterogen atau homogen, yang disajikan kepada dosen
+    \autocite{Nalli2022, Maina2017}. Setelah kelompok terbentuk, adaptasi konten
+    personal (R5a) dapat berlanjut secara individual di dalam kelompok tersebut,
+    terpisah dari logika formasi kelompok awal.
+
+    \item \textbf{Alternatif C: Arsitektur Integrasi Dinamis (Model Umpan
+    Balik Ganda)}
+    
+    Solusi ini berfokus pada \textit{loop} umpan balik yang berkelanjutan
+    (\textit{continuous feedback loop}) yang menggabungkan kedua jenis penilaian
+    secara algoritmik.
+    
+    \textbf{Strategi Integrasi (R4):} Integrasi bersifat \textbf{dinamis}.
+    Arsitektur ini menjalankan dua \textit{loop} asesmen yang berjalan paralel:
+    1) \textit{Loop} Personal (R1) yang menilai tugas individu (misal, kuis)
+    dengan algoritma seperti \textit{Elo-rating} \autocite{Vesin2022}, dan
+    2) \textit{Loop} Sosial (R3) yang menilai tugas sosial (misal, kualitas
+    \textit{peer assessment} yang diberikan) menggunakan metrik dari
+    \textcite{Lu2012}.
+    
+    \textbf{Strategi Adaptasi (R5):} Sistem dapat menggunakan \textit{output}
+    dari kedua \textit{loop} ini untuk memberikan adaptasi yang holistik.
+    Adaptasi konten personal (R5a) direkomendasikan berdasarkan skor R1.
+    Adaptasi intervensi sosial (R5b) direkomendasikan berdasarkan skor R3
+    (misalnya, "Kualitas \textit{peer assessment} Anda perlu ditingkatkan,
+    berikut adalah materi latihannya"). Dalam implementasi yang lebih canggih,
+    skor R3 dapat menjadi salah satu parameter (misalnya, sebagai bobot)
+    dalam perhitungan skor R1 untuk menciptakan satu \textbf{skor kemahiran
+    holistik} yang terintegrasi.
+
+\end{itemize}
+
 \subsection{Analisis Penentuan Solusi}
 \lipsum[9]
