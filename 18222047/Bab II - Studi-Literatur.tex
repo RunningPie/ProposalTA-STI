@@ -138,10 +138,11 @@ kompetensi siswa dan tingkat kesulitan konten pendidikan \autocite{Vesin2022}.
 Berbagai teknik dan algoritma telah dikembangkan untuk memungkinkan asesmen adaptif, 
 masing-masing dengan dasar teoretis dan karakteristiknya sendiri. Bagian ini mengulas
 beberapa pendekatan utama yang digunakan dalam asesmen adaptif, dengan fokus pada 
-\textit{Item Response Theory} (IRT), \textit{Bayesian Knowledge Tracing} (BKT),
+\textit{Item Response Theory} (IRT), IRT* atau \textit{Bayesian IRT}, \textit{Hidden Markov Models} (HMM),
+\textit{Factor Analysis} (FA), \textit{Bayesian Knowledge Tracing} (BKT),
 \textit{Deep Knowledge Tracing} (DKT), dan sistem \textit{Elo-rating}.
 
-\subsection{\textit{Item Response Theory (IRT)}}
+\subsection{\textit{Item Response Theory} (IRT)}
 \textit{Item Response Theory (IRT)} adalah salah satu teori yang paling banyak
 digunakan dalam asesmen adaptif, dengan asal-usulnya berasal dari Rasch dan Lord 
 pada tahun 1950-an. Teori psikometri ini digunakan untuk memperkirakan pengetahuan 
@@ -151,20 +152,72 @@ pertanyaan berikutnya yang sesuai pada setiap momen, dan memutuskan kapan tes se
 (\textit{item}) dipetakan sebagai fungsi dari tingkat kemahiran (\textit{ability}) 
 yang mempertimbangkan keseluruhan tugas, dengan asumsi bahwa keadaan pengetahuan 
 siswa statis selama ujian. Keadaan pengetahuan siswa $\theta$ dinilai berdasarkan
- kemahirannya saat tes dilakukan, dan setiap \textit{item} yang diuji membantu
-  memberikan informasi untuk menyempurnakan estimasi keadaan pengetahuan $\theta_{i}$. 
-  Model IRT dasar mengasumsikan satu keterampilan tunggal dan bahwa \textit{item} 
-  tes bersifat unidimensional \autocite{Minn2022}. Model IRT 1-Parameter Logistik 
-  (1PL) hanya melibatkan satu karakteristik \textit{item}, yaitu kesulitan 
-  \textit{item} (b), sedangkan model 2PL melibatkan kesulitan \textit{item} (b) 
-  dan diskriminasi \textit{item} (a), dan model 3PL menambahkan karakteristik 
-  ketiga, yaitu tebakan (\textit{lower asymptote}) \textit{item} (c) 
-  \autocite{Handayani2025}. IRT bukanlah pendekatan \textit{Knowledge Tracing} 
-  karena mengasumsikan siswa tidak belajar selama proses pengujian; ini dianggap 
-  sebagai pendekatan \textit{Knowledge Assessment} \autocite{Minn2022}. Namun, IRT 
-  memiliki tantangan dalam hal kalibrasi pada sampel besar dan kesulitan komputasi 
-  untuk pembaruan yang sering karena estimasi keterampilan baru harus dihitung untuk 
-  setiap siswa setelah satu respons untuk satu tugas \autocite{Vesin2022}.
+kemahirannya saat tes dilakukan, dan setiap \textit{item} yang diuji membantu
+memberikan informasi untuk menyempurnakan estimasi keadaan pengetahuan $\theta_{i}$. 
+Model IRT dasar mengasumsikan satu keterampilan tunggal dan bahwa \textit{item} 
+tes bersifat unidimensional \autocite{Minn2022}. Model IRT 1-Parameter Logistik 
+(1PL) hanya melibatkan satu karakteristik \textit{item}, yaitu kesulitan 
+\textit{item} (b), sedangkan model 2PL melibatkan kesulitan \textit{item} (b) 
+dan diskriminasi \textit{item} (a), dan model 3PL menambahkan karakteristik 
+ketiga, yaitu tebakan (\textit{lower asymptote}) \textit{item} (c) 
+\autocite{Handayani2025}. IRT bukanlah pendekatan \textit{Knowledge Tracing} 
+karena mengasumsikan siswa tidak belajar selama proses pengujian; ini dianggap 
+sebagai pendekatan \textit{Knowledge Assessment} \autocite{Minn2022}. Namun, IRT 
+memiliki tantangan dalam hal kalibrasi pada sampel besar dan kesulitan komputasi 
+untuk pembaruan yang sering karena estimasi keterampilan baru harus dihitung untuk 
+setiap siswa setelah satu respons untuk satu tugas \autocite{Vesin2022}.
+
+\subsection{Model IRT* (\textit{Bayesian IRT})}
+Selain pendekatan frekuentis standar, model IRT juga dapat dipasang dalam
+kerangka kerja Bayesian (\textit{Bayesian framework}), pendekatan ini
+dalam \textcite{Minn2022} disebut sebagai IRT*. Pendekatan Bayesian untuk IRT
+memungkinkan peneliti untuk memasukkan informasi sebelumnya
+(\textit{prior information}) tentang parameter model. \textit{Prior} ini
+dapat ditentukan dengan berbagai cara, seperti menggunakan estimasi parameter
+dari studi sebelumnya atau menggunakan \textit{prior} yang tidak informatif
+jika tidak ada informasi yang tersedia. Sebagai
+contoh, dalam kerangka kerja ini, tingkat kesulitan sebuah \textit{item}
+dapat diperkirakan dari \textit{item} lain yang serupa, atau kemampuan
+siswa dapat diperkirakan dari kinerjanya (\textit{performance}) pada tugas-tugas
+lain \autocite{Minn2022}.
+
+\subsection{\textit{Hidden Markov Models} (HMM)}
+\textit{Hidden Markov Model} (HMM) adalah model statistik yang mengasumsikan
+bahwa sistem yang dimodelkan adalah proses Markov dengan keadaan yang tidak
+teramati (\textit{hidden states}). Dalam konteks asesmen
+pengetahuan, keadaan tersembunyi adalah penguasaan siswa terhadap suatu
+keterampilan. HMM memiliki dua asumsi utama. Asumsi pertama adalah bahwa
+keadaan pada waktu $t$ hanya bergantung pada keadaan pada waktu $t-1$.
+Asumsi kedua adalah bahwa observasi (misalnya, jawaban siswa) pada waktu $t$
+hanya bergantung pada keadaan pada waktu $t$. Dalam model
+ini, keadaan pengetahuan siswa dimodelkan sebagai variabel laten yang bertransisi
+antar keadaan (misalnya, dari "belum dipelajari" ke "dipelajari"), dan
+probabilitas transisi ini diperbarui berdasarkan urutan kinerja siswa
+yang teramati \autocite{Minn2022}.
+
+\subsection{\textit{Factor Analysis} (FA)}
+\textit{Factor Analysis} (FA) atau Analisis Faktor adalah teknik psikometri
+yang menjelaskan korelasi antar variabel yang teramati
+(\textit{observed variables}). Dalam konteks
+asesmen adaptif, FA utamanya berfungsi untuk membangun model pembelajar,
+khususnya komponen kognitif, dengan mengeksplorasi faktor-faktor yang
+memengaruhi proses pembelajaran. Faktor-faktor ini mungkin termasuk
+pengetahuan sebelumnya (\textit{prior knowledge}), kemampuan kognitif,
+dan motivasi. FA membantu dalam menentukan \textit{item}
+yang paling baik mengukur kemahiran pembelajar dan dalam menghasilkan umpan
+balik adaptif \autocite{Ihichr2024}.
+
+Model berbasis FA memperkirakan kemahiran siswa pada setiap
+atribut (keterampilan) sebagai variabel laten kontinu.
+Model FA dapat dibagi menjadi dua kategori: \textit{exploratory factor
+analysis} (EFA) dan \textit{confirmatory factor analysis} (CFA). EFA
+digunakan untuk mengidentifikasi struktur faktor yang mendasari
+(\textit{underlying factor structure}) dan mengurangi jumlah total
+\textit{item} tes. CFA, di sisi lain, digunakan untuk memverifikasi
+apakah struktur faktor yang dihipotesiskan konsisten dengan data
+respons siswa. Dalam CFA, peneliti perlu menentukan
+terlebih dahulu jumlah faktor laten dan \textit{item} mana yang terkait
+dengan faktor mana sebelum melakukan analisis \autocite{Minn2022}.
 
 \subsection{\textit{Bayesian Knowledge Tracing (BKT)}}
 \textit{Bayesian Knowledge Tracing (BKT)} adalah pendekatan luas yang didasarkan pada 
