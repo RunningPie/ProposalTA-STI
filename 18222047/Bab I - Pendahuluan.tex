@@ -27,8 +27,8 @@ Strategi Nasional KA Indonesia menekankan pentingnya ekosistem kolaboratif dalam
 Dari uraian pada latar belakang, terlihat bahwa ada kesenjangan teknologi yang jelas, yaitu ketiadaan suatu perangkat lunak yang dapat mengelola dan mengoptimalkan interaksi dalam pembelajaran terpersonalisasi dengan skenario yang lebih luas, tidak lagi hanya berfokus pada seorang siswa tunggal. Sistem yang seperti ini diperlukan, tidak hanya untuk mewujudkan pembelajaran yang terpersonalisasi, tetapi juga untuk mengelola dan mengoptimasi pembelajaran sosial dalam dinamika berkelompok. Maka dari itu, permasalahan utama yang ingin diselesaikan ada dua, yaitu:
 
 \begin{enumerate}
-  \item bagaimana cara mengimplementasikan teknik asesmen adaptif dalam suatu sistem perangkat lunak berbasis kecerdasan buatan yang memerhatikan aspek pembelajaran sosial, dan
-  \item bagaimana cara mengevaluasi sistem asesmen adaptif tersebut pada sampel populasi pengguna untuk menilai fungsionalitas dan efektivitasnya.
+  \item Bagaimana rancangan dan implementasi purwarupa sistem perangkat lunak berbasis kecerdasan buatan yang mampu mengintegrasikan penilaian performa pengguna individual dengan penilaian interaksi berkelompok?
+  \item Bagaimana hasil evaluasi fungsionalitas dan efektivitas purwarupa sistem tersebut setelah diujicobakan pada sampel populasi pengguna?
 \end{enumerate}
 
 % \begin{enumerate}
@@ -53,11 +53,9 @@ Tujuan utama dari tugas akhir ini adalah \textbf{membangun dan mengevaluasi purw
 \label{sec:batasan_masalah}
 Untuk memastikan penelitian ini tetap fokus dan dapat diselesaikan dalam jangka waktu yang ditentukan, maka ditetapkan batasan-batasan sebagai berikut:
 \begin{enumerate}
-  \item Platform dan Teknologi: Purwarupa perangkat lunak yang dikembangkan akan berbasis web (\textit{web-based}). Penelitian ini tidak akan mencakup pengembangan aplikasi untuk \textit{platform} lain seperti aplikasi \textit{native} Android, iOS, atau \textit{desktop}.
-  \item Algoritma Asesmen: Penelitian akan berfokus pada implementasi dan integrasi satu teknik asesmen adaptif yang komputasinya efisien dan mudah diinterpretasikan. Penelitian ini tidak akan melakukan perbandingan performa antara berbagai algoritma asesmen adaptif yang kompleks (seperti \textit{Deep Knowledge Tracing}).
-  \item Konten Pembelajaran: Sistem yang dibangun merupakan sebuah kerangka kerja (\textit{framework}) yang agnostik terhadap materi pelajaran. Konten yang digunakan selama tahap evaluasi (misalnya, bank soal) akan terbatas pada satu domain pengetahuan spesifik (contoh: Dasar-Dasar Algoritma dan Pemrograman) dan tidak bersifat komprehensif.
-  \item Skala Evaluasi: Evaluasi fungsionalitas dan efektivitas sistem akan dilakukan pada skala terbatas, melibatkan satu kelompok sampel populasi pengguna (misalnya, satu kelas perkuliahan). Penelitian ini tidak bertujuan untuk melakukan studi longitudinal atau generalisasi hasil ke populasi yang lebih luas.
-  \item Fungsionalitas Sistem: Purwarupa akan mencakup fungsionalitas inti yang dibutuhkan untuk asesmen adaptif individual dan kolaboratif, serta visualisasi data penilaian. Fitur-fitur pendukung yang biasa ditemukan pada Learning Management System (LMS) lengkap, seperti manajemen pengguna tingkat lanjut, forum diskusi, atau pengiriman notifikasi, tidak akan diimplementasikan.
+  \item Batasan Konteks Strategis dan Kultural: Permasalahan asesmen adaptif yang dikaji akan difokuskan pada konteks yang selaras dengan visi Strategi Nasional Kecerdasan Artifisial (Stranas KA) Indonesia . Ini berarti penelitian berfokus pada pengembangan sistem yang mendukung ekosistem kolaboratif, yang disesuaikan dengan kebutuhan dan potensi implementasi di lingkungan pendidikan tinggi di Indonesia.
+  \item Fokus masalah utama penelitian ini adalah pada kesenjangan integrasi algoritmik antara asesmen adaptif individual dan asesmen kolaboratif. Penelitian tidak akan menginvestigasi masalah lain dalam asesmen adaptif (seperti deteksi gaya belajar atau cheating), melainkan terbatas pada perancangan model yang menggabungkan metrik kemahiran personal dengan metrik kinerja sosial.
+  \item Permasalahan yang dikaji terbatas pada penilaian luaran kognitif (cognitive outcomes), yaitu pelacakan "keterampilan" dan "pengetahuan" siswa. Penelitian ini tidak akan mencakup perancangan model untuk menilai luaran afektif (seperti motivasi atau kepuasan) atau luaran perilaku (seperti durasi belajar) sebagai ukuran utama kemahiran. 
 \end{enumerate}
 % Tuliskan batasan-batasan yang diambil dalam pelaksanaan tugas akhir. Batasan ini dapat dihindari (bersifat opsional, tidak perlu ada) jika topik atau judul tugas akhir dibuat cukup spesifik.
 
