@@ -160,7 +160,13 @@ siswa statis selama ujian. Keadaan pengetahuan siswa $\theta$ dinilai berdasarka
 kemahirannya saat tes dilakukan, dan setiap \textit{item} yang diuji membantu
 memberikan informasi untuk menyempurnakan estimasi keadaan pengetahuan $\theta_{i}$. 
 Model IRT dasar mengasumsikan satu keterampilan tunggal dan bahwa \textit{item} 
-tes bersifat unidimensional \autocite{Minn2022}.
+tes bersifat unidimensional \autocite{Minn2022}. Secara formal, model IRT dasar
+bisa diekspresikan dengan rumus matematika seperti berikut ini.
+
+\begin{align}
+P_{ij} &= \sigma(\theta_i - \beta_j) \notag \\
+     &= \frac{1}{1 + e^{\theta_i - \beta_j}} \label{eq:rumus_irt}
+\end{align}
 
 Model IRT bisa dirancang dengan berbagai variasi parameter logistik.
 Model IRT dengan 1-Parameter Logistik 
@@ -187,7 +193,19 @@ jika tidak ada informasi yang tersedia. Sebagai
 contoh, dalam kerangka kerja ini, tingkat kesulitan sebuah \textit{item}
 dapat diperkirakan dari \textit{item} lain yang serupa, atau kemampuan
 siswa dapat diperkirakan dari kinerjanya (\textit{performance}) pada tugas-tugas
-lain \autocite{Minn2022}.
+lain. Pendekatan ini memanfaatkan pendekatan Bayesian dan
+melakukan regularisasi terhadap $log P_ij$ dengan menerapkan distribusi
+standard \textit{normal prior} independen ke setiap $\theta_i$ dan $\beta_j$.
+Dengan demikian, model ini memaksimalkan probabilitas log posterior dari {$\theta_i$, $\beta_j$}
+jika diketahui data respons {r: (i, j, r, t) $\in$ D}, dengan r adalah respons biner (nilainya antara 0 dan 1),
+t adalah waktu ketika respons diberikan, dan D adalah kumpulan \textit{tuple} (i, j, r, t) yang menunjukkan
+semua respons yang diberikan oleh siswa i pada \textit{item} j pada waktu t. Dalam penelitian oleh \textcite{Minn2022},
+model IRT* dapat dirumuskan sebagai berikut.
+
+\begin{multline}
+\log P(\{\theta_i\}, \{\beta_j\}|D) = \sum_{(i,j,r,t) \in D} r\log \sigma(\theta_i - \beta_j) + (1-r) \\
+\log(1 - \sigma(\theta_i - \beta_j)) - \frac{1}{2}\sum_i \theta_i^2 - \frac{1}{2}\sum_j \beta_j^2 + C \label{eq:rumus_irt_star}
+\end{multline}
 
 % \subsection{\textit{Hidden Markov Models} (HMM)}
 % \textit{Hidden Markov Model} (HMM) adalah model statistik yang mengasumsikan
@@ -261,6 +279,17 @@ dipelajari" menjadi "dipelajari". Berbagai ekstensi BKT telah diperkenalkan, sep
 memperhitungkan pengetahuan sebelumnya siswa atau kesulitan \textit{item} 
 \autocite{Minn2022}.
 
+\textsc{\begin{figure}[H] % Sesuai dengan Gambar 1 dari Vesin et al. (2022), hlm. 6
+    \centering
+    \captionsetup{justification=centering}
+        \includegraphics[width=0.9\textwidth]
+        {image/standard_bkt.png}
+    \caption{Contoh Model Konseptual dari BKT Standard yang Mengestimasi
+    Transisi \textit{State} siswa dari Belum Dipelajari (\textit{Not Learned})
+    menjadi Sudah Dipelajari (\textit{Learned}) (diadaptasi dari \textcite{Minn2022})}
+    \label{fig:model-standard-bkt}
+\end{figure}}
+
 \subsection{\textit{Deep Knowledge Tracing (DKT)}}
 \textit{Deep Knowledge Tracing (DKT)}, sebuah algoritma perintis yang
 menggunakan jaringan neural rekuren dalam (\textit{deep recurrent neural networks})
@@ -307,6 +336,51 @@ mempertimbangkan parameter tambahan seperti jumlah upaya dan waktu yang digunaka
 bukan hanya status terselesaikan atau tidak, untuk memberikan adaptivitas dan
 rekomendasi dalam tugas pemrograman \textit{open-ended}.
 
+Secara spesifik, metode yang diusulkan menerapkan dua strategi, (1) memperbarui peringkat
+berdasarkan performa siswa pada materi pembelajaran dibandingkan nilai ekspektasinya dan (2)
+tingkat kesulitan konten pembelajaran diperbarui berdasarkan tingkat pemahaman siswa yang berhasil,
+ataupun gagal dalam latihan. Secara matematis, cara ini mengestimasi probabilitas seorang siswa \textit{i} mampu
+menyelesaikan latihan j berdasarkan peringkat siswa saat ini dan tingkat kesulitan latihan \textit{j}.
+Peringkat siswa dan kesulitan latihan kemudian diperbarui menurut rumus berikut:
+
+\begin{align}
+R_i &= R_{i-1} + K (W - W_e)\label{eq:rumus_elo_student}
+\end{align}
+\begin{align}
+D_j &= D_{j-1} + K (W_e - W)\label{eq:rumus_elo_student}
+\end{align}
+
+dengan $R_i$ adalah peringkat siswa setelah menyelesaikan latihan ke-i,
+$R_{i-1}$ adalah peringkat siswa sebelum menyelesaikan latihan ke-i,
+$D_j$ adalah tingkat kesulitan latihan ke-j setelah siswa menyelesaikannya,
+$D_{j-1}$ adalah tingkat kesulitan latihan ke-j sebelum siswa menyelesaikannya,
+$K$ adalah faktor penyesuaian yang menentukan seberapa besar perubahan peringkat
+atau tingkat kesulitan, nilai ini dikurangi secara bertahap seiring siswa menyelesaikan lebih banyak latihan,
+$W$ merepresentasikan hasil dari penyelesaian latihan yang direkomendasikan (dengan kata lain adalah tingkat keberhasilan),
+yang dihitung berdasarkan formula berikut:
+
+\begin{align}
+W = \left(\frac{(A_s + A_o)T_c}{2A_oT_p}\right)(a_id_i - a_it_i). \label{eq:rumus_W_elo}
+\end{align}
+
+Rumus \ref{eq:rumus_W_elo} di atas adalah kunci modifikasi algoritma \textit{elo-rating} dari riset oleh \textcite{Vesin2022},
+variabel-variabelnya dijelaskan dalam laporan hasil risetnya dengan definisi di bawah ini:
+\begin{itemize}
+    \item $A_s$: banyaknya upaya yang berhasil untuk latihan tertentu
+    \item $A_o$: banyaknya total upaya untuk latihan tertentu
+    \item $T_c$: banyaknya latihan yang sudah diselesaikan
+    \item $T_p$: banyaknya latihan yang diselesaikan dengan benar
+    \item $a_i$: bobot yang menentukan seberapa penting kecepatan (waktu) memengaruhi skor akhir
+    \item $d_i$: merepresentasikan batas waktu
+    \item $t_i$: merepresentasikan waktu yang dibutuhkan untuk menyelesaikan latihan
+\end{itemize}
+
+Terakhir adalah komponen $W_e$, komponen ini merepresentasikan probabilitas
+seorang siswa mampu menyelesaikan latihan tertentu, yang dihitung berdasarkan rumus elo standard \autocite{Elo1978}:
+\begin{align}
+W_e = \frac{1}{1+10^{\frac{R_{i-1} - D_{j-1}}{400}}}. \label{eq:rumus_W_e_elo}
+\end{align}
+
 \subsection{Contoh Arsitektur Sistem Asesmen Individual yang Ada Saat Ini}
 \label{ssec:arsitektur_sistem_aa_individual}
 Berbagai teknik yang telah dibahas di atas (IRT, Elo-rating, dll.) umumnya
@@ -317,7 +391,7 @@ berpusat pada pembelajar tunggal. Sebuah contoh representatif dari alur kerja in
 diimplementasikan dalam sistem ProTuS oleh \textcite{Vesin2022}, seperti yang
 ditunjukkan pada Gambar \ref{fig:model-konseptual-individu}.
 
-\textsc{\begin{figure}[H] % Sesuai dengan Gambar 1 dari Vesin et al. (2022), hlm. 6
+\textsc{\begin{figure}[H]
     \centering
     \captionsetup{justification=centering}
         \includegraphics[width=0.9\textwidth]
