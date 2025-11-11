@@ -136,6 +136,73 @@ Studi tersebut menunjukkan bahwa ketiga aspek ini saling berkorelasi.
     dan perilaku \autocite{Ihichr2024}.
 \end{enumerate}
 
+% =====================================================================
+% MULAI SUBBAB II.2 (BARU) - SISIPKAN SETELAH AKHIR SUBBAB II.1
+% =====================================================================
+
+\section{Pemodelan Siswa (\textit{Student Modeling})}
+\label{sec:student_modeling}
+
+Dalam konteks lingkungan pembelajaran adaptif, asesmen pengetahuan diperlukan
+untuk membangun sebuah \textbf{\textit{student model}} (model siswa). Model
+siswa adalah inti dari setiap sistem pendidikan adaptif, yang juga dikenal
+sebagai \textit{learner model} \autocite{Brusilovsky2016}. Model ini berfungsi
+sebagai blok pembangunan fundamental (\textit{fundamental building block}) dari
+asesmen pengetahuan \autocite{Minn2022}. Tujuan utamanya adalah untuk
+merepresentasikan keadaan pengetahuan domain (\textit{domain knowledge})
+siswa saat ini. Selain pengetahuan, \textit{student model} juga dapat
+merepresentasikan informasi lain tentang siswa seperti tujuan pembelajaran
+(\textit{learning goals}), sifat-sifat personal (\textit{personal traits}),
+dan/atau preferensi. Dengan menggunakan
+\textit{student model} inilah sebuah sistem adaptif dapat menyediakan berbagai
+intervensi pembelajaran yang dipersonalisasi, seperti
+\textit{mastery learning} atau \textit{adaptive sequencing}
+(pengurutan adaptif) \autocite{Brusilovsky2016}.
+
+Untuk membangun \textit{student model} secara efektif, diperlukan sebuah
+\textit{domain model} (model domain) sebagai landasan \autocite{Minn2022}.
+\textit{Domain model} ini berfungsi untuk mengekstrak apa yang disebut sebagai
+\textit{\textbf{Knowledge Components}} (KCs) atau keterampilan (\textit{skills})
+dan atribut laten (\textit{latent attributes}) yang mendasari setiap tugas atau
+materi pembelajaran. \textit{Knowledge Components} ini adalah
+faktor laten (\textit{latents factors}) yang tidak pernah dapat diamati secara
+langsung, namun keberadaannya dianggap menentukan hasil atau kinerja siswa pada
+suatu tugas. Dalam kerangka kerja psikometri,
+pemetaan antara \textit{item} (pertanyaan) dan KCs yang diperlukannya seringkali
+direpresentasikan dalam sebuah \textit{\textbf{Q-matrix}} \autocite{Minn2022}.
+Oleh karena itu, berbagai teknik asesmen adaptif (yang akan dibahas berikutnya)
+pada dasarnya adalah algoritma yang digunakan untuk memperkirakan penguasaan
+siswa atas KCs yang tersembunyi ini.
+
+Dalam sebagian besar sistem pembelajaran terpersonalisasi,
+\textit{student model} bersifat tersembunyi atau tidak dapat diamati
+(\textit{unobservable}) oleh siswa, dan hanya digunakan oleh sistem untuk
+menggerakkan adaptasi. Namun, sebuah pendekatan yang
+dikenal sebagai \textbf{\textit{Open Student Modeling}} (OSM) atau
+Pemodelan Siswa Terbuka, berusaha membuat terobosan baru dengan secara sengaja
+memperlihatkan aspek-aspek model tersebut kepada pembelajar. Tujuan dari
+pendekatan OSM adalah untuk meningkatkan \textit{self-reflection} (refleksi diri)
+siswa, \textit{self-regulated learning} (pembelajaran mandiri),
+transparansi personalisasi, dan motivasi siswa
+\autocite{Brusilovsky2016, Ihichr2024}.
+
+Sebuah ekstensi yang lebih baru dan relevan dengan penelitian ini adalah
+\textbf{\textit{Open Social Student Modeling}} (OSSM) atau
+Pemodelan Siswa Sosial Terbuka. Ide dari OSSM adalah untuk
+melengkapi aspek kognitif OSM dengan aspek sosial.
+Hal ini dicapai dengan mengizinkan siswa untuk mengeksplorasi model-model
+rekan siswa dan/atau model kelas yang diagregasi. Pendekatan ini memiliki
+kesamaan dengan teknik \textit{gamification} seperti \textit{leaderboards}
+(papan peringkat), yang bertujuan memanfaatkan perbandingan sosial untuk
+meningkatkan motivasi dan keterlibatan siswa. Penelitian telah menunjukkan
+bahwa antarmuka OSSM, seperti yang diimplementasikan dalam \textit{MasteryGrids},
+dapat "meningkatkan pembelajaran, terutama untuk siswa dengan pengetahuan awal
+yang lebih rendah" \autocite{Brusilovsky2016}.
+
+% =====================================================================
+% AKHIR SUBBAB II.2 (BARU)
+% =====================================================================
+
 \section{Teknik dan Algoritma \textit{Adaptive Assessment}}
 \label{sec:teknik_algoritma_aa}
 Dalam rangka mencapai adaptivitas, sistem pembelajaran perlu memperkirakan tingkat 
