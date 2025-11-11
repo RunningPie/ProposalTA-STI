@@ -16,7 +16,29 @@ satu dari dua aliran utama: (1) asesmen adaptif yang berfokus pada individu deng
 arsitektur seperti yang sudah dijelaskan pada \ref{ssec:arsitektur_sistem_aa_individual}, atau
 (2) fasilitasi pembelajaran yang berfokus pada sosial/kolaboratif seperti yang
 dijelaskan di bagian \ref{ssec:aktivitas_pembelajaran_sosial}.
-Jarang sekali kedua aliran ini terintegrasi secara algoritmik.
+Dari literatur yang sudah dikumpulkan dan disajikan pada bab \ref{chap:studi-literatur}
+terlihat bahwa kedua aliran ini berkembang secara terpisah, dengan hanya
+sedikit upaya yang berusaha mengintegrasikannya. Berikut akan dibahas setiap aliran
+secara singkat untuk menyoroti kesenjangan yang ada.
+
+Pada subbab \ref{ssec:arsitektur_sistem_aa_individual} telah dijelaskan salah satu arsitektur
+sistem asesmen individual saat ini yang termauk dalam aliran 1. Masalah dari model ini adalah bahwa
+keseluruhan siklus bersifat individualistis. Algoritma asesmen (misalnya, \textit{Elo-rating} yang dimodifikasi) menghitung
+keberhasilan siswa murni berdasarkan parameter individual, seperti
+"jumlah upaya yang berhasil/gagal", "persentase/tingkat keberhasilan
+\textit{unit test}", dan "waktu yang dibutuhkan untuk menyelesaikan latihan"
+\autocite{Vesin2022}. Model ini tidak memiliki mekanisme untuk memasukkan
+atau mengukur nilai dari interaksi sosial.
+
+Di sisi lain, implementasi terkini dari pembelajaran sosial (aliran 2) dibahas pada
+subbab \ref{ssec:aktivitas_pembelajaran_sosial}. Model-model ini berhasil memanfaatkan
+kecerdasan buatan untuk memfasilitasi interaksi sosial, dalam ekosistem pembelajaran.
+Kelemahan dari pendekatan ini adalah kurangnya integrasi dengan model asesmen adaptif individual.
+Model OSSM yang diusulkan oleh \textcite{Brusilovsky2016}, menggunakan data sosial untuk meningkatkan pembelajaran
+melalui visualisasi, tetapi kalkulasi kemahiran siswa dan kelompoknya tetap terpisah dan
+data sosial yang divisualisasikan tidak kembali ke siklus asesmen yang memengaruhi penilaian
+sistem terhadap kemahiran individu, kelompok, maupun konten pembelajaran. Adapula formasi kelompok heterogen yang diusulkan oleh \textcite{Nalli2022}. Dalam model ini,
+kecerdasan buatan tidak digunakan untuk menilai dan hanya digunakan di awal saat mempersiapkan pembelajaran.
 
 % \subsection{Masalah Kesenjangan Integrasi pada Kondisi Saat Ini}
 % \label{ssec:masalah_integrasi}
@@ -24,7 +46,7 @@ Jarang sekali kedua aliran ini terintegrasi secara algoritmik.
 Analisis terhadap kondisi saat ini menunjukkan kesenjangan teknologi yang jelas:
 sistem asesmen adaptif individual (Aliran 1) dan sistem pembelajaran sosial
 (Aliran 2) berkembang secara terpisah.
-\begin{itemize}
+\begin{enumerate}[a)]
     \item Model asesmen adaptif seperti yang diusulkan oleh
     \textcite{Vesin2022} sangat efektif dalam mempersonalisasi konten untuk
     satu siswa, tetapi mengabaikan data sosial.
@@ -32,7 +54,7 @@ sistem asesmen adaptif individual (Aliran 1) dan sistem pembelajaran sosial
     dan \textcite{Nalli2022} berhasil menggunakan data sosial untuk visualisasi
     motivasi atau pembentukan kelompok, tetapi tidak mengintegrasikan data ini
     kembali ke dalam algoritma asesmen adaptif inti.
-\end{itemize}
+\end{enumerate}
 
 Fokus eksklusif pada individu ini dapat menyebabkan "personalisasi berlebih"
 (\textit{over-individualization}), yang berisiko "mengasingkan" pembelajar
@@ -41,13 +63,14 @@ yang mendapat manfaat dari "aspek komunal pembelajaran"
 juga mengungkap bahwa mayoritas sistem asesmen adaptif masih berfokus eksklusif
 pada pelacakan pengetahuan individu.
 
-Masalah utamanya adalah kurangnya sistem yang menjembatani kesenjangan ini.
+Masalah utamanya adalah kurangnya sistem yang bisa mengintegrasikan dua sistem penilaian ini.
 Belum ada implementasi perangkat lunak yang secara dinamis menggabungkan skor
 kemahiran \textbf{individu} (misalnya dari BKT) dengan metrik
 kinerja
 \textbf{sosial} (misalnya, kualitas kontribusi dalam PBL)
-untuk menghasilkan satu model kemahiran yang lebih menyeluruh dan terintegrasi.
-Sistem seperti ini
+untuk menghasilkan satu model kemahiran yang lebih menyeluruh dan mempertimbangkan pembelajaran dari aspek individu maupun aspek sosial.
+Dalam sistem perangkat lunaknya, salah satu hasil penilaian (individu atau sosial) seharusnya menjadi komponen pertimbangan
+penilaian dari proses atau teknik penilaian selanjutnya. Sistem seperti ini
 diperlukan untuk mewujudkan visi Stranas KA Indonesia, yang tidak hanya menuntut
 "pengembangan sistem penilaian adaptif" \autocite{BPPT2020} tetapi juga
 menekankan pentingnya "ekosistem kolaboratif \textit{Quadruple-Helix}"

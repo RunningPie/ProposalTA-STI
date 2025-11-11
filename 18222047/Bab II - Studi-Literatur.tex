@@ -414,7 +414,7 @@ Peringkat siswa dan kesulitan latihan kemudian diperbarui menurut rumus berikut:
 R_i &= R_{i-1} + K (W - W_e)\label{eq:rumus_elo_student}
 \end{align}
 \begin{align}
-D_j &= D_{j-1} + K (W_e - W)\label{eq:rumus_elo_student}
+D_j &= D_{j-1} + K (W_e - W)\label{eq:rumus_elo_latihan}
 \end{align}
 
 dengan $R_i$ adalah peringkat siswa setelah menyelesaikan latihan ke-i,
@@ -485,13 +485,13 @@ yang diulang secara terus-menerus:
     kemahiran siswa saat ini.
 \end{enumerate}
 
-Masalah pada model ini adalah bahwa keseluruhan siklus bersifat individualistis.
-Algoritma asesmen (misalnya, \textit{Elo-rating} yang dimodifikasi) menghitung
-keberhasilan siswa murni berdasarkan parameter individual, seperti
-"jumlah upaya yang berhasil/gagal", "persentase/tingkat keberhasilan
-\textit{unit test}", dan "waktu yang dibutuhkan untuk menyelesaikan latihan"
-\autocite{Vesin2022}. Model ini tidak memiliki mekanisme untuk memasukkan
-atau mengukur nilai dari interaksi sosial.
+% Masalah pada model ini adalah bahwa keseluruhan siklus bersifat individualistis.
+% Algoritma asesmen (misalnya, \textit{Elo-rating} yang dimodifikasi) menghitung
+% keberhasilan siswa murni berdasarkan parameter individual, seperti
+% "jumlah upaya yang berhasil/gagal", "persentase/tingkat keberhasilan
+% \textit{unit test}", dan "waktu yang dibutuhkan untuk menyelesaikan latihan"
+% \autocite{Vesin2022}. Model ini tidak memiliki mekanisme untuk memasukkan
+% atau mengukur nilai dari interaksi sosial.
 
 \section{Pembelajaran Kolaboratif dan CSCL}
 \label{sec:collaborative_learning}
