@@ -7,156 +7,54 @@
 
 \chapter{ANALISIS MASALAH}
 \label{chap:analisis-masalah}
-
 \section{Analisis Kondisi Saat Ini}
 \label{sec:kondisi_saat_ini}
-Kondisi saat ini dalam teknologi pembelajaran adaptif masih bergerak dalam ekosistem
-yang terfragmentasi, di suatu ekosistem yang cenderung berfokus secara eksklusif pada
-satu dari dua aliran utama: (1) asesmen adaptif yang berfokus pada individu dengan
-arsitektur seperti yang sudah dijelaskan pada \ref{ssec:arsitektur_sistem_aa_individual}, atau
-(2) fasilitasi pembelajaran yang berfokus pada sosial/kolaboratif seperti yang
-dijelaskan di bagian \ref{ssec:aktivitas_pembelajaran_sosial}.
-Dari literatur yang sudah dikumpulkan dan disajikan pada bab \ref{chap:studi-literatur}
-terlihat bahwa kedua aliran ini berkembang secara terpisah, dengan hanya
-sedikit upaya yang berusaha mengintegrasikannya. Berikut akan dibahas setiap aliran
-secara singkat untuk menyoroti kesenjangan yang ada.
 
-Pada subbab \ref{ssec:arsitektur_sistem_aa_individual} telah dijelaskan salah satu arsitektur
-sistem asesmen individual saat ini yang termauk dalam aliran 1. Masalah dari model ini adalah bahwa
-keseluruhan siklus bersifat individualistis. Algoritma asesmen (misalnya, \textit{Elo-rating} yang dimodifikasi) menghitung
-keberhasilan siswa murni berdasarkan parameter individual, seperti
-"jumlah upaya yang berhasil/gagal", "persentase/tingkat keberhasilan
-\textit{unit test}", dan "waktu yang dibutuhkan untuk menyelesaikan latihan"
-\autocite{Vesin2022}. Model ini tidak memiliki mekanisme untuk memasukkan
-atau mengukur nilai dari interaksi sosial.
+% Analisis terhadap lanskap teknologi pembelajaran adaptif saat ini mengungkapkan sebuah paradoks fundamental: sementara teknologi mitigasi \textit{over-personalization} telah matang di domain sistem rekomendasi komersial, adopsinya di domain pendidikan terhambat oleh arsitektur sistem asesmen yang kaku.
 
-Di sisi lain, implementasi terkini dari pembelajaran sosial (aliran 2) dibahas pada
-subbab \ref{ssec:aktivitas_pembelajaran_sosial}. Model-model ini berhasil memanfaatkan
-kecerdasan buatan untuk memfasilitasi interaksi sosial, dalam ekosistem pembelajaran.
-Kelemahan dari pendekatan ini adalah kurangnya integrasi dengan model asesmen adaptif individual.
-Model OSSM yang diusulkan oleh \textcite{Brusilovsky2016}, menggunakan data sosial untuk meningkatkan pembelajaran
-melalui visualisasi, tetapi kalkulasi kemahiran siswa dan kelompoknya tetap terpisah dan
-data sosial yang divisualisasikan tidak kembali ke siklus asesmen yang memengaruhi penilaian
-sistem terhadap kemahiran individu, kelompok, maupun konten pembelajaran. Adapula formasi kelompok heterogen yang diusulkan oleh \textcite{Nalli2022}. Dalam model ini,
-kecerdasan buatan tidak digunakan untuk menilai dan hanya digunakan di awal saat mempersiapkan pembelajaran.
+% \subsection{Keterbatasan Arsitektur Asesmen dalam Mendeteksi Isolasi}
+Masalah utama saat ini bukan sekadar ketiadaan fitur sosial, melainkan ketidakmampuan algoritma inti (\textit{core algorithms}) untuk memproses sinyal sosial. Teknik dominan seperti \textit{Bayesian Knowledge Tracing} (BKT) atau \textit{Elo-rating} bekerja dengan asumsi dasar bahwa pembelajaran adalah proses soliter \autocite{Minn2022}. Variabel yang diolah hanyalah interaksi biner antara siswa dan konten (benar/salah) \autocite{Vesin2022}.
 
-% \subsection{Masalah Kesenjangan Integrasi pada Kondisi Saat Ini}
-% \label{ssec:masalah_integrasi}
+Implikasinya adalah sistem saat ini menderita \textit{algorithmic blindness}
+terhadap isolasi pembelajaran. Meskipun seorang siswa terjebak dalam
+\textit{filter bubble} atau \textit{echo chamber} akademik, hanya mengerjakan
+soal yang ia sukai dan tidak pernah berinteraksi dengan perspektif lain, 
+sistem
+asesmen konvensional tetap akan menilainya berkinerja tinggi selama ia menjawab
+benar. Kondisi ini berbahaya karena menciptakan "kompetensi semu", suatu fenomena ketika siswa
+mahir secara individu namun rapuh dalam kolaborasi, yang bertentangan dengan visi
+ekosistem kolaboratif \autocite{BPPT2020}.
 
-Analisis terhadap kondisi saat ini menunjukkan kesenjangan teknologi yang jelas:
-sistem asesmen adaptif individual (Aliran 1) dan sistem pembelajaran sosial
-(Aliran 2) berkembang secara terpisah.
-\begin{enumerate}[a)]
-    \item Model asesmen adaptif seperti yang diusulkan oleh
-    \textcite{Vesin2022} sangat efektif dalam mempersonalisasi konten untuk
-    satu siswa, tetapi mengabaikan data sosial.
-    \item Model sosial seperti yang diusulkan oleh \textcite{Brusilovsky2016}
-    dan \textcite{Nalli2022} berhasil menggunakan data sosial untuk visualisasi
-    motivasi atau pembentukan kelompok, tetapi tidak mengintegrasikan data ini
-    kembali ke dalam algoritma asesmen adaptif inti.
+% \subsection{Analisis Kesenjangan Adopsi Solusi Mitigasi \textit{Over-Personalization}}
+Studi literatur menunjukkan bahwa solusi untuk masalah isolasi ini sudah tersedia
+di bidang lain, seperti \textit{User-Controllable Recommender Systems} (UCRS)
+\autocite{Wang2022} dan \textit{Group Recommender Systems} (GRS)
+\autocite{Dokoupil2022}. Namun, analisis kondisi saat ini menunjukkan bahwa
+solusi-solusi tersebut gagal diterapkan secara efektif dalam pendidikan karena
+alasan arsitektural berikut:
+
+\begin{enumerate}
+    \item \textbf{Kegagalan Pendekatan Kendali Pengguna (UCRS):} Solusi \textcite{Wang2022} mengandalkan pengguna untuk sadar bahwa mereka terjebak dalam \textit{bubble}. Dalam konteks pendidikan, siswa (sebagai \textit{novice}) sering kali tidak memiliki metakognisi yang cukup untuk menyadari bahwa mereka butuh materi yang lebih beragam atau menantang secara sosial. Oleh karena itu, intervensi manual ala UCRS tidak cukup; diperlukan intervensi otomatis dari sistem.
+    
+    \item \textbf{Kegagalan Pendekatan Visual (OSSM):} Upaya yang ada saat ini seperti \textit{Open Social Student Modeling} (OSSM) hanya menempatkan data sosial sebagai "lapisan visual" di atas sistem, tanpa mengubah logika rekomendasi di bawahnya \autocite{Brusilovsky2016}. Data perbandingan sosial hanya menjadi "hiasan" motivasi, tidak menjadi variabel input yang mengubah tingkat kesulitan atau jenis materi yang direkomendasikan algoritma.
 \end{enumerate}
 
-Fokus eksklusif pada individu ini dapat menyebabkan "personalisasi berlebih"
-(\textit{over-individualization}), yang berisiko "mengasingkan" pembelajar
-yang mendapat manfaat dari "aspek komunal pembelajaran"
-\autocite{Halkiopoulos2024}. Tinjauan sistematis oleh \textcite{Ihichr2024}
-juga mengungkap bahwa mayoritas sistem asesmen adaptif masih berfokus eksklusif
-pada pelacakan pengetahuan individu.
+% \subsection{Implikasi Terhadap Arah Pengembangan Sistem (\textit{What's Next})}
+Dari analisis di atas, dapat disimpulkan bahwa menambahkan fitur kolaborasi saja (seperti forum atau grup) tidak akan memecahkan masalah \textit{over-personalization} jika mesin asesmennya tetap terpisah.
 
-Masalah utamanya adalah kurangnya sistem yang bisa mengintegrasikan dua sistem penilaian ini.
-Belum ada implementasi perangkat lunak yang secara dinamis menggabungkan skor
-kemahiran \textbf{individu} (misalnya dari BKT) dengan metrik
-kinerja
-\textbf{sosial} (misalnya, kualitas kontribusi dalam PBL)
-untuk menghasilkan satu model kemahiran yang lebih menyeluruh dan mempertimbangkan pembelajaran dari aspek individu maupun aspek sosial.
-Dalam sistem perangkat lunaknya, salah satu hasil penilaian (individu atau sosial) seharusnya menjadi komponen pertimbangan
-penilaian dari proses atau teknik penilaian selanjutnya. Sistem seperti ini
-diperlukan untuk mewujudkan visi Stranas KA Indonesia, yang tidak hanya menuntut
-"pengembangan sistem penilaian adaptif" \autocite{BPPT2020} tetapi juga
-menekankan pentingnya "ekosistem kolaboratif \textit{Quadruple-Helix}"
-\autocite{BPPT2020}.
+Kebutuhan mendesak saat ini adalah melakukan rekayasa ulang (\textit{re-engineering}) pada alur data. Kita tidak lagi membutuhkan dua sistem yang berjalan paralel (satu untuk nilai individu, satu untuk grup), melainkan sebuah sistem hibrida. Data kinerja sosial, seperti kualitas umpan balik dalam \textit{peer assessment} \autocite{Lu2012}, harus diubah menjadi variabel matematis yang dapat "dibaca" oleh algoritma asesmen adaptif (seperti parameter $K$ dalam \textit{Elo-rating}).
+
+Hanya dengan cara inilah, sistem dapat secara proaktif mendeteksi isolasi dan melakukan "koreksi paksa" melalui rekomendasi konten, menjembatani kesenjangan menuju analisis kebutuhan sistem yang akan diuraikan pada subbab berikutnya.
 
 \section{Analisis Kebutuhan}
 \label{sec:analisis_kebutuhan}
-Berdasarkan analisis kondisi saat ini pada Subbab \ref{sec:kondisi_saat_ini},
-masalah utama yang teridentifikasi adalah adanya kesenjangan integrasi antara
-sistem asesmen adaptif individual dan sistem pembelajaran sosial. Sistem yang
-ada saat ini cenderung terfragmentasi dan hanya berfokus pada salah satu aspek,
-yang berisiko menimbulkan "personalisasi berlebih"
-(\textit{over-individualization}) dan mengabaikan "aspek komunal
-pembelajaran" \autocite{Halkiopoulos2024}.
 
-Untuk menjembatani kesenjangan ini dan memenuhi mandat Stranas KA untuk
-"pengembangan sistem penilaian adaptif" \autocite{BPPT2020} dalam
-"ekosistem kolaboratif" \autocite{BPPT2020}, diperlukan sebuah sistem
-perangkat lunak dengan kebutuhan fungsional sebagai berikut:
-
-\begin{enumerate}[R1.]
-    \item \textbf{Kebutuhan untuk Pemodelan Kemahiran Individu.}
-    Sistem harus mampu memodelkan dan melacak perolehan pengetahuan individu
-    \autocite{Minn2022}. Sistem memerlukan mekanisme untuk "memperkirakan
-    tingkat kompetensi siswa dan tingkat kesulitan konten pendidikan". Model
-    kemahiran individu ini harus dapat diperbarui
-    secara dinamis seiring waktu berdasarkan kinerja siswa dalam mengerjakan
-    tugas-tugas \autocite{Vesin2022}.
-
-    \item \textbf{Kebutuhan untuk Fasilitasi Interaksi Kolaboratif.}
-    Untuk mengatasi risiko "personalisasi berlebih"
-    \autocite{Halkiopoulos2024}, sistem harus dapat mendukung aktivitas
-    kolaboratif secara daring. Sistem harus mampu
-    mengelola proses interaksi sosial, yang dapat mencakup fungsionalitas
-    untuk "realisasi kelompok heterogen" \autocite{Nalli2022} dan
-    fasilitasi proses \textit{peer assessment} (penilaian sejawat), yang
-    memberikan lingkungan tempat siswa dengan status yang sama saling
-    menilai \autocite{Ihichr2024}.
-    
-    \item \textbf{Kebutuhan untuk Penilaian Kinerja Kolaboratif.}
-    Sistem tidak hanya memfasilitasi, tetapi juga harus mampu menilai kinerja
-    siswa dalam konteks sosial. Sistem memerlukan mekanisme untuk mengukur
-    kontribusi individu dalam aktivitas kelompok \autocite{Ryoo2021} atau
-    mengukur kualitas dari \textit{peer assessment} yang mereka berikan.
-    Ini penting karena penelitian menunjukkan bahwa siswa mendapat lebih
-    banyak manfaat dari bertindak sebagai penilai \autocite{Ihichr2024}.
-    
-    \item \textbf{Kebutuhan untuk Integrasi Model Penilaian.}
-    Ini adalah kebutuhan inti untuk menjembatani kesenjangan yang ada.
-    Sistem harus mampu \textbf{mengintegrasikan secara algoritmik} antara
-    metrik kemahiran individu (dari Kebutuhan 1) dan metrik kinerja sosial
-    (dari Kebutuhan 3). Tujuannya adalah untuk menghasilkan satu model
-    pembelajar yang terintegrasi, yang tidak hanya "mencerminkan kinerja
-    individu, tetapi juga pencapaian sekelompok pembelajar" \autocite{Othman2016}.
-    Sederhananya, sistem tidak menghadirkan dan mempertimbangkan skor individual
-    secara terpisah dari skor kontribusi sosial, melainkan menggabungkan keduanya
-    dalam memberikan pengalaman pembelajran dan asesmen yang adaptif.
-    
-    \item \textbf{Kebutuhan untuk Sistem Adaptasi Terintegrasi.}
-    Model kemahiran terintegrasi yang dihasilkan (dari Kebutuhan 4)
-    harus digunakan untuk memberikan adaptasi yang bermakna.
-    Sistem harus dapat menggunakan skor gabungan ini sebagai
-    \textit{input} untuk \textit{loop} adaptif, yang kemudia
-    memberikan luaran berupa:
-    \begin{enumerate}[a)]
-        \item Rekomendasi konten yang dipersonalisasi, seperti merekomendasikan
-        \textit{item} konten berikutnya berdasarkan tingkat kesulitan yang
-        sesuai \autocite{Vesin2022}; dan
-        \item Intervensi sosial yang adaptif, seperti memfasilitasi perbandingan
-        sosial \autocite{Brusilovsky2016} atau mengoptimalkan komposisi kelompok
-        secara dinamis \autocite{Nalli2022}.
-    \end{enumerate}
-
-\end{enumerate}
+Berdasarkan analisis kondisi saat ini pada Subbab \ref{sec:kondisi_saat_ini}, sistem yang dibutuhkan harus mampu menjembatani keterpisahan antara personalisasi individu dengan lingkungan sosialnya untuk memitigasi risiko \textit{over-personalization}. Kebutuhan ini dirumuskan tanpa membatasi teknik implementasi spesifik, guna memungkinkan eksplorasi berbagai alternatif solusi (seperti \textit{peer assessment}, \textit{mentoring}, atau rekomendasi jejaring) pada tahap pemilihan solusi.
 
 \subsection{Kebutuhan Fungsional}
 \label{ssec:kebutuhan_fungsional}
-Kebutuhan fungsional (\textit{functional requirements}) mendefinisikan
-fungsionalitas atau layanan spesifik yang harus mampu dilakukan oleh sistem.
-Kebutuhan ini diturunkan langsung dari analisis kebutuhan \textit{high-level}
-(R1-R5) pada Subbab \ref{sec:analisis_kebutuhan} untuk menjembatani kesenjangan
-integrasi yang ada. Kebutuhan fungsional sistem diidentifikasi pada Tabel
-\ref{tbl:kebutuhan-fungsional}.
+Daftar kebutuhan fungsional sistem dari sisi pengguna (siswa) dan logika sistem disajikan pada Tabel \ref{tbl:kebutuhan-fungsional}.
 
-% Menggunakan longtable untuk Kebutuhan Fungsional
-% Kolom: l = left-aligned (Kode), p{...} = paragraph (Deskripsi) dengan lebar 80% dari \textwidth
 \begin{longtable}{@{\extracolsep{\fill}} l p{0.8\textwidth}}
 \caption{Kebutuhan Fungsional (FR) Sistem}\label{tbl:kebutuhan-fungsional} \\
 \toprule
@@ -164,59 +62,41 @@ integrasi yang ada. Kebutuhan fungsional sistem diidentifikasi pada Tabel
 \midrule
 \endfirsthead
 
-% Header untuk halaman selanjutnya
 \caption*{Tabel \ref{tbl:kebutuhan-fungsional} Kebutuhan Fungsional (FR) Sistem (lanjutan)} \\
 \toprule
 \textbf{Kode} & \textbf{Deskripsi Kebutuhan Fungsional} \\
 \midrule
 \endhead
 
-% Footer untuk halaman biasa
 \midrule
 \multicolumn{2}{r}{\textit{Bersambung ke halaman berikutnya}} \\
 \bottomrule
 \endfoot
 
-% Footer untuk halaman terakhir
-\bottomrule
-\endlastfoot
-\endfoot
-
-% Footer untuk halaman terakhir
 \bottomrule
 \endlastfoot
 
 % === Data Tabel Kebutuhan Fungsional ===
-\multicolumn{2}{l}{\textbf{Modul Pengguna (Mahasiswa)}} \\
-\addlinespace[0.3em] % Memberi sedikit spasi
-FR-01 & Sistem harus menyediakan fungsionalitas bagi mahasiswa untuk mendaftar (\textit{register}) dan masuk (\textit{login}) ke dalam sistem secara aman. \\
-FR-02 & Sistem harus dapat menyajikan daftar tugas asesmen (misalnya, latihan pengkodean, kuis) dan materi pembelajaran yang relevan kepada mahasiswa. \\
-FR-03 & Sistem harus menyediakan antarmuka bagi mahasiswa untuk mengunggah atau mengumpulkan hasil pekerjaan mereka untuk dinilai oleh sistem. \\
-FR-04 & Sistem harus dapat menugaskan mahasiswa untuk menilai hasil pekerjaan mahasiswa lain dan menyediakan antarmuka (misalnya, rubrik) untuk memasukkan penilaian tersebut \autocite{Ihichr2024}. \\
-FR-05 & Sistem harus menampilkan model kemahiran individu kepada mahasiswa (misalnya, kemajuan mereka per topik) untuk mendorong refleksi \autocite{Brusilovsky2016}. \\
-FR-06 & Sistem harus dapat menampilkan perbandingan sosial, seperti membandingkan kemajuan individu dengan kemajuan rata-rata kelompok atau rekan lain, untuk meningkatkan pembelajaran \autocite{Brusilovsky2016}. \\
-\addlinespace[0.8em] % Spasi antar grup
-
-\multicolumn{2}{l}{\textbf{Modul Pengelola (Dosen)}} \\
+\multicolumn{2}{l}{\textbf{Interaksi Pengguna (Siswa)}} \\
 \addlinespace[0.3em]
-FR-07 & Sistem harus menyediakan antarmuka bagi dosen untuk membuat, mengubah, dan menghapus materi pembelajaran serta bank soal/tugas asesmen. \\
-FR-08 & Sistem harus memungkinkan dosen untuk menginisiasi dan mengonfigurasi aktivitas sosial, seperti menentukan bobot \textit{peer assessment} atau memicu pembentukan kelompok. \\
-FR-09 & Sistem harus menyediakan dasbor bagi dosen untuk memantau kemajuan kemahiran seluruh mahasiswa, baik secara individu maupun kelompok. \\
+FR-01 & Sistem harus menyediakan mekanisme otentikasi bagi siswa untuk mengakses lingkungan pembelajaran personal mereka. \\
+FR-02 & Sistem harus menyajikan materi pembelajaran yang telah disesuaikan tingkat kesulitannya dengan kemahiran siswa saat ini. \\
+FR-03 & Sistem harus memfasilitasi \textbf{interaksi pembelajaran antar-pengguna} yang memungkinkan terjadinya pertukaran informasi atau kolaborasi akademik di dalam platform. \\
+FR-04 & Sistem harus menyediakan informasi mengenai konteks sosial pembelajaran (misalnya, aktivitas komunitas atau capaian kolektif) untuk membangun kesadaran sosial (\textit{social awareness}). \\
 \addlinespace[0.8em]
 
-\multicolumn{2}{l}{\textbf{Modul Sistem (Logika Inti)}} \\
+\multicolumn{2}{l}{\textbf{Logika Adaptasi \& Pemrosesan Data (Sistem)}} \\
 \addlinespace[0.3em]
-FR-10 & Sistem harus memiliki modul algoritma untuk menghitung dan memperbarui skor kemahiran individu mahasiswa secara dinamis setiap kali mereka menyelesaikan tugas \autocite{Vesin2022}. \\
-FR-11 & Sistem harus memiliki modul algoritma untuk menghitung skor kinerja sosial mahasiswa (misalnya, berdasarkan kualitas \textit{peer assessment} yang mereka berikan). \\
-FR-12 & Sistem harus mampu \textbf{menggabungkan secara algoritmik} skor kemahiran individu (dari FR-10) dan skor kinerja sosial (dari FR-11) untuk menghasilkan satu model kemahiran yang terintegrasi. \\
-FR-13 & Sistem harus menggunakan skor kemahiran terintegrasi (dari FR-12) sebagai \textit{input} untuk merekomendasikan tugas atau materi pembelajaran berikutnya yang paling sesuai dengan tingkat kemahiran siswa \autocite{Vesin2022}. \\
-FR-14 & Sistem harus dapat menggunakan data dari model kemahiran terintegrasi untuk merekomendasikan atau memicu intervensi sosial secara adaptif, seperti pembentukan kelompok yang heterogen \autocite{Nalli2022}. \\
+FR-05 & Sistem harus memiliki algoritma untuk mengestimasi tingkat kemahiran pengetahuan individu siswa secara dinamis berdasarkan riwayat aktivitasnya. \\
+FR-06 & Sistem harus mampu \textbf{mengkuantifikasi data interaksi sosial} (dari FR-03) menjadi parameter numerik yang dapat diproses lebih lanjut (misalnya, skor keterlibatan atau skor kinerja kolaboratif). \\
+FR-07 & Sistem harus memiliki mekanisme untuk menggabungkan parameter kemahiran individu (FR-05) dan parameter sosial (FR-06) dalam satu model komputasi terpadu. \\
+FR-08 & Sistem harus menggunakan hasil penggabungan model (FR-07) untuk menentukan materi atau aktivitas berikutnya yang paling optimal bagi siswa. \\
+FR-09 & Sistem harus mampu merekomendasikan \textbf{intervensi sosial spesifik} (misalnya, merekomendasikan orang untuk berinteraksi atau topik untuk didiskusikan) guna mencegah isolasi pembelajaran. \\
 \end{longtable}
-
 
 \subsection{Kebutuhan Nonfungsional}
 \label{ssec:kebutuhan_nonfungsional}
-Kebutuhan nonfungsional (\textit{non-functional requirements}) mendefinisikan kriteria kualitas, batasan, dan atribut operasional dari sistem yang akan dibangun. Kebutuhan ini dirangkum pada Tabel \ref{tbl:kebutuhan-nonfungsional}.
+Kebutuhan nonfungsional disesuaikan untuk mendukung interaksi sosial yang responsif tanpa menentukan metode spesifik.
 
 \begin{longtable}{@{\extracolsep{\fill}} l p{0.8\textwidth}}
 \caption{Kebutuhan Nonfungsional (NFR) Sistem}\label{tbl:kebutuhan-nonfungsional} \\
@@ -225,63 +105,47 @@ Kebutuhan nonfungsional (\textit{non-functional requirements}) mendefinisikan kr
 \midrule
 \endfirsthead
 
-% Header untuk halaman selanjutnya
 \caption*{Tabel \ref{tbl:kebutuhan-nonfungsional} Kebutuhan Nonfungsional (NFR) Sistem (lanjutan)} \\
 \toprule
 \textbf{Kode} & \textbf{Deskripsi Kebutuhan Nonfungsional} \\
 \midrule
 \endhead
 
-% Footer untuk halaman biasa
 \midrule
 \multicolumn{2}{r}{\textit{Bersambung ke halaman berikutnya}} \\
 \bottomrule
 \endfoot
 
-% Footer untuk halaman terakhir
-\bottomrule
-\endlastfoot
-\endhead
-
-% Footer untuk halaman biasa
-\midrule
-\multicolumn{2}{r}{\textit{Bersambung ke halaman berikutnya}} \\
-\bottomrule
-\endfoot
-
-% Footer untuk halaman terakhir
 \bottomrule
 \endlastfoot
 
 % === Data Tabel Kebutuhan Nonfungsional ===
-NFR-01 & \textbf{(Usability)} Antarmuka pengguna harus intuitif dan mudah dioperasikan oleh mahasiswa dan dosen tanpa memerlukan pelatihan teknis mendalam. \\
-NFR-02 & \textbf{(Usability)} Visualisasi model kemahiran (individu dan sosial) harus jelas dan mudah dipahami untuk secara efektif mendorong refleksi pembelajar \autocite{Brusilovsky2016}. \\
-NFR-03 & \textbf{(Performance)} Sistem harus mampu memberikan umpan balik (skor kemahiran baru dan rekomendasi tugas baru) secara \textit{real-time} atau hampir \textit{real-time} (misalnya, dalam < 5 detik) setelah mahasiswa menyelesaikan sebuah aktivitas. \\
-NFR-04 & \textbf{(Scalability)} Arsitektur sistem harus mampu menangani beban kerja setidaknya untuk satu kelas (misalnya, 50 pengguna) yang berinteraksi secara bersamaan selama periode pengumpulan data. \\
-NFR-05 & \textbf{(Security)} Data pribadi dan riwayat asesmen mahasiswa harus dilindungi dan hanya dapat diakses oleh mahasiswa yang bersangkutan dan dosen pengampu mata kuliah. \\
-NFR-06 & \textbf{(Maintainability)} Perangkat lunak harus dibangun dengan arsitektur modular yang memisahkan logika antarmuka pengguna, logika asesmen individu, dan logika kolaborasi, untuk mempermudah pengembangan, pengujian, dan pemeliharaan. \\
-NFR-07 & \textbf{(Portability)} Sistem harus dapat diakses melalui peramban web (\textit{web browser}) modern (seperti Chrome, Firefox, Safari) tanpa memerlukan instalasi perangkat lunak tambahan di sisi klien. \\
+NFR-01 & \textbf{(Usability)} Antarmuka interaksi sosial harus terintegrasi secara intuitif dengan materi pembelajaran, meminimalkan beban kognitif siswa saat berpindah antara belajar mandiri dan berkolaborasi. \\
+NFR-02 & \textbf{(Interpretability)} Sistem harus mampu memberikan indikasi alasan di balik rekomendasi (baik materi maupun interaksi sosial) agar dapat dipahami oleh siswa. \\
+NFR-03 & \textbf{(Performance)} Pembaruan model pengguna (baik skor individu maupun sosial) harus terjadi dalam waktu nyata (\textit{near real-time}) setelah interaksi selesai dilakukan. \\
+NFR-04 & \textbf{(Scalability)} Sistem harus mampu menangani konkurensi interaksi sosial dari satu kelas (±50 pengguna) secara simultan. \\
+NFR-05 & \textbf{(Privacy)} Mekanisme interaksi sosial harus dirancang sedemikian rupa sehingga data privasi spesifik (seperti nilai ujian mentah) tidak terekspos ke pengguna lain tanpa izin. \\
+NFR-06 & \textbf{(Access)} Sistem dapat diakses melalui peramban web standar. \\
 \end{longtable}
-
 
 \subsection{Pemetaan Kebutuhan}
 \label{ssec:pemetaan_kebutuhan}
-Untuk memastikan bahwa semua kebutuhan \textit{high-level} (RX) yang telah diidentifikasi pada Subbab \ref{sec:analisis_kebutuhan} telah ditangani, Tabel \ref{tbl:pemetaan-kebutuhan} memetakan setiap kebutuhan \textit{high-level} tersebut ke kebutuhan fungsional (FR) spesifik yang akan diimplementasikan. Kebutuhan nonfungsional (NFR) yang telah diidentifikasi pada Tabel \ref{tbl:kebutuhan-nonfungsional} berlaku untuk sistem secara keseluruhan.
+Tabel \ref{tbl:pemetaan-kebutuhan} memetakan tujuan penanganan masalah ke fungsi spesifik yang telah digeneralisasi.
 
-\begin{table}[H] % Menggunakan [h] agar tabel ditempatkan 'di sini'
+\begin{table}[H]
     \centering
     \captionsetup{justification=centering}
-    \caption{Pemetaan Kebutuhan \textit{High-Level} (RX) ke Kebutuhan Fungsional (FR)}
+    \caption{Pemetaan Masalah dan Kebutuhan Fungsional}
     \label{tbl:pemetaan-kebutuhan}
-    \begin{tabular}{@{\extracolsep{\fill}} l p{0.65\textwidth}} % Mengatur lebar kolom kedua
+    \begin{tabular}{@{\extracolsep{\fill}} l p{0.55\textwidth}}
     \toprule
-    \textbf{Kebutuhan \textit{High-Level} (RX)} & \textbf{Kebutuhan Fungsional Terkait (FR)} \\
+    \textbf{Fokus Penanganan Masalah} & \textbf{Implementasi Fungsional (FR)} \\
     \midrule
-    R1: Pemodelan Kemahiran Individu & FR-05, FR-10 \\
-    R2: Fasilitasi Interaksi Kolaboratif & FR-01, FR-02, FR-03, FR-04, FR-07, FR-08 \\
-    R3: Penilaian Kinerja Kolaboratif & FR-04, FR-11 \\
-    R4: Integrasi Model Penilaian & FR-12 \\
-    R5: Sistem Adaptasi Terintegrasi & FR-06, FR-09, FR-13, FR-14 \\
+    Model Kompetensi Individu & FR-02, FR-05 \\
+    Fasilitasi Interaksi Sosial & FR-01, FR-03, FR-04 \\
+    Kuantifikasi Aspek Sosial & FR-06 \\
+    Integrasi Model & FR-07 \\
+    Adaptasi & FR-08, FR-09 \\
     \bottomrule
     \end{tabular}
 \end{table}
@@ -289,434 +153,205 @@ Untuk memastikan bahwa semua kebutuhan \textit{high-level} (RX) yang telah diide
 \section{Analisis Pemilihan Solusi}
 \subsection{Alternatif Solusi}
 \label{ssec:alternatif_solusi}
-Berdasarkan analisis kebutuhan pada Subbab \ref{sec:analisis_kebutuhan}, solusi
-yang diperlukan harus mampu menjembatani kesenjangan antara asesmen individual
-dan asesmen sosial. Tujuan utamanya adalah membangun sistem yang tidak hanya
-memodelkan kemahiran individu (R1) dan memfasilitasi interaksi sosial (R2),
-tetapi juga menilai kinerja sosial tersebut (R3), mengintegrasikan kedua jenis
-penilaian itu (R4), dan menggunakan model terintegrasi tersebut untuk memberikan
-adaptasi yang holistik (R5).
-
-Untuk mencapai tujuan ini, terdapat beberapa alternatif keputusan desain yang
-dapat diambil pada tiga dimensi utama: (1) teknik asesmen kemahiran individu,
-(2) teknik interaksi dan asesmen sosial, dan (3) arsitektur integrasi.
+Untuk menjawab kebutuhan sistem dalam memitigasi \textit{over-personalization}, diperlukan pemilihan komponen teknologi yang tidak hanya akurat, tetapi juga fleksibel untuk diintegrasikan. Pemilihan solusi dilakukan pada tiga dimensi utama: (1) teknik asesmen kemahiran individu, (2) teknik interaksi dan asesmen sosial, dan (3) teknik spesifik pencegahan \textit{echo chamber}.
 
 \subsubsection{Alternatif Teknik Asesmen Kemahiran Individu (R1)}
 \label{sssec:alternatif_asesmen_individu}
-Komponen ini bertugas untuk "memperkirakan tingkat kompetensi siswa dan
-tingkat kesulitan konten pendidikan" \autocite{Vesin2022}. Berdasarkan
-studi literatur (Subbab \ref{sec:teknik_algoritma_aa}), beberapa teknik utama
-dapat dipertimbangkan:
+Komponen ini berfungsi memodelkan kompetensi siswa. Dalam konteks pencegahan \textit{over-personalization}, kriteria utamanya adalah apakah model tersebut cukup fleksibel untuk "diintervensi" oleh parameter sosial tanpa merusak integritas matematisnya.
 
 \begin{itemize}
+    \item \textbf{\textit{Item Response Theory} (IRT) dan \textit{Bayesian IRT} (IRT*):}
+    Pendekatan psikometri standar yang memodelkan probabilitas jawaban benar berdasarkan parameter siswa ($\theta$) dan butir soal ($b$) \autocite{Handayani2025}.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} Model IRT cenderung statis dan mengasumsikan parameter invarian. Sangat sulit untuk menyuntikkan "bobot sosial" ke dalam rumus IRT secara dinamis untuk mengubah rekomendasi soal secara \textit{real-time} saat terdeteksi adanya isolasi pembelajaran \autocite{Vesin2022}.
 
-    \item \textbf{\textit{Item Response Theory} (IRT):} Pendekatan psikometri
-    klasik yang memodelkan probabilitas jawaban benar berdasarkan kemahiran
-    siswa ($\theta$) dan parameter soal (kesulitan, diskriminasi, tebakan)
-    \autocite{Handayani2025, Ihichr2024}.
-    \textbf{Kelemahan:} Model
-    dasarnya mengasumsikan pengetahuan statis (tidak belajar selama tes)
-    \autocite{Minn2022}, serta membutuhkan kalibrasi data dalam jumlah besar
-    dan komputasinya berat untuk pembaruan \textit{real-time}
-    \autocite{Vesin2022}.
-    
-    \item \textbf{Model \textit{IRT*} (Bayesian IRT):} Ini adalah ekstensi dari IRT 
-    yang menggunakan kerangka kerja Bayesian \autocite[Subbab II.2.2]{Minn2022}.
-    \textbf{Kelebihan:} Memungkinkan pemasukan informasi sebelumnya (\textit{prior information}) 
-    tentang parameter, membuatnya lebih fleksibel daripada IRT standar untuk 
-    memodelkan data dinamis \autocite{Minn2022}.
-    \textbf{Kelemahan:} Sama seperti IRT standar, model ini tetap memiliki 
-    kompleksitas komputasi yang tinggi dan membutuhkan kalibrasi data yang 
-    signifikan.
+    \item \textbf{\textit{Factor Analysis} (FA):}
+    Teknik statistik yang digunakan untuk mengidentifikasi struktur faktor laten (seperti pengetahuan awal atau kemampuan kognitif) yang mendasari kinerja siswa \autocite{Ihichr2024}.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} FA lebih cocok digunakan untuk validasi struktur tes atau analisis \textit{post-hoc} (setelah data terkumpul) daripada pelacakan dinamis. Teknik ini tidak dirancang untuk pembaruan parameter \textit{real-time} yang diperlukan untuk merespons perubahan perilaku sosial siswa seketika.
 
-    \item \textbf{\textit{Hidden Markov Models} (HMM) dan \textit{Bayesian
-    Knowledge Tracing} (BKT):} 
-    Alternatif ini dikelompokkan bersama karena BKT pada dasarnya adalah
-    penerapan atau kasus khusus dari HMM yang diaplikasikan untuk konteks
-    pelacakan pengetahuan \autocite{Minn2022}. BKT menggunakan model Markov
-    untuk memodelkan transisi keadaan pengetahuan siswa (variabel tersembunyi)
-    dari "belum dipelajari" ke "sudah dipelajari" \autocite{Minn2022, Ihichr2024}.
-    \textbf{Kelebihan:} Secara eksplisit memodelkan "pembelajaran" ($P(T)$)
-    seiring berjalannya waktu. 
-    \textbf{Kekurangan:} Model BKT standar biasanya hanya memodelkan satu
-    keterampilan per \textit{item} dan mengasumsikan keterampilan yang dipelajari
-    tidak pernah dilupakan \autocite{Ihichr2024}.
-    
-    \item \textbf{\textit{Deep Knowledge Tracing} (DKT):} Menggunakan
-    \textit{Recurrent Neural Networks} (RNN) untuk melacak pengetahuan siswa.
-    Meskipun akurat, model ini berfungsi sebagai \textit{black box} sehingga
-    sulit untuk memberikan penjelasan yang bermakna secara psikologis dan
-    komputasinya berat \autocite{Minn2022}. Hal ini berpotensi bertentangan
-    dengan Batasan Masalah (Subbab \ref{sec:batasan_masalah}) yang menuntut
-    solusi yang "mudah diinterpretasikan" dan tidak "kompleks".
-    
-    \item \textbf{Sistem \textit{Elo-rating}:} Memodelkan asesmen sebagai
-    "kompetisi" antara siswa ("pemain") dan \textit{item} konten
-    ("lawan"). Kelebihannya adalah sangat efisien
-    secara komputasi, sederhana untuk diimplementasikan, dan dapat memberikan
-    estimasi yang akurat bahkan dengan ukuran sampel kecil.
-    Model dasarnya dapat dimodifikasi untuk mempertimbangkan parameter tambahan
-    seperti jumlah upaya dan waktu \autocite{Vesin2022}.
+    \item \textbf{\textit{Bayesian Knowledge Tracing} (BKT):}
+    Model berbasis \textit{Hidden Markov Models} (HMM) yang melacak transisi biner status pengetahuan dari "belum belajar" ke "sudah belajar" \autocite{Minn2022}.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} BKT memiliki struktur probabilitas yang kaku (mengandalkan parameter \textit{guess} dan \textit{slip}). Memasukkan variabel sosial kontinu ke dalam probabilitas transisi BKT sangat kompleks dan berisiko melanggar asumsi dasar model bahwa keterampilan tidak akan "dilupakan" \autocite{Ihichr2024}, padahal isolasi sosial mungkin memerlukan penurunan skor untuk memicu intervensi.
 
+    \item \textbf{\textit{Deep Knowledge Tracing} (DKT):}
+    Menggunakan jaringan saraf tiruan (\textit{Recurrent Neural Networks}) untuk melacak pengetahuan \autocite{Minn2022}.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} Meskipun akurasinya tinggi, sifatnya yang \textit{black-box} membuat sistem sulit mendeteksi \textit{kenapa} seorang siswa terjebak dalam pola soal tertentu. Intervensi algoritmik untuk memecahkan \textit{bubble} sulit dilakukan secara terukur karena kompleksitas parameternya.
+
+    \item \textbf{Sistem \textit{Elo-rating}:}
+    Memodelkan interaksi siswa-konten sebagai kompetisi dengan rumus pembaruan sederhana: $R_{baru} = R_{lama} + K(S - E)$ \autocite{Vesin2022}.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} Ini adalah kandidat terkuat karena keberadaan faktor $K$ (koefisien bobot). Faktor ini dapat dimodifikasi secara eksplisit menjadi fungsi dari aktivitas sosial (misalnya, siswa yang kurang bersosialisasi mendapat $K$ yang memaksa perubahan peringkat lebih cepat), memungkinkan integrasi langsung untuk melawan stagnasi algoritma.
 \end{itemize}
 
 \subsubsection{Alternatif Teknik Interaksi dan Asesmen Sosial (R2 \& R3)}
 \label{sssec:alternatif_asesmen_sosial}
-Komponen ini harus memfasilitasi interaksi (R2) sekaligus
-menyediakan metrik yang dapat dinilai (R3) untuk mengukur kinerja sosial.
-Tinjauan literatur memberikan beberapa alternatif aktivitas sosial yang
-terbukti berdampak pada hasil belajar, yang dapat diimplementasikan dan
-dinilai:
+Komponen ini bertujuan memfasilitasi interaksi yang bermakna. Untuk memecahkan \textit{filter bubble}, aktivitas sosial harus memaksa siswa terpapar pada perspektif atau materi di luar preferensi historis mereka.
 
 \begin{itemize}
-    \item \textbf{Penilaian Sejawat (\textit{Peer Assessment}):}
-    Aktivitas ini didefinisikan sebagai proses yang menempatkan penilai
-    (\textit{assessor}) dan yang dinilai (\textit{assessed}) dalam
-    status yang sama dan saling menilai hasil belajar atau kualitas
-    pekerjaan satu sama lain \autocite{Ihichr2024}. Manfaat pedagogis
-    dari \textit{peer assessment} telah terbukti signifikan, namun mekanisme
-    persisnya menjadi kunci. Sebuah studi mendalam oleh \textcite{Lu2012}
-    menyelidiki apakah manfaat tersebut berasal dari \textbf{menerima} umpan balik
-    atau \textbf{memberikan} umpan balik. Temuan studi tersebut sangat
-    jelas: manfaat terbesar tidak diterima oleh siswa yang menerima umpan balik,
-    melainkan oleh siswa yang \textbf{memberikan} umpan balik. Secara spesifik,
-    ditemukan bahwa jumlah umpan balik kognitif yang \textbf{diberikan} oleh
-    seorang penilai (\textit{Cognitive Feedback to Peers} / CTP) secara
-    signifikan memprediksi skor proyek akhir dari penilai itu
-    sendiri \autocite{Lu2012}. Hal ini diyakini terjadi karena penilai harus
-    "terlibat dalam aktivitas kognitif yang lebih menuntut" dan "mendapatkan
-    wawasan tentang pekerjaan mereka sendiri dengan menilai dan mengkritik
-    pekerjaan rekan-rekan mereka". Sebaliknya, studi yang
-    sama menemukan bahwa jumlah umpan balik kognitif yang \textbf{diterima}
-    (\textit{Cognitive Feedback from Peers} / CFP) \textit{tidak}
-    memprediksi skor proyek akhir penerima secara signifikan \autocite{Lu2012}.
-    
-    \textit{\textbf{Metrik Asesmen:}} Berdasarkan temuan ini, sistem dapat
-    dirancang untuk menilai kinerja sosial (R3) dengan mengukur
-    \textbf{kualitas dan kuantitas umpan balik kognitif yang \textit{diberikan}
-    oleh siswa} sebagai metrik utama untuk menilai keterlibatan sosial mereka
-    yang berkontribusi pada pembelajaran mereka sendiri.
-    
-    \item \textbf{Formasi Kelompok Berbasis Atribut Pembelajar:}
-    Alternatif ini berfokus pada penggunaan AI untuk memfasilitasi interaksi
-    (R2) dengan cara membentuk kelompok yang optimal di awal. Dalam pendekatan ini,
-    asesmen sosial (R3) bersifat prediktif, bukan performatif. Tujuannya adalah
-    untuk "mendorong formasi kelompok yang heterogen untuk memaksimalkan
-    keragaman kognitif dan mendorong refleksi kritis" \autocite{Halkiopoulos2024}.
-    Implementasi teknis dari hal ini telah dieksplorasi oleh \textcite{Nalli2022}
-    yang menggunakan "teknik \textit{clustering}" untuk membantu dosen dalam
-    "realisasi kelompok heterogen" berdasarkan "profil perilaku" siswa dari data
-    log Moodle \autocite{Nalli2022}. Penelitian serupa oleh \textcite{Maina2017}
-    secara spesifik mengusulkan penggunaan teknik \textit{machine learning}
-    (K-Means \textit{clustering}) untuk mengelompokkan pembelajar berdasarkan
-    "tingkat kompetensi kolaborasi" (\textit{collaboration competence level})
-    mereka, yang ditentukan dari data interaksi yang telah dikumpulkan
-    sebelumnya \autocite{Maina2017}.
-    
-    \textit{\textbf{Metrik Asesmen:}} Sistem akan menilai "profil" siswa
-    berdasarkan data historis (misalnya, "forum posts, forum replies and forum
-    rating" \autocite{Maina2017}) atau gaya belajar. Kinerja sosial (R3) tidak
-    diukur secara \textit{real-time}, melainkan sistem menggunakan profil ini
-    untuk \textbf{menghasilkan pengelompokan yang optimal} sebagai \textit{output}
-    utamanya.
-    
-    \item \textbf{Sesi Diskusi Terbuka (Analisis Forum):}
-    Alternatif ini berfokus pada fasilitasi interaksi (R2) melalui forum diskusi
-    atau \textit{Computer-Supported Collaborative Work} (CSCW) \autocite{Ryoo2021}.
-    Manfaat pedagogis dari diskusi terbuka telah divalidasi sebelumnya, dalam
-    sebuah studi oleh \textcite{DaifAllah2016} didapatkan bahwa partisipasi aktif
-    dalam "Sesi Diskusi Terbuka" yang terstruktur dan dilakukan di lingkungan
-    yang santai dan non-tradisional (di luar kelas) secara signifikan
-    meningkatkan "kemampuan komunikatif lisan" (\textit{oral communicative
-    abilities}) dan "kepercayaan diri" (\textit{self-confidence}) siswa
-    \autocite{DaifAllah2016}. Tantangannya terletak pada bagaimana menilai
-    aktivitas ini (R3) secara otomatis.
-    
-    \textit{\textbf{Metrik Asesmen:}} Mengadopsi pendekatan dari
-    \textcite{Maina2017}, kinerja sosial siswa dalam forum dapat diukur
-    menggunakan kombinasi metrik kuantitatif dan kualitatif sederhana.
-    Sistem dapat melacak \textbf{jumlah \textit{post} forum} (kontribusi ide baru)
-    dan \textbf{jumlah balasan forum} (interdependensi) sebagai indikator
-    kuantitatif.
-    Sistem dapat bergantung pada \textbf{penilaian forum (\textit{forum
-    rating}) yang diberikan oleh instruktur} atau rekan
-    sejawat, yang kemudian dapat dimasukkan ke dalam model
-    kemahiran sosial siswa.
+    \item \textbf{Pembelajaran Berbasis Proyek (\textit{Project-Based Learning} / PBL):}
+    Model pembelajaran yang di dalamnya siswa berkolaborasi untuk menghasilkan artefak proyek nyata \autocite{Zhang2023}.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} Sangat baik untuk kolaborasi mendalam, namun memiliki kendala besar dalam penilaian otomatis. Sulit bagi sistem untuk memisahkan kontribusi individu dari hasil kelompok (\textit{free-rider problem}) secara akurat tanpa intervensi manual dosen \autocite{Ryoo2021}, sehingga sulit dijadikan input data \textit{real-time} untuk algoritma adaptif.
 
     \item \textbf{Pendampingan Sejawat (\textit{Peer Mentoring}):}
-    Alternatif ini memfasilitasi interaksi sosial (R2) dengan cara yang
-    lebih terstruktur satu lawan satu, sehingga menciptakan sistem yang bisa
-    memfasilitasi pembentukan pasangan mentor-mentee di antara siswa.
-    Sebuah tinjauan sistematis oleh \textcite{Le2024} mengonfirmasi bahwa skema
-    \textit{peer mentoring} memiliki manfaat signifikan yang dapat diukur pada
-    empat aspek, termasuk "kinerja akademik" (\textit{academic performance}) dan
-    "integrasi sosial" (\textit{social integration}) \autocite{Le2024}.
-    Manfaat ini tidak hanya berdampak pada \textit{mentee} (penerima pendampingan)
-    tetapi juga pada mentor itu sendiri, yang mengembangkan keterampilan
-    kepemimpinan dan pemahaman materi yang lebih dalam.
-    
-    \textit{\textbf{Metrik Asesmen:}} Kinerja sosial (R3) dari seorang
-    \textbf{mentor} dapat dinilai secara tidak langsung. Sistem dapat mengukur
-    efektivitas seorang mentor dengan melacak \textbf{peningkatan kemahiran
-    (skor R1) dari \textit{mentee}} yang didampinginya dari waktu ke waktu.
+    Mekanisme bimbingan \textit{one-on-one} antara siswa senior dan junior \autocite{Le2024}.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} Hubungan ini sering kali bersifat hierarkis dan searah (senior mengajar junior), bukan kolaborasi setara. Hal ini kurang efektif untuk tujuan memecahkan \textit{echo chamber} yang membutuhkan paparan terhadap berbagai perspektif sejawat yang beragam, bukan sekadar transfer pengetahuan vertikal.
 
+    \item \textbf{Formasi Kelompok Berbasis Klastering (\textit{Group Formation}):}
+    Menggunakan algoritma seperti K-Means untuk membentuk kelompok heterogen di awal pembelajaran \autocite{Nalli2022}.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} Efektif untuk "memaksa" keberagaman di awal (\textit{cold start}). Namun, karena sifatnya statis, teknik ini tidak menghasilkan data kinerja kontinu yang bisa digunakan sistem untuk memantau apakah siswa kembali mengisolasi diri setelah kelompok terbentuk.
+
+    \item \textbf{Sesi Diskusi Terbuka (\textit{Open Discussion}):}
+    Memfasilitasi forum bebas untuk pertukaran ide \autocite{DaifAllah2016}.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} Dalam forum bebas, siswa cenderung mencari teman yang sepemikiran (\textit{homophily}), yang justru memperkuat \textit{echo chamber} alih-alih memecahkannya. Selain itu, sulit menilai kualitas interaksi secara otomatis tanpa NLP yang kompleks.
+
+    \item \textbf{Penilaian Sejawat (\textit{Peer Assessment}):}
+    Siswa menilai pekerjaan rekan lain berdasarkan rubrik dengan status yang setara \autocite{Ihichr2024}.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} Teknik ini paling potensial karena sistem memegang kendali penuh atas "siapa menilai siapa". Sistem dapat menugaskan siswa untuk menilai rekan yang memiliki sudut pandang bertentangan atau tingkat kemampuan berbeda (di luar \textit{bubble}-nya). Selain itu, kualitas umpan balik (R3) dapat diukur sebagai metrik keterbukaan siswa terhadap kolaborasi \autocite{Lu2012}.
 \end{itemize}
 
-\subsubsection{Alternatif Strategi Integrasi dan Adaptasi (R4 \& R5)}
-\label{sssec:alternatif_integrasi}
-Kesenjangan utama yang diidentifikasi di Subbab \ref{sec:integrasi_penilaian_personal_sosial} adalah kurangnya integrasi algoritmik antara model personal dan sosial. Berdasarkan studi literatur, terdapat beberapa arsitektur alternatif yang \textit{feasible} untuk mengimplementasikan integrasi ini (R4) dan menghasilkan adaptasi holistik (R5).
+\subsubsection{Alternatif Teknik Pencegahan \textit{Echo Chamber} dan \textit{Filter Bubble}}
+\label{sssec:alternatif_pencegahan_bubble}
+Subbab ini mengevaluasi pendekatan spesifik yang telah dikembangkan dalam literatur sistem rekomendasi modern (Bab \ref{chap:studi-literatur}) untuk mengatasi masalah isolasi, guna melihat kesesuaiannya untuk diadopsi ke dalam sistem asesmen pendidikan.
 
 \begin{itemize}
-    \item \textbf{Alternatif A: Arsitektur Integrasi Visual (OSSM)}
-    
-    Solusi ini berfokus pada \textit{interface} (antarmuka) sebagai sarana
-    integrasi, berdasarkan arsitektur \textit{Open Social Student Modeling}
-    (OSSM) \autocite{Brusilovsky2016}.
-    
-    \textbf{Strategi Integrasi (R4):} Integrasi terjadi di
-    \textbf{lapisan visual}. Sistem menghitung skor individu (R1)
-    dan metrik sosial (misal, rata-rata grup) secara \textbf{terpisah}.
-    Keduanya kemudian divisualisasikan berdampingan (misalnya, sebagai
-    antarmuka "MasteryGrids" yang menunjukkan baris "Saya vs Grup")
-    \autocite{Brusilovsky2016}.
-    
-    \textbf{Strategi Adaptasi (R5):} Adaptasi algoritmik (rekomendasi konten, R5a)
-    tetap didasarkan murni pada skor individu (R1). Adaptasi sosial (R5b)
-    bersifat \textbf{pasif} sehingga sistem bergantung pada motivasi dan refleksi
-    siswa yang muncul setelah melihat perbandingan sosial tersebut. Ini adalah
-    solusi \textit{feasible} yang telah terbukti "meningkatkan pembelajaran,
-    terutama untuk siswa dengan pengetahuan awal yang lebih rendah"
-    \autocite{Brusilovsky2016}.
+    \item \textbf{\textit{User-Controllable Recommender Systems} (UCRS):}
+    Pendekatan yang memberikan fitur kendali eksplisit kepada pengguna untuk mengatur tingkat diversifikasi rekomendasi mereka sendiri \autocite{Wang2022}.
+    \textbf{Analisis:} Pendekatan ini sangat bergantung pada kesadaran pengguna. Dalam konteks pendidikan, siswa sering kali tidak menyadari bahwa mereka berada dalam \textit{bubble} kompetensi ("\textit{unconscious incompetence}"). Mengandalkan siswa untuk secara manual meminta materi yang "tidak mereka sukai" berisiko tidak efektif dibandingkan intervensi otomatis.
 
-    \item \textbf{Alternatif B: Arsitektur Integrasi Statis (Formasi Kelompok)}
-    
-    Solusi ini berfokus pada \textit{persiapan} kolaborasi,
-    berdasarkan penelitian seperti oleh \textcite{Maina2017} dan
-    \textcite{Nalli2022}.
-    
-    \textbf{Strategi Integrasi (R4):} Integrasi bersifat \textbf{statis} dan
-    terjadi di awal. Sistem menggunakan data asesmen individu (R1, misal: skor
-    kuis) dan/atau data profil (misal: gaya belajar, "tingkat kompetensi
-    kolaborasi") sebagai \textit{input} untuk algoritma \textit{machine
-    learning} (seperti K-Means \textit{clustering}) \autocite{Maina2017}.
-    
-    \textbf{Strategi Adaptasi (R5):} \textit{Output} dari integrasi ini
-    adalah \textbf{rekomendasi formasi kelompok} (adaptasi sosial, R5b) yang
-    heterogen atau homogen, yang disajikan kepada dosen
-    \autocite{Nalli2022, Maina2017}. Setelah kelompok terbentuk, adaptasi konten
-    personal (R5a) dapat berlanjut secara individual di dalam kelompok tersebut,
-    terpisah dari logika formasi kelompok awal.
+    \item \textbf{\textit{Group Recommender Systems} (GRS):}
+    Teknik yang merekomendasikan konten berdasarkan preferensi agregat dari sekelompok pengguna untuk meningkatkan keadilan (\textit{fairness}) dan pluralitas \autocite{Dokoupil2022}.
+    \textbf{Analisis:} GRS cenderung memprioritaskan konsensus kelompok atau rata-rata preferensi. Dalam pembelajaran adaptif, hal ini berisiko mengorbankan personalisasi spesifik yang dibutuhkan siswa \textit{outlier} (sangat mahir atau sangat tertinggal), karena rekomendasi akan tertarik ke arah "pusat" kelompok, yang bisa menyebabkan \textit{under-personalization}.
 
-    \item \textbf{Alternatif C: Arsitektur Integrasi Dinamis (Model Umpan
-    Balik Ganda)}
-    
-    Solusi ini berfokus pada \textit{loop} umpan balik yang berkelanjutan
-    (\textit{continuous feedback loop}) yang menggabungkan kedua jenis penilaian
-    secara algoritmik.
-    
-    \textbf{Strategi Integrasi (R4):} Integrasi bersifat \textbf{dinamis}.
-    Arsitektur ini menjalankan dua \textit{loop} asesmen yang berjalan paralel:
-    1) \textit{Loop} Personal (R1) yang menilai tugas individu (misal, kuis)
-    dengan algoritma seperti \textit{Elo-rating} \autocite{Vesin2022}, dan
-    2) \textit{Loop} Sosial (R3) yang menilai tugas sosial (misal, kualitas
-    \textit{peer assessment} yang diberikan) menggunakan metrik dari
-    \textcite{Lu2012}.
-    
-    \textbf{Strategi Adaptasi (R5):} Sistem dapat menggunakan \textit{output}
-    dari kedua \textit{loop} ini untuk memberikan adaptasi yang holistik.
-    Adaptasi konten personal (R5a) direkomendasikan berdasarkan skor R1.
-    Adaptasi intervensi sosial (R5b) direkomendasikan berdasarkan skor R3
-    (misalnya, "Kualitas \textit{peer assessment} Anda perlu ditingkatkan,
-    berikut adalah materi latihannya"). Dalam implementasi yang lebih canggih,
-    skor R3 dapat menjadi salah satu parameter (misalnya, sebagai bobot)
-    dalam perhitungan skor R1 untuk menciptakan satu \textbf{skor kemahiran
-    holistik} yang terintegrasi.
-
+    \item \textbf{Pemodelan Komunitas Implisit (\textit{FRediECH}):}
+    Sebuah teknik rekomendasi teman yang dirancang khusus untuk memecahkan \textit{echo chamber} dengan merekomendasikan koneksi sosial yang beragam namun relevan, berdasarkan pembelajaran representasi interaksi pengguna \autocite{Tommasel2021}.
+    \textbf{Analisis:} Teknik ini sangat kuat untuk memecah polarisasi opini dengan memperluas jejaring sosial siswa. Namun, penerapannya dalam asesmen kompetensi memiliki tantangan: FRediECH berfokus pada rekomendasi "siapa yang harus dijadikan teman", bukan "materi apa yang harus dipelajari". Mengadopsinya memerlukan modifikasi agar rekomendasi koneksi tersebut dapat diterjemahkan menjadi aktivitas belajar yang terukur (misalnya, menjadi mitra \textit{peer assessment}), bukan sekadar jejaring sosial pasif.
 \end{itemize}
 
 \subsection{Analisis Penentuan Solusi}
 \label{ssec:analisis_penentuan_solusi}
-Penentuan solusi untuk purwarupa sistem dilakukan dengan menggunakan metode
-\textit{Decision Matrix} (Matriks Keputusan). Pendekatan ini dipilih untuk
-menganalisis dan membandingkan berbagai alternatif solusi yang telah diidentifikasi
-pada Subbab \ref{ssec:alternatif_solusi} secara objektif dan transparan.
+Penentuan solusi teknis dilakukan menggunakan metode \textit{Weighted Decision Matrix} (Matriks Keputusan Terbobot). Pendekatan ini digunakan untuk memilih komponen sistem secara objektif berdasarkan kriteria yang diturunkan dari Batasan Masalah (Bab \ref{chap:pendahuluan}) dan Tinjauan Literatur (Bab \ref{chap:studi-literatur}).
 
-Setiap alternatif solusi akan dinilai berdasarkan sekumpulan kriteria yang relevan.
-Kriteria ini diturunkan dari tujuan penelitian (Subbab \ref{sec:tujuan}), batasan
-masalah (Subbab \ref{sec:batasan_masalah}), kebutuhan fungsional
-(Subbab \ref{ssec:kebutuhan_fungsional}), serta temuan dari studi literatur
-(Bab \ref{chap:studi-literatur}). Setiap kriteria diberi bobot (\%) yang
-mencerminkan prioritasnya dalam penelitian ini. Alternatif dengan skor
-terbobot tertinggi akan dipilih untuk diimplementasikan.
+Analisis dibagi menjadi tiga keputusan terpisah untuk memilih: (1) Teknik Asesmen Individu, (2) Teknik Interaksi Sosial, dan (3) Teknik Mitigasi \textit{Over-personalization}.
 
-Analisis penentuan solusi dibagi menjadi tiga keputusan utama:
+\subsubsection{Keputusan 1: Penentuan Teknik Asesmen Individu}
+\label{sssec:keputusan_asesmen_individu}
+Tujuannya adalah memilih algoritma pelacakan pengetahuan. Berdasarkan tinjauan literatur, kandidat utamanya adalah IRT, FA, BKT, DKT, dan Elo-rating.
 
+\begin{longtable}{@{\extracolsep{\fill}} p{3.0cm} c c c c c c}
+\caption{Matriks Keputusan: Teknik Asesmen Individu}\label{tbl:solusi-r1} \\
+\toprule
+\textbf{Kriteria} & \textbf{Bobot} & \textbf{IRT} & \textbf{FA} & \textbf{BKT} & \textbf{DKT} & \textbf{Elo} \\
+\midrule
+\endfirsthead
+\caption*{Tabel \ref{tbl:solusi-r1} (Lanjutan)} \\
+\toprule
+\textbf{Kriteria} & \textbf{Bobot} & \textbf{IRT} & \textbf{FA} & \textbf{BKT} & \textbf{DKT} & \textbf{Elo} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+
+% Data Penilaian
+Efisiensi Komputasi & 30\% & 2 & 1 & 3 & 1 & 5 \\
+Kebutuhan Data Awal (Cold Start) & 30\% & 2 & 2 & 3 & 2 & 5 \\
+Akurasi Pelacakan & 20\% & 4 & 3 & 3 & 5 & 4 \\
+Interpretabilitas & 20\% & 4 & 3 & 4 & 1 & 5 \\
+\midrule
+\textbf{Skor Terbobot} & \textbf{100\%} & \textbf{2.8} & \textbf{2.1} & \textbf{3.2} & \textbf{2.1} & \textbf{4.8} \\
+\end{longtable}
+
+\textbf{Rasionalisasi Objektif dan Analisis \textit{Trade-off}:}
+\begin{itemize}
+    \item \textbf{Efisiensi \& Kebutuhan Data (Bobot Tinggi - 60\%):} Kriteria ini diberi bobot tertinggi mengingat batasan masalah pengembangan purwarupa yang mungkin tidak memiliki dataset historis besar. \textbf{Elo-rating} unggul mutlak (skor 5) karena algoritma ini dirancang untuk bekerja tanpa pra-kalibrasi yang rumit dan efisien secara komputasi \autocite{Vesin2022}. Sebaliknya, \textbf{IRT} dan \textbf{FA} membutuhkan sampel besar untuk kalibrasi parameter butir soal, dan \textbf{DKT} membutuhkan data pelatihan masif untuk melatih jaringan saraf \autocite{Minn2022}.
+    
+    \item \textbf{Akurasi vs. Kelayakan (Trade-off):} \textbf{DKT} memiliki skor akurasi tertinggi (5) karena kemampuannya menangkap pola kompleks \autocite{Minn2022}. Namun, terjadi \textit{trade-off} signifikan pada aspek \textbf{Interpretabilitas} (skor 1) karena sifat \textit{black-box}-nya, yang menyulitkan sistem untuk menjelaskan alasan rekomendasi kepada siswa. \textbf{Elo-rating} dipilih bukan karena ia paling akurat, tetapi karena ia adalah solusi paling layak (\textit{feasible}) untuk diimplementasikan dalam skenario data terbatas dengan akurasi yang masih dapat diterima.
+\end{itemize}
+
+\subsubsection{Keputusan 2: Penentuan Teknik Interaksi Sosial}
+\label{sssec:keputusan_asesmen_sosial}
+Tujuannya adalah memilih bentuk aktivitas sosial yang dapat memfasilitasi kolaborasi sekaligus menghasilkan data yang dapat diolah sistem.
+
+\begin{longtable}{@{\extracolsep{\fill}} p{3.0cm} c c c c c c}
+\caption{Matriks Keputusan: Teknik Interaksi Sosial}\label{tbl:solusi-r2} \\
+\toprule
+\textbf{Kriteria} & \textbf{Bobot} & \textbf{PBL} & \textbf{Mentor} & \textbf{Group} & \textbf{Diskusi} & \textbf{Peer Assmt.} \\
+\midrule
+\endfirsthead
+\caption*{Tabel \ref{tbl:solusi-r2} (Lanjutan)} \\
+\toprule
+\textbf{Kriteria} & \textbf{Bobot} & \textbf{PBL} & \textbf{Mentor} & \textbf{Group} & \textbf{Diskusi} & \textbf{Peer Assmt.} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{6}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+
+% Data Penilaian
+Keterukuran Data (Measurability) & 35\% & 2 & 3 & 1 & 1 & 5 \\
+Kesetaraan Interaksi & 25\% & 5 & 2 & 5 & 5 & 5 \\
+Potensi Eksposur Keberagaman & 25\% & 4 & 2 & 3 & 3 & 5 \\
+Kompleksitas Implementasi & 15\% & 2 & 3 & 4 & 3 & 4 \\
+\midrule
+\textbf{Skor Terbobot} & \textbf{100\%} & \textbf{3.25} & \textbf{2.5} & \textbf{3.0} & \textbf{2.8} & \textbf{4.85} \\
+\end{longtable}
+
+\textbf{Rasionalisasi Objektif dan Analisis \textit{Trade-off}:}
+\begin{itemize}
+    \item \textbf{Keterukuran Data (35\%):} Sistem membutuhkan input kuantitatif untuk algoritma (FR-06). \textbf{Peer Assessment} mendapatkan skor tertinggi (5) karena menghasilkan artefak terstruktur (skor rubrik dan teks umpan balik) yang mudah dikuantifikasi \autocite{Ihichr2024}. Sebaliknya, \textbf{Diskusi Terbuka} dan \textbf{PBL} (Project-Based Learning) sangat sulit dinilai kontribusi individunya secara otomatis tanpa intervensi manual dosen \autocite{Ryoo2021}.
+    
+    \item \textbf{Kesetaraan \& Eksposur (Trade-off):} \textbf{Mentoring} mendapat skor rendah pada kesetaraan (2) karena sifatnya hierarkis (senior-junior) \autocite{Le2024}, yang kurang cocok untuk memecah \textit{echo chamber} dibandingkan interaksi setara. \textbf{PBL} sebenarnya sangat baik dalam kesetaraan dan kolaborasi mendalam (skor 5), namun dipilihnya \textbf{Peer Assessment} merupakan \textit{trade-off} logis karena PBL memiliki kompleksitas implementasi yang tinggi dan risiko \textit{free-rider} yang sulit dideteksi sistem \autocite{Zhang2023}. Peer Assessment dipilih karena memungkinkan sistem "mengatur" siapa menilai siapa untuk memaksa eksposur keberagaman.
+\end{itemize}
+
+\subsubsection{Keputusan 3: Penentuan Teknik Mitigasi \textit{Over-personalization}}
+\label{sssec:keputusan_mitigasi_bubble}
+Tujuannya adalah memilih pendekatan algoritmik untuk mengatasi isolasi pembelajaran, berdasarkan alternatif yang tersedia di Bab II.
+
+\begin{longtable}{@{\extracolsep{\fill}} p{3.5cm} c c c c}
+\caption{Matriks Keputusan: Teknik Mitigasi Bubble}\label{tbl:solusi-r3} \\
+\toprule
+\textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt A: UCRS} & \textbf{Alt B: GRS} & \textbf{Alt C: FRediECH} \\
+\midrule
+\endfirsthead
+\caption*{Tabel \ref{tbl:solusi-r3} (Lanjutan)} \\
+\toprule
+\textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt A: UCRS} & \textbf{Alt B: GRS} & \textbf{Alt C: FRediECH} \\
+\midrule
+\endhead
+\midrule
+\multicolumn{5}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\bottomrule
+\endfoot
+\bottomrule
+\endlastfoot
+
+% Data Penilaian
+Otomasi Intervensi & 40\% & 1 & 4 & 4 \\
+Preservasi Personalisasi Individu & 30\% & 5 & 2 & 3 \\
+Relevansi Pemecahan Echo Chamber & 30\% & 3 & 3 & 5 \\
+\midrule
+\textbf{Skor Terbobot} & \textbf{100\%} & \textbf{2.8} & \textbf{3.1} & \textbf{4.0} \\
+\end{longtable}
+
+\textbf{Rasionalisasi Objektif dan Analisis \textit{Trade-off}:}
+\begin{itemize}
+    \item \textbf{Otomasi Intervensi (40\%):} Untuk mengatasi siswa yang tidak sadar akan inkompetensinya (\textit{unconscious incompetence}), sistem harus proaktif. \textbf{UCRS} (User-Controllable) mendapat skor terendah (1) karena sangat bergantung pada inisiatif siswa untuk mengubah pengaturan rekomendasi \autocite{Wang2022}. \textbf{GRS} dan \textbf{FRediECH} unggul karena bekerja secara otomatis di latar belakang.
+    
+    \item \textbf{Preservasi Personalisasi (30\%):} \textbf{GRS} (Group Recommender) cenderung merekomendasikan apa yang disukai mayoritas kelompok, yang berisiko mengorbankan kebutuhan unik individu (skor 2) \autocite{Dokoupil2022}. \textbf{UCRS} paling menghormati otonomi individu (skor 5). \textbf{FRediECH} berada di tengah-tengah; ia merekomendasikan koneksi orang lain, namun tetap mempertahankan profil individu pengguna.
+    
+    \item \textbf{Relevansi Pemecahan Echo Chamber (30\%):} \textbf{FRediECH} secara spesifik dirancang dengan fungsi tujuan (\textit{objective function}) untuk memecahkan \textit{echo chamber} dengan merekomendasikan teman yang beragam \autocite{Tommasel2021}. Ini lebih relevan dibanding GRS yang fokus pada keadilan kelompok.
+    
+    \item \textbf{Kesimpulan:} \textbf{FRediECH (Implisit Community Modeling)} dipilih sebagai pendekatan mitigasi. Meskipun UCRS memberikan kontrol lebih besar, risiko pasifnya siswa membuat FRediECH lebih unggul untuk tujuan penelitian ini. Konsep FRediECH akan diadaptasi: alih-alih sekadar merekomendasikan "teman", sistem akan merekomendasikan "mitra interaksi" (untuk aktivitas Peer Assessment yang terpilih di Keputusan 2) guna memecah isolasi.
+\end{itemize}
+
+\subsubsection{Ringkasan Solusi Terpilih}
+Berdasarkan analisis matriks keputusan di atas, purwarupa sistem akan mengimplementasikan kombinasi berikut:
 \begin{enumerate}
-    % --- KEPUTUSAN 1: TEKNIK ASESMEN INDIVIDU ---
-    \item \textbf{Penentuan Teknik Asesmen Individu (R1)}
-    
-    Tabel \ref{tbl:solusi-r1} berikut ini akan memberikan penilaian dan analisi alternatif teknik untuk asesmen
-    kemahiran individu (R1), yang alternatifnya telah dipaparkan pada Subbab
-    \ref{sssec:alternatif_asesmen_individu}.
-    
-    % --- Tabel R1 (REVISI) ---
-    \begin{longtable}{@{\extracolsep{\fill}} p{3.5cm} c >{\centering\arraybackslash}p{1.4cm} >{\centering\arraybackslash}p{1.4cm} >{\centering\arraybackslash}p{1.4cm} >{\centering\arraybackslash}p{1.4cm} >{\centering\arraybackslash}p{1.4cm}}
-    \caption{Matriks Keputusan: Teknik Asesmen Individu (R1)}\label{tbl:solusi-r1} \\
-    \toprule
-    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt. 1: IRT} & \textbf{Alt. 2: IRT*} & \textbf{Alt. 3: BKT} & \textbf{Alt. 4: DKT} & \textbf{Alt. 5: \textit{Elo-rating}} \\
-    \midrule
-    \endfirsthead
-    
-    \caption{Matriks Keputusan: Teknik Asesmen Individu (R1) (lanjutan)} \\
-    \toprule
-    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt. 1: IRT} & \textbf{Alt. 2: IRT*} & \textbf{Alt. 3: BKT} & \textbf{Alt. 4: DKT} & \textbf{Alt. 5: \textit{Elo-rating}} \\
-    \midrule
-    \endhead
-    
-    \midrule
-    \multicolumn{7}{r}{\textit{Bersambung ke halaman berikutnya}} \\
-    %\bottomrule
-    \endfoot
-    
-    \bottomrule
-    \endlastfoot
-    
-    % === Table Data ===
-    Interpretabilitas & 30\% & 5 (Sangat Baik) & 4 (Baik) & 4 (Baik) & 1 (Buruk) & 5 (Sangat Baik) \\
-    Efisiensi Komputasi & 30\% & 2 (Buruk) & 2 (Buruk) & 3 (Cukup) & 1 (Buruk) & 5 (Sangat Baik) \\
-    Akurasi Prediksi & 20\% & 4 (Baik) & 5 (Sangat Baik) & 3 (Cukup) & 5 (Sangat Baik) & 4 (Baik) \\
-    Risiko Implementasi & 20\% & 2 (Tinggi) & 2 (Tinggi) & 3 (Cukup) & 1 (Sangat Tinggi) & 4 (Rendah) \\
-    \midrule
-    \textbf{Total Skor Terbobot} & \textbf{100\%} & \textbf{3.3} & \textbf{3.2} & \textbf{3.3} & \textbf{1.8} & \textbf{4.6} \\
-    \end{longtable}
-
-    \textbf{Rasionalisasi (Tabel \ref{tbl:solusi-r1}):}
-    
-    Bobot kriteria difokuskan pada kebutuhan purwarupa ini. \textbf{Interpretabilitas (30\%)} dan \textbf{Efisiensi Komputasi (30\%)} diberi bobot tertinggi karena sejalan dengan dan kebutuhan nonfungsional (NFR-02, NFR-03) untuk menghindari solusi \textit{black-box} \autocite{Minn2022} dan memastikan umpan balik \textit{real-time}. \textbf{Akurasi Prediksi (20\%)} diberi bobot sedang, karena untuk purwarupa, akurasi dapat ditoleransi (\textit{trade-off}) demi interpretabilitas. \textbf{Risiko Implementasi (20\%)} juga diberi bobot sedang, merefleksikan kebutuhan akan kalibrasi data yang minimal untuk skala terbatas.
-    
-    Berdasarkan kriteria tersebut, \textbf{IRT \& IRT*} mendapat skor rendah pada \textbf{Efisiensi Komputasi} dan \textbf{Risiko Implementasi} karena terkenal sulit dikalibrasi (membutuhkan data besar) dan komputasinya berat untuk pembaruan \textit{real-time} \autocite{Vesin2022}. \textbf{DKT} mendapat skor sempurna untuk \textbf{Akurasi Prediksi} \autocite{Ihichr2024}, namun gagal total pada kriteria berbobot tinggi lainnya (Interpretabilitas \textit{black-box} \autocite{Minn2022} dan Efisiensi). \textbf{\textit{Elo-rating}} menawarkan \textit{trade-off} terbaik: skor sempurna pada interpretabilitas dan efisiensi, serta risiko implementasi terendah karena terbukti dapat bekerja dengan sampel data kecil \autocite{Vesin2022}.
-
-    % --- KEPUTUSAN 2: TEKNIK ASESMEN SOSIAL ---
-    \item \textbf{Penentuan Interaksi dan Asesmen Sosial (R2 \& R3)}
-    
-    Tabel \ref{tbl:solusi-r2r3} menganalisis alternatif untuk fasilitasi interaksi (R2) dan asesmen kinerja kolaboratif (R3), yang alternatifnya telah dipaparkan pada Subbab \ref{sssec:alternatif_asesmen_sosial}.
-
-    % --- Tabel R2/R3 (REVISI) ---
-    \begin{longtable}{@{\extracolsep{\fill}} p{4cm} c >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.5cm}}
-    \caption{Matriks Keputusan: Teknik Interaksi \& Asesmen Sosial (R2 \& R3)}\label{tbl:solusi-r2r3} \\
-    \toprule
-    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt. 1: \textit{Peer Assessment}} & \textbf{Alt. 2: Formasi Kelompok} & \textbf{Alt. 3: Sesi Diskusi} \\
-    \midrule
-    \endfirsthead
-    
-    \caption{Matriks Keputusan: Teknik Interaksi \& Asesmen Sosial (R2 \& R3) (lanjutan)} \\
-    \toprule
-    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt. 1: \textit{Peer Assessment}} & \textbf{Alt. 2: Formasi Kelompok} & \textbf{Alt. 3: Sesi Diskusi} \\
-    \midrule
-    \endhead
-    
-    \midrule
-    \multicolumn{5}{r}{\textit{Bersambung ke halaman berikutnya}} \\
-    %\bottomrule
-    \endfoot
-    
-    \bottomrule
-    \endlastfoot
-    
-    % === Table Data ===
-    Kemudahan Asesmen (R3) & 40\% & 4 (Baik) & 2 (Rendah) & 1 (Buruk) \\
-    Dampak Pedagogis (Lit.) & 40\% & 5 (Sangat Baik) & 3 (Cukup) & 3 (Cukup) \\
-    Risiko Implementasi & 20\% & 3 (Cukup) & 4 (Rendah) & 2 (Tinggi) \\
-    \midrule
-    \textbf{Total Skor Terbobot} & \textbf{100\%} & \textbf{4.2} & \textbf{2.8} & \textbf{2.0} \\
-    \end{longtable}
-
-    \textbf{Rasionalisasi (Tabel \ref{tbl:solusi-r2r3}):}
-    
-    Pembobotan kriteria di sini sangat terfokus. \textbf{Kemudahan Asesmen (R3) (40\%)} diberi bobot sangat tinggi karena ini adalah inti dari kebutuhan R3 (Penilaian Kinerja Kolaboratif); solusi harus menghasilkan metrik yang dapat diukur secara otomatis oleh sistem. \textbf{Dampak Pedagogis (Lit.) (40\%)} juga diberi bobot sangat tinggi karena aktivitas sosial yang dipilih harus memiliki landasan teoretis yang kuat dan terbukti berdampak positif pada pembelajaran, seperti yang diuraikan di Subbab \ref{ssec:aktivitas_pembelajaran_sosial}.
-    
-    Pemberian skor menunjukkan bahwa \textbf{\textit{Peer Assessment}} adalah pemenang yang jelas. Aktivitas ini mendapat skor tertinggi pada \textbf{Dampak Pedagogis} karena temuan kuat dari \textcite{Lu2012} yang menunjukkan manfaat kognitif bagi \textit{pemberi} umpan balik. Skor \textbf{Kemudahan Asesmen}-nya tinggi (4/5) karena sistem dapat secara otomatis mengukur kualitas dan kuantitas umpan balik yang diberikan sebagai metrik R3. Sebaliknya, \textbf{Formasi Kelompok} sulit dinilai secara dinamis (asesmen R3 bersifat statis) \autocite{Nalli2022, Maina2017}, dan \textbf{Sesi Diskusi} hampir tidak mungkin dinilai secara otomatis (1/5) tanpa NLP yang kompleks, yang memiliki \textbf{Risiko Implementasi} tinggi.
-
-    % --- KEPUTUSAN 3: STRATEGI INTEGRASI ---
-    \item \textbf{Penentuan Strategi Integrasi dan Adaptasi (R4 \& R5)}
-    
-    Tabel \ref{tbl:solusi-r4r5} menganalisis arsitektur alternatif yang bisa 
-    digunakan untuk
-    mencapai tujuan mengintegrasikan (R4) model personal dan sosial,
-    yang alternatifnya telah
-    dipaparkan pada Subbab \ref{sssec:alternatif_integrasi}.
-
-    % --- Tabel R4/R5 (REVISI) ---
-    \begin{longtable}{@{\extracolsep{\fill}} p{4cm} c >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.5cm} >{\centering\arraybackslash}p{2.5cm}}
-    \caption{Matriks Keputusan: Strategi Integrasi dan Adaptasi (R4 \& R5)}\label{tbl:solusi-r4r5} \\
-    \toprule
-    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt. A: Integrasi Visual (OSSM)} & \textbf{Alt. B: Integrasi Statis} & \textbf{Alt. C: Integrasi Dinamis} \\
-    \midrule
-    \endfirsthead
-    
-    \caption{Matriks Keputusan: Strategi Integrasi dan Adaptasi (R4 \& R5) (lanjutan)} \\
-    \toprule
-    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt. A: Integrasi Visual (OSSM)} & \textbf{Alt. B: Integrasi Statis} & \textbf{Alt. C: Integrasi Dinamis} \\
-    \midrule
-    \endhead
-    
-    \midrule
-    \multicolumn{5}{r}{\textit{Bersambung ke halaman berikutnya}} \\
-    %\bottomrule
-    \endfoot
-    
-    \bottomrule
-    \endlastfoot
-    
-    % === Table Data ===
-    Kedalaman Integrasi (R4) & 35\% & 2 (Rendah) & 2 (Rendah) & 5 (Sangat Baik) \\
-    Kekuatan Adaptasi (R5) & 35\% & 2 (Rendah) & 3 (Cukup) & 5 (Sangat Baik) \\
-    Kompleksitas Arsitektur & 30\% & 4 (Rendah) & 4 (Rendah) & 2 (Tinggi) \\
-    \midrule
-    \textbf{Total Skor Terbobot} & \textbf{100\%} & \textbf{2.6} & \textbf{2.95} & \textbf{4.1} \\
-    \end{longtable}
-
-    \textbf{Rasionalisasi (Tabel \ref{tbl:solusi-r4r5}):}
-    
-    Bobot untuk keputusan ini difokuskan untuk menyelesaikan masalah utama penelitian (Subbab \ref{ssec:masalah_integrasi}). \textbf{Kedalaman Integrasi (R4) (35\%)} dan \textbf{Kekuatan Adaptasi (R5) (35\%)} diberi bobot tertinggi karena secara langsung mengukur sejauh mana solusi dapat menjembatani "kesenjangan integrasi algoritmik" (R4) dan menghasilkan adaptasi holistik (R5). \textbf{Kompleksitas Arsitektur (30\%)} diberi bobot tinggi (kebalikan dari "Risiko Implementasi") karena arsitektur yang lebih sederhana lebih disukai, namun tidak dengan mengorbankan tujuan inti penelitian.
-    
-    Penilaian skor menunjukkan bahwa \textbf{Alt. A (Integrasi Visual OSSM)} dan \textbf{Alt. B (Integrasi Statis)} keduanya gagal pada kriteria utama. Seperti yang dianalisis di Subbab \ref{sec:integrasi_penilaian_personal_sosial}, model-model ini \textit{tidak} mengintegrasikan data secara algoritmik \autocite{Brusilovsky2016, Nalli2022, Maina2017}; integrasinya hanya bersifat visual atau statis di awal. \textbf{Alt. C (Integrasi Dinamis)} adalah satu-satunya yang mendapat skor sempurna pada \textbf{Integrasi} dan \textbf{Adaptasi} karena secara fundamental dirancang untuk memenuhi R4 dan R5. Skor rendahnya pada \textbf{Kompleksitas} (yang berarti kompleksitasnya tinggi) adalah \textit{trade-off} yang dapat diterima untuk menjawab masalah inti penelitian ini.
-
+    \item \textbf{Asesmen Individu:} Menggunakan \textbf{\textit{Elo-rating}} karena efisiensinya dalam kondisi data terbatas.
+    \item \textbf{Interaksi Sosial:} Menggunakan \textbf{\textit{Peer Assessment}} karena menghasilkan data kuantitatif yang terukur.
+    \item \textbf{Mitigasi Isolasi:} Mengadaptasi logika \textbf{FRediECH} untuk merekomendasikan mitra penilaian sejawat yang berada di luar \textit{bubble} pengguna, guna memastikan terjadinya eksposur terhadap keberagaman.
 \end{enumerate}
-
-% \subsubsection*{Justifikasi Solusi Terpilih}
-% \addcontentsline{toc}{subsubsection}{Justifikasi Solusi Terpilih}
-Berdasarkan hasil analisis kuantitatif pada matriks keputusan di atas, solusi
-terintegrasi yang terpilih untuk diimplementasikan dalam purwarupa adalah kombinasi
-dari tiga keputusan berikut:
-
-\textbf{Sistem \textit{Elo-rating}} dipilih untuk asesmen kemahiran individu (R1)
-dengan skor: 4.6. Analisis \textit{trade-off} pada Tabel \ref{tbl:solusi-r1}
-menunjukkan bahwa meskipun DKT dan IRT* menawarkan akurasi prediksi tertinggi,
-keduanya memiliki kelemahan fatal pada kriteria berbobot tinggi lainnya. DKT
-bersifat \textit{black-box} \autocite{Minn2022}, sementara IRT/IRT* memiliki
-efisiensi komputasi dan risiko implementasi yang buruk untuk purwarupa
-\textit{real-time} karena kebutuhan kalibrasi data yang besar \autocite{Vesin2022}.
-Sistem \textit{Elo-rating} menawarkan \textit{trade-off} terbaik antara akurasi
-yang memadai (4/5), interpretabilitas yang sangat baik (5/5), dan efisiensi serta
-risiko implementasi yang paling ideal untuk purwarupa \autocite{Vesin2022}.
-
-\textbf{\textit{Peer Assessment}} (penilaian sejawat) dipilih untuk interaksi dan
-asesmen sosial (R2 \& R3) dengan skor 4.2. Berdasarkan Tabel \ref{tbl:solusi-r2r3},
-\textit{peer assessment} adalah satu-satunya alternatif yang unggul di kedua
-kriteria berbobot tinggi. Secara pedagogis, dampaknya sangat kuat dan berlandaskan
-teori, terutama manfaat kognitif bagi siswa yang \textit{memberi} penilaian
-\autocite{Lu2012}. Secara teknis, aktivitas ini menghasilkan metrik yang jelas
-(kualitas dan kuantitas umpan balik) yang dapat diukur oleh sistem untuk memenuhi
-kebutuhan asesmen R3, tidak seperti formasi kelompok yang statis atau analisis
-diskusi yang terlalu kompleks.
-
-\textbf{Arsitektur Integrasi Dinamis} dipilih untuk strategi integrasi (R4 \& R5)
-dengan skor 4.1. Analisis pada Tabel \ref{tbl:solusi-r4r5} menunjukkan bahwa
-meskipun arsitektur ini paling kompleks, ini adalah satu-satunya alternatif yang
-secara fundamental menjawab masalah inti penelitian. Alternatif Integrasi Visual
-(OSSM) \autocite{Brusilovsky2016} dan Integrasi Statis (Formasi Kelompok)
-\autocite{Nalli2022, Maina2017} gagal melakukan \textbf{integrasi algoritmik}
-yang dinamis. Solusi Integrasi Dinamis memungkinkan sistem untuk secara nyata
-menggabungkan skor personal (dari \textit{Elo-rating}) dan skor sosial
-(dari \textit{peer assessment}) untuk menciptakan adaptasi yang holistik.
