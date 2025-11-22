@@ -10,41 +10,24 @@
 \section{Analisis Kondisi Saat Ini}
 \label{sec:kondisi_saat_ini}
 
-% Analisis terhadap lanskap teknologi pembelajaran adaptif saat ini mengungkapkan sebuah paradoks fundamental: sementara teknologi mitigasi \textit{over-personalization} telah matang di domain sistem rekomendasi komersial, adopsinya di domain pendidikan terhambat oleh arsitektur sistem asesmen yang kaku.
+% Analisis terhadap lanskap teknologi pembelajaran adaptif saat ini mengungkapkan kesenjangan fundamental antara kemampuan sistem untuk mempersonalisasi materi dan ketidakmampuannya untuk mengelola dinamika sosial pembelajar. Kondisi ini dapat dipetakan ke dalam tiga masalah arsitektural utama.
 
-% \subsection{Keterbatasan Arsitektur Asesmen dalam Mendeteksi Isolasi}
-Masalah utama saat ini bukan sekadar ketiadaan fitur sosial, melainkan ketidakmampuan algoritma inti (\textit{core algorithms}) untuk memproses sinyal sosial. Teknik dominan seperti \textit{Bayesian Knowledge Tracing} (BKT) atau \textit{Elo-rating} bekerja dengan asumsi dasar bahwa pembelajaran adalah proses soliter \autocite{Minn2022}. Variabel yang diolah hanyalah interaksi biner antara siswa dan konten (benar/salah) \autocite{Vesin2022}.
+% \subsection{Dominasi Algoritma Berbasis Isolasi}
+Mayoritas sistem asesmen adaptif yang ada saat ini dibangun di atas asumsi bahwa pembelajaran adalah proses soliter. Algoritma pelacakan pengetahuan (\textit{knowledge tracing}) yang dominan bekerja dengan memproses data interaksi biner (benar/salah) antara siswa dan mesin secara eksklusif \autocite{Minn2022}. 
 
-Implikasinya adalah sistem saat ini menderita \textit{algorithmic blindness}
-terhadap isolasi pembelajaran. Meskipun seorang siswa terjebak dalam
-\textit{filter bubble} atau \textit{echo chamber} akademik, hanya mengerjakan
-soal yang ia sukai dan tidak pernah berinteraksi dengan perspektif lain, 
-sistem
-asesmen konvensional tetap akan menilainya berkinerja tinggi selama ia menjawab
-benar. Kondisi ini berbahaya karena menciptakan "kompetensi semu", suatu fenomena ketika siswa
-mahir secara individu namun rapuh dalam kolaborasi, yang bertentangan dengan visi
-ekosistem kolaboratif \autocite{BPPT2020}.
+Implikasi dari desain ini adalah terjadinya \textit{algorithmic blindness} terhadap konteks sosial. Sistem mampu memodelkan kemahiran individu dengan presisi tinggi, namun "buta" terhadap fakta bahwa siswa mungkin terjebak dalam isolasi materi atau \textit{filter bubble} akademik, hanya mengerjakan tipe soal yang dikuasai dan tidak pernah terekspos pada perspektif rekan sejawat \autocite{Halkiopoulos2024}. Akibatnya, sistem berisiko memberikan skor kompetensi tinggi pada siswa yang sebenarnya rapuh secara kolaboratif, menciptakan fenomena "kompetensi semu".
 
-% \subsection{Analisis Kesenjangan Adopsi Solusi Mitigasi \textit{Over-Personalization}}
-Studi literatur menunjukkan bahwa solusi untuk masalah isolasi ini sudah tersedia
-di bidang lain, seperti \textit{User-Controllable Recommender Systems} (UCRS)
-\autocite{Wang2022} dan \textit{Group Recommender Systems} (GRS)
-\autocite{Dokoupil2022}. Namun, analisis kondisi saat ini menunjukkan bahwa
-solusi-solusi tersebut gagal diterapkan secara efektif dalam pendidikan karena
-alasan arsitektural berikut:
+% \subsection{Fragmentasi Antara Asesmen Kognitif dan Aktivitas Sosial}
+Dalam kondisi saat ini, aktivitas sosial seringkali hanya ditempatkan sebagai fitur tambahan (\textit{add-on}) yang berjalan paralel namun terpisah dari mesin asesmen utama. Data berharga dari interaksi sosial seperti kemampuan siswa dalam mengevaluasi pekerjaan orang lain atau memberikan argumen seringkali terbuang dan tidak dikonversi menjadi sinyal kompetensi yang dapat mengubah rekomendasi materi \autocite{Ihichr2024}.
 
-\begin{enumerate}
-    \item \textbf{Kegagalan Pendekatan Kendali Pengguna (UCRS):} Solusi \textcite{Wang2022} mengandalkan pengguna untuk sadar bahwa mereka terjebak dalam \textit{bubble}. Dalam konteks pendidikan, siswa (sebagai \textit{novice}) sering kali tidak memiliki metakognisi yang cukup untuk menyadari bahwa mereka butuh materi yang lebih beragam atau menantang secara sosial. Oleh karena itu, intervensi manual ala UCRS tidak cukup; diperlukan intervensi otomatis dari sistem.
-    
-    \item \textbf{Kegagalan Pendekatan Visual (OSSM):} Upaya yang ada saat ini seperti \textit{Open Social Student Modeling} (OSSM) hanya menempatkan data sosial sebagai "lapisan visual" di atas sistem, tanpa mengubah logika rekomendasi di bawahnya \autocite{Brusilovsky2016}. Data perbandingan sosial hanya menjadi "hiasan" motivasi, tidak menjadi variabel input yang mengubah tingkat kesulitan atau jenis materi yang direkomendasikan algoritma.
-\end{enumerate}
+% \subsection{Keterbatasan Mitigasi Berbasis Kendali Pengguna}
+Upaya yang ada untuk mengatasi masalah isolasi pembelajaran sejauh ini cenderung mengandalkan inisiatif pengguna, seperti pendekatan \textit{User-Controllable Recommender Systems} (UCRS) \autocite{Wang2022} atau visualisasi sosial (OSSM) \autocite{Brusilovsky2016}. Namun, pendekatan ini memiliki kelemahan fundamental dalam konteks pendidikan: pendekatan ini berasumsi bahwa pengguna menyadari bahwa mereka sedang terisolasi.
 
-% \subsection{Implikasi Terhadap Arah Pengembangan Sistem (\textit{What's Next})}
-Dari analisis di atas, dapat disimpulkan bahwa menambahkan fitur kolaborasi saja (seperti forum atau grup) tidak akan memecahkan masalah \textit{over-personalization} jika mesin asesmennya tetap terpisah.
+Dalam realitas algoritma adaptif, fenomena \textit{over-personalization} yang terealisasi dengan gejala \textit{filter bubble} atau \textit{echo-chamber} seringkali bersifat tidak terlihat (\textit{invisible}). Sistem secara otomatis menyaring konten yang tidak sesuai dengan profil historis, sehingga siswa tidak pernah terekspos pada opsi alternatif dan menganggap bahwa materi yang mereka terima adalah satu-satunya yang tersedia. Oleh karena itu, menyerahkan kendali mitigasi sepenuhnya kepada pengguna berisiko tidak efektif karena pengguna tidak dapat memilih apa yang tidak mereka lihat. Sistem saat ini kekurangan mekanisme intervensi otomatis yang mampu "memaksa" terjadinya diversifikasi interaksi ketika pola isolasi terdeteksi oleh algoritma.
+% \subsection{Implikasi Terhadap Arah Pengembangan Sistem}
+Dari analisis kondisi di atas, disimpulkan bahwa menambahkan fitur kolaborasi konvensional tidak akan menyelesaikan masalah \textit{over-personalization} selama mesin asesmennya masih bekerja secara terisolasi.
 
-Kebutuhan mendesak saat ini adalah melakukan rekayasa ulang (\textit{re-engineering}) pada alur data. Kita tidak lagi membutuhkan dua sistem yang berjalan paralel (satu untuk nilai individu, satu untuk grup), melainkan sebuah sistem hibrida. Data kinerja sosial, seperti kualitas umpan balik dalam \textit{peer assessment} \autocite{Lu2012}, harus diubah menjadi variabel matematis yang dapat "dibaca" oleh algoritma asesmen adaptif (seperti parameter $K$ dalam \textit{Elo-rating}).
-
-Hanya dengan cara inilah, sistem dapat secara proaktif mendeteksi isolasi dan melakukan "koreksi paksa" melalui rekomendasi konten, menjembatani kesenjangan menuju analisis kebutuhan sistem yang akan diuraikan pada subbab berikutnya.
+Kebutuhan mendesak saat ini adalah melakukan rekayasa ulang (\textit{re-engineering}) pada arsitektur asesmen. Diperlukan sebuah sistem yang mampu memperlakukan aktivitas sosial setara dengan aktivitas pengerjaan soal. Sistem harus memiliki kapabilitas untuk: (1) mengkuantifikasi aktivitas kolaboratif menjadi data kompetensi yang terukur, dan (2) menggunakan data tersebut untuk melakukan intervensi aktif terhadap rekomendasi yang diberikan kepada siswa. Hanya dengan mengintegrasikan kedua jalur data inilah sistem dapat memitigasi risiko isolasi pembelajaran secara sistematis.
 
 \section{Analisis Kebutuhan}
 \label{sec:analisis_kebutuhan}
@@ -192,7 +175,7 @@ Komponen ini bertujuan memfasilitasi interaksi yang bermakna. Untuk memecahkan \
 
     \item \textbf{Pendampingan Sejawat (\textit{Peer Mentoring}):}
     Mekanisme bimbingan \textit{one-on-one} antara siswa senior dan junior \autocite{Le2024}.
-    \textbf{Analisis terhadap \textit{Over-personalization}:} Hubungan ini sering kali bersifat hierarkis dan searah (senior mengajar junior), bukan kolaborasi setara. Hal ini kurang efektif untuk tujuan memecahkan \textit{echo chamber} yang membutuhkan paparan terhadap berbagai perspektif sejawat yang beragam, bukan sekadar transfer pengetahuan vertikal.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} Hubungan ini seringkali bersifat hierarkis dan searah (senior mengajar junior), bukan kolaborasi setara. Hal ini kurang efektif untuk tujuan memecahkan \textit{echo chamber} yang membutuhkan paparan terhadap berbagai perspektif sejawat yang beragam, bukan sekadar transfer pengetahuan vertikal.
 
     \item \textbf{Formasi Kelompok Berbasis Klastering (\textit{Group Formation}):}
     Menggunakan algoritma seperti K-Means untuk membentuk kelompok heterogen di awal pembelajaran \autocite{Nalli2022}.
@@ -209,20 +192,24 @@ Komponen ini bertujuan memfasilitasi interaksi yang bermakna. Untuk memecahkan \
 
 \subsubsection{Alternatif Teknik Pencegahan \textit{Echo Chamber} dan \textit{Filter Bubble}}
 \label{sssec:alternatif_pencegahan_bubble}
-Subbab ini mengevaluasi pendekatan spesifik yang telah dikembangkan dalam literatur sistem rekomendasi modern (Bab \ref{chap:studi-literatur}) untuk mengatasi masalah isolasi, guna melihat kesesuaiannya untuk diadopsi ke dalam sistem asesmen pendidikan.
+Subbab ini mengevaluasi pendekatan spesifik yang telah dikembangkan dalam literatur sistem rekomendasi untuk mengatasi masalah isolasi, guna melihat kesesuaiannya untuk diadopsi ke dalam sistem asesmen pendidikan.
 
 \begin{itemize}
     \item \textbf{\textit{User-Controllable Recommender Systems} (UCRS):}
     Pendekatan yang memberikan fitur kendali eksplisit kepada pengguna untuk mengatur tingkat diversifikasi rekomendasi mereka sendiri \autocite{Wang2022}.
-    \textbf{Analisis:} Pendekatan ini sangat bergantung pada kesadaran pengguna. Dalam konteks pendidikan, siswa sering kali tidak menyadari bahwa mereka berada dalam \textit{bubble} kompetensi ("\textit{unconscious incompetence}"). Mengandalkan siswa untuk secara manual meminta materi yang "tidak mereka sukai" berisiko tidak efektif dibandingkan intervensi otomatis.
+    \textbf{Analisis:} Pendekatan ini sangat bergantung pada kesadaran pengguna. Dalam konteks pendidikan, siswa seringkali tidak menyadari bahwa mereka berada dalam \textit{bubble} kompetensi ("\textit{unconscious incompetence}"). Mengandalkan siswa untuk secara manual meminta materi yang "tidak mereka sukai" berisiko tidak efektif dibandingkan intervensi otomatis.
 
     \item \textbf{\textit{Group Recommender Systems} (GRS):}
     Teknik yang merekomendasikan konten berdasarkan preferensi agregat dari sekelompok pengguna untuk meningkatkan keadilan (\textit{fairness}) dan pluralitas \autocite{Dokoupil2022}.
     \textbf{Analisis:} GRS cenderung memprioritaskan konsensus kelompok atau rata-rata preferensi. Dalam pembelajaran adaptif, hal ini berisiko mengorbankan personalisasi spesifik yang dibutuhkan siswa \textit{outlier} (sangat mahir atau sangat tertinggal), karena rekomendasi akan tertarik ke arah "pusat" kelompok, yang bisa menyebabkan \textit{under-personalization}.
 
     \item \textbf{Pemodelan Komunitas Implisit (\textit{FRediECH}):}
-    Sebuah teknik rekomendasi teman yang dirancang khusus untuk memecahkan \textit{echo chamber} dengan merekomendasikan koneksi sosial yang beragam namun relevan, berdasarkan pembelajaran representasi interaksi pengguna \autocite{Tommasel2021}.
-    \textbf{Analisis:} Teknik ini sangat kuat untuk memecah polarisasi opini dengan memperluas jejaring sosial siswa. Namun, penerapannya dalam asesmen kompetensi memiliki tantangan: FRediECH berfokus pada rekomendasi "siapa yang harus dijadikan teman", bukan "materi apa yang harus dipelajari". Mengadopsinya memerlukan modifikasi agar rekomendasi koneksi tersebut dapat diterjemahkan menjadi aktivitas belajar yang terukur (misalnya, menjadi mitra \textit{peer assessment}), bukan sekadar jejaring sosial pasif.
+    Sebuah teknik rekomendasi teman yang dirancang khusus untuk memecahkan \textit{echo chamber} dengan merekomendasikan koneksi sosial yang beragam namun relevan, berdasarkan pembelajaran representasi interaksi pengguna menggunakan \textit{Graph Neural Networks} \autocite{Tommasel2021}.
+    \textbf{Analisis:} Teknik ini sangat kuat untuk memecah polarisasi opini. Namun, kelemahan utamanya adalah kebutuhan akan data pelatihan yang besar untuk membangun graf interaksi awal (\textit{cold-start problem}), sehingga sulit diterapkan pada fase awal implementasi sistem tanpa dataset historis.
+
+    \item \textbf{\textit{Constraint-based Re-ranking}:}
+    Metode pasca-pemrosesan (\textit{post-processing}) yang menyusun ulang daftar rekomendasi awal agar memenuhi batasan (\textit{constraints}) distribusi tertentu, misalnya menetapkan persentase minimum item yang bersifat "favorable" atau beragam \autocite{DeBiasio2023}.
+    \textbf{Analisis:} Pendekatan ini bersifat agnostik terhadap model dasar dan bekerja berdasarkan aturan logis ($\alpha$ dan $\beta$) pada daftar rekomendasi yang ada. Keunggulan utamanya adalah efisiensi komputasi dan kemampuan untuk langsung berfungsi tanpa memerlukan pelatihan model data yang ekstensif (\textit{training-free}), menjadikannya solusi yang sangat potensial untuk kondisi data terbatas.
 \end{itemize}
 
 \subsection{Analisis Penentuan Solusi}
@@ -309,49 +296,53 @@ Kompleksitas Implementasi & 15\% & 2 & 3 & 4 & 3 & 4 \\
 
 \subsubsection{Keputusan 3: Penentuan Teknik Mitigasi \textit{Over-personalization}}
 \label{sssec:keputusan_mitigasi_bubble}
-Tujuannya adalah memilih pendekatan algoritmik untuk mengatasi isolasi pembelajaran, berdasarkan alternatif yang tersedia di Bab II.
+Keputusan ini bertujuan memilih mekanisme teknis untuk memecahkan \textit{echo chamber} yang dapat beroperasi secara otomatis dan layak diimplementasikan segera tanpa data pelatihan (\textit{cold-start}).
 
-\begin{longtable}{@{\extracolsep{\fill}} p{3.5cm} c c c c}
-\caption{Matriks Keputusan: Teknik Mitigasi Bubble}\label{tbl:solusi-r3} \\
+\begin{longtable}{@{\extracolsep{\fill}} p{3.5cm} c c c c c}
+\caption{Matriks Keputusan: Teknik Mitigasi Isolasi}\label{tbl:solusi-r3} \\
 \toprule
-\textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt A: UCRS} & \textbf{Alt B: GRS} & \textbf{Alt C: FRediECH} \\
+\textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt A} & \textbf{Alt B} & \textbf{Alt C} & \textbf{Alt D} \\
+\textbf{} & \textbf{} & \textbf{(UCRS)} & \textbf{(GRS)} & \textbf{(FRediECH)} & \textbf{(Re-rank)} \\
 \midrule
 \endfirsthead
 \caption*{Tabel \ref{tbl:solusi-r3} (Lanjutan)} \\
 \toprule
-\textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt A: UCRS} & \textbf{Alt B: GRS} & \textbf{Alt C: FRediECH} \\
+\textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt A} & \textbf{Alt B} & \textbf{Alt C} & \textbf{Alt D} \\
 \midrule
 \endhead
 \midrule
-\multicolumn{5}{r}{\textit{Bersambung ke halaman berikutnya}} \\
+\multicolumn{6}{r}{\textit{Bersambung ke halaman berikutnya}} \\
 \bottomrule
 \endfoot
 \bottomrule
 \endlastfoot
 
 % Data Penilaian
-Otomasi Intervensi & 40\% & 1 & 4 & 4 \\
-Preservasi Personalisasi Individu & 30\% & 5 & 2 & 3 \\
-Relevansi Pemecahan Echo Chamber & 30\% & 3 & 3 & 5 \\
+Otomasi Intervensi & 35\% & 1 & 4 & 5 & 5 \\
+Kelayakan Cold-Start & 35\% & 5 & 4 & 1 & 5 \\
+Preservasi Personalisasi & 30\% & 5 & 2 & 4 & 4 \\
 \midrule
-\textbf{Skor Terbobot} & \textbf{100\%} & \textbf{2.8} & \textbf{3.1} & \textbf{4.0} \\
+\textbf{Skor Terbobot} & \textbf{100\%} & \textbf{3.6} & \textbf{3.4} & \textbf{3.3} & \textbf{4.7} \\
 \end{longtable}
 
 \textbf{Rasionalisasi Objektif dan Analisis \textit{Trade-off}:}
 \begin{itemize}
-    \item \textbf{Otomasi Intervensi (40\%):} Untuk mengatasi siswa yang tidak sadar akan inkompetensinya (\textit{unconscious incompetence}), sistem harus proaktif. \textbf{UCRS} (User-Controllable) mendapat skor terendah (1) karena sangat bergantung pada inisiatif siswa untuk mengubah pengaturan rekomendasi \autocite{Wang2022}. \textbf{GRS} dan \textbf{FRediECH} unggul karena bekerja secara otomatis di latar belakang.
+    \item \textbf{Otomasi Intervensi (35\%):} \textbf{Alt A (UCRS)} mendapat skor terendah (1) karena bergantung pada inisiatif pengguna yang seringkali bias atau pasif. \textbf{Alt C (FRediECH)} dan \textbf{Alt D (Re-ranking)} unggul (5) karena sistem secara proaktif melakukan intervensi untuk memecah \textit{bubble} tanpa menunggu tindakan pengguna.
     
-    \item \textbf{Preservasi Personalisasi (30\%):} \textbf{GRS} (Group Recommender) cenderung merekomendasikan apa yang disukai mayoritas kelompok, yang berisiko mengorbankan kebutuhan unik individu (skor 2) \autocite{Dokoupil2022}. \textbf{UCRS} paling menghormati otonomi individu (skor 5). \textbf{FRediECH} berada di tengah-tengah; ia merekomendasikan koneksi orang lain, namun tetap mempertahankan profil individu pengguna.
+    \item \textbf{Kelayakan Cold-Start (35\%):} Kriteria ini krusial untuk purwarupa. \textbf{Alt C (FRediECH)} mendapat penalti besar (1) karena berbasis \textit{Deep Learning} yang membutuhkan data historis masif untuk pelatihan awal. Sebaliknya, \textbf{Alt D (Re-ranking)} mendapat skor sempurna (5) karena algoritma ini bekerja secara \textit{greedy} pada daftar yang ada berdasarkan aturan logis, sehingga bisa langsung berjalan sejak hari pertama implementasi \autocite{DeBiasio2023}.
     
-    \item \textbf{Relevansi Pemecahan Echo Chamber (30\%):} \textbf{FRediECH} secara spesifik dirancang dengan fungsi tujuan (\textit{objective function}) untuk memecahkan \textit{echo chamber} dengan merekomendasikan teman yang beragam \autocite{Tommasel2021}. Ini lebih relevan dibanding GRS yang fokus pada keadilan kelompok.
+    \item \textbf{Preservasi Personalisasi (30\%):} \textbf{Alt B (GRS)} cenderung menarik rekomendasi ke rata-rata kelompok, mengorbankan preferensi unik individu (skor 2). \textbf{Alt D (Re-ranking)} dinilai baik (4) karena hanya memodifikasi sebagian kecil daftar rekomendasi (sesuai parameter $\alpha$) untuk menyuntikkan keberagaman, sementara sisa daftar tetap mempertahankan personalisasi berbasis kompetensi individu.
     
-    \item \textbf{Kesimpulan:} \textbf{FRediECH (Implisit Community Modeling)} dipilih sebagai pendekatan mitigasi. Meskipun UCRS memberikan kontrol lebih besar, risiko pasifnya siswa membuat FRediECH lebih unggul untuk tujuan penelitian ini. Konsep FRediECH akan diadaptasi: alih-alih sekadar merekomendasikan "teman", sistem akan merekomendasikan "mitra interaksi" (untuk aktivitas Peer Assessment yang terpilih di Keputusan 2) guna memecah isolasi.
+    \item \textbf{Kesimpulan:} \textbf{Constraint-based Re-ranking} \autocite{DeBiasio2023} dipilih. Metode ini menawarkan keseimbangan terbaik: ia seotomatis FRediECH dalam memecahkan isolasi, namun sefleksibel UCRS dalam hal implementasi tanpa data (\textit{cold-start}). Sistem akan menggunakan algoritma ini untuk memfilter calon mitra \textit{peer assessment}, memastikan setiap siswa terpapar pada rekan dengan tingkat kemahiran yang beragam (heterogen) sesuai batasan statistik yang ditentukan.
 \end{itemize}
 
-\subsubsection{Ringkasan Solusi Terpilih}
-Berdasarkan analisis matriks keputusan di atas, purwarupa sistem akan mengimplementasikan kombinasi berikut:
-\begin{enumerate}
-    \item \textbf{Asesmen Individu:} Menggunakan \textbf{\textit{Elo-rating}} karena efisiensinya dalam kondisi data terbatas.
-    \item \textbf{Interaksi Sosial:} Menggunakan \textbf{\textit{Peer Assessment}} karena menghasilkan data kuantitatif yang terukur.
-    \item \textbf{Mitigasi Isolasi:} Mengadaptasi logika \textbf{FRediECH} untuk merekomendasikan mitra penilaian sejawat yang berada di luar \textit{bubble} pengguna, guna memastikan terjadinya eksposur terhadap keberagaman.
-\end{enumerate}
+\subsection{Keputusan Akhir Pemilihan Solusi}
+\label{ssec:keputusan_akhir_pemilihan_solusi}
+
+Berdasarkan analisis komparatif yang telah dilakukan melalui matriks keputusan, penelitian ini menetapkan arsitektur solusi yang terdiri dari tiga komponen utama yang saling terintegrasi. Pemilihan ini didasarkan pada prinsip efisiensi komputasi, ketersediaan data pada fase awal (\textit{cold-start}), dan validitas pedagogis untuk memitigasi risiko \textit{over-personalization}.
+
+Komponen pertama yang menjadi fondasi pelacakan kompetensi adalah \textbf{Sistem \textit{Elo-rating}}. Berbeda dengan model probabilitas statis seperti IRT atau model berbasis \textit{Deep Learning} seperti DKT yang membutuhkan dataset historis masif, Elo-rating dipilih karena kemampuannya untuk beradaptasi secara dinamis dengan ukuran sampel yang kecil (\textit{small sample size}). Algoritma ini akan berfungsi sebagai mesin utama untuk mengestimasi parameter kemahiran siswa secara \textit{real-time} setelah setiap interaksi, memberikan landasan data yang akurat namun ringan secara komputasi untuk proses adaptasi selanjutnya \autocite{Vesin2022}.
+
+Sebagai mekanisme interaksi sosial, sistem akan mengimplementasikan \textbf{\textit{Peer Assessment}} (penilaian sejawat). Keputusan ini diambil karena aktivitas ini menawarkan keuntungan ganda: secara teknis, ia menghasilkan artefak data kuantitatif (skor penilaian) yang terstruktur dan mudah diolah oleh algoritma; secara pedagogis, ia memberikan manfaat metakognitif tertinggi bagi siswa yang berperan sebagai penilai (\textit{assessor}) \autocite{Lu2012}. Aktivitas ini menjadi wadah strategis bagi sistem untuk menyuntikkan intervensi sosial yang terukur, menggantikan interaksi diskusi bebas yang sulit dikuantifikasi.
+
+Komponen krusial yang mengikat kedua elemen di atas untuk memecahkan isolasi pembelajaran adalah algoritma \textbf{\textit{Constraint-based Re-ranking}}. Diadaptasi dari kerangka kerja \textcite{DeBiasio2023}, teknik ini dipilih sebagai strategi mitigasi utama karena keunggulannya dalam menangani masalah \textit{cold-start} dibandingkan pendekatan berbasis graf seperti FRediECH. Sistem akan menggunakan algoritma ini untuk memfilter daftar calon mitra \textit{peer assessment} dengan menerapkan batasan (\textit{constraint}) statistik $\alpha$. Batasan ini memastikan bahwa setiap siswa terpapar pada proporsi minimum rekan yang memiliki tingkat kemahiran berbeda (heterogen), yang dihitung berdasarkan jarak skor Elo mereka. Dengan demikian, sistem menjamin terjadinya diversifikasi perspektif dan pemecahan \textit{echo chamber} kompetensi secara otomatis sejak hari pertama operasional.

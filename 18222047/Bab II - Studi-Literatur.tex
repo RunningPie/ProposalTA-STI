@@ -101,7 +101,7 @@ terakhir telah menunjukkan potensi lebih, terutama dalam pembelajaran adaptif.
     % \subsubsection{Pra-Asesmen}
     \item Pra-asesmen atau yang dikenal sebagai asesmen diagnostik, jenis asesmen ini
     mengukur kompetensi awal setiap pembelajar, memberikan gambaran yang jelas kepada
-    guru tentang tingkat keterampilan pembelajar. Ini sering kali diikuti oleh semacam
+    guru tentang tingkat keterampilan pembelajar. Ini seringkali diikuti oleh semacam
     instruksi kompensasi untuk menghilangkan hambatan dan menawarkan berbagai jenis
     kegiatan remedial. Pra-asesmen biasanya dilakukan di awal pembelajaran dan dirancang
     untuk mengukur pengetahuan yang sudah diperoleh sebelumnya oleh siswa untuk
@@ -408,7 +408,7 @@ berdasarkan performa siswa pada materi pembelajaran dibandingkan nilai ekspektas
 tingkat kesulitan konten pembelajaran diperbarui berdasarkan tingkat pemahaman siswa yang berhasil,
 ataupun gagal dalam latihan. Secara matematis, cara ini mengestimasi probabilitas seorang siswa \textit{i} mampu
 menyelesaikan latihan j berdasarkan peringkat siswa saat ini dan tingkat kesulitan latihan \textit{j}.
-Peringkat siswa dan kesulitan latihan kemudian diperbarui menurut rumus berikut:
+Peringkat siswa dan kesulitan latihan kemudian diperbarui menurut rumus berikut.
 
 \begin{align}
 R_i &= R_{i-1} + K (W - W_e)\label{eq:rumus_elo_student}
@@ -424,7 +424,7 @@ $D_{j-1}$ adalah tingkat kesulitan latihan ke-j sebelum siswa menyelesaikannya,
 $K$ adalah faktor penyesuaian yang menentukan seberapa besar perubahan peringkat
 atau tingkat kesulitan, nilai ini dikurangi secara bertahap seiring siswa menyelesaikan lebih banyak latihan,
 $W$ merepresentasikan hasil dari penyelesaian latihan yang direkomendasikan (dengan kata lain adalah tingkat keberhasilan),
-yang dihitung berdasarkan formula berikut:
+yang dihitung berdasarkan formula berikut.
 
 \begin{align}
 W = \left(\frac{(A_s + A_o)T_c}{2A_oT_p}\right)(a_id_i - a_it_i). \label{eq:rumus_W_elo}
@@ -825,3 +825,90 @@ interaksi sedemikian rupa sehingga interaksi antara pengguna yang berasal dari
 interaksi dalam \textit{echo chamber} yang sama, sehingga mempromosikan keragaman
 rekomendasi dengan mempelajari struktur komunitas secara implisit
 \autocite{Tommasel2021}.
+
+\subsection{Mitigasi Dampak \textit{Echo Chamber} Melalui \textit{Constraint-Based Re-ranking}}
+\label{ssec:debiasio_reranking}
+
+Salah satu pendekatan algoritmik terbaru yang secara spesifik menangani dampak rekomendasi terhadap perilaku pengguna adalah kerangka kerja yang diusulkan oleh \textcite{DeBiasio2023}. Penelitian ini membedakan dirinya dari pendekatan diversifikasi umum dengan memfokuskan pada perlindungan kelompok pengguna "sensitif" (\textit{sensitive users}) dari paparan berlebih terhadap konten "berpengaruh" (\textit{influential items}) yang dapat memperburuk kondisi perilaku mereka, seperti polarisasi ekstrem atau isolasi sosial.
+
+% \subsubsection{Konsep Pengguna Sensitif dan Item Berpengaruh}
+Dalam model \textcite{DeBiasio2023}, masalah \textit{echo chamber} tidak dipandang seragam untuk semua pengguna, melainkan diklasifikasikan berdasarkan kerentanan:
+\begin{itemize}
+    \item \textbf{Pengguna Sensitif (\textit{Sensitive Users}):} Kelompok pengguna yang perilakunya rentan dipengaruhi secara negatif oleh pola konsumsi konten yang homogen atau bias.
+    \item \textbf{Item Berpengaruh (\textit{Influential Items}):} Kategori konten yang memiliki dampak signifikan terhadap perilaku pengguna sensitif. Item ini dibagi menjadi dua:
+    \begin{enumerate}
+        \item \textit{Controversial Items}: Item yang jika dikonsumsi berlebihan dapat memperburuk isolasi atau perilaku negatif.
+        \item \textit{Favorable Items}: Item yang dapat memberikan dampak positif atau memecah isolasi (\textit{bubble}) jika direkomendasikan dengan proporsi yang cukup.
+    \end{enumerate}
+\end{itemize}
+
+Pendekatan ini sangat relevan untuk konteks pembelajaran adaptif, di mana "pengguna sensitif" dapat dipetakan sebagai siswa yang terisolasi secara akademik, dan "favorable items" sebagai interaksi dengan rekan yang memiliki kompetensi berbeda (heterogen).
+
+% \subsubsection{Algoritma \textit{Re-ranking} Berbasis Batasan}
+Untuk memitigasi dampak negatif rekomendasi pada pengguna sensitif tanpa memerlukan pelatihan model ulang, \textcite{DeBiasio2023} mengusulkan algoritma \textit{greedy re-ranking}. Algoritma ini bekerja pada tahap pasca-pemrosesan dengan menyusun ulang daftar skor prediksi awal ($\hat{r}_u$) agar memenuhi batasan proporsi item tertentu.
+
+Berikut adalah pseudocode dari algoritma tersebut sebagaimana didefinisikan dalam penelitian aslinya:
+
+\begin{minipage}{\textwidth} 
+\begin{lstlisting}[frame=lines, captionpos=t, caption={Algoritma Re-ranking}, label={alg:reranking_debiasio_original}]
+ALGORITHM Re-ranking
+    INPUT:
+        u      : User identifier
+        S      : Set of sensitive users
+        r_hat  : Scores predicted by backbone model for user u
+        alpha  : Minimum percentage of favorable items allowed
+        beta   : Maximum percentage of controversial items allowed
+        k      : Number of items to be recommended
+    OUTPUT:
+        Y_star : Top-k items to recommend to user u
+    BEGIN
+        IF u NOT IN S THEN
+            RETURN Argsort(r_hat, order='descending')[0:k]
+        
+        ELSE
+            Y_star <- EmptySet
+            SortedItems <- Sort(r_hat, order='descending')
+            
+            FOR EACH item j IN SortedItems DO
+                IF Size(Y_star) < k THEN
+                    
+                    CondAlpha <- ((f_j + Sum(f_i for i in Y_star)) / k) >= alpha
+                    
+                    CondBeta  <- ((c_j + Sum(c_i for i in Y_star)) / k) <= beta
+                    
+                    IF CondAlpha AND CondBeta THEN
+                        Add j to Y_star
+                    END IF
+                ELSE
+                    BREAK
+                END IF
+            END FOR
+            
+            RETURN Y_star
+        END IF
+    END
+END ALGORITHM
+\end{lstlisting}
+\end{minipage}
+
+Secara matematis, algoritma memastikan bahwa probabilitas terpilihnya suatu item $y_i$ dalam rekomendasi untuk pengguna sensitif ($s_u=1$) memenuhi pertidaksamaan berikut.
+
+\begin{align}
+    \mathbb{P}(y_i=1 \mid s_u=1, f_i=1) &\geq \alpha \label{eq:constraint_favorable} \\
+    \mathbb{P}(y_i=1 \mid s_u=1, c_i=1) &\leq \beta \label{eq:constraint_controversial}
+\end{align}
+
+dengan:
+\begin{itemize}
+    \item Persamaan \eqref{eq:constraint_favorable} menetapkan bahwa proporsi item \textit{favorable} (yang memecah isolasi) harus lebih besar atau sama dengan ambang batas $\alpha$.
+    \item Persamaan \eqref{eq:constraint_controversial} menetapkan bahwa proporsi item \textit{controversial} (yang memperburuk isolasi) harus lebih kecil atau sama dengan ambang batas $\beta$.
+\end{itemize}
+
+% \subsubsection{Mekanisme Kerja Algoritma}
+Algoritma \textit{re-ranking} ini bekerja dengan menyusun ulang daftar rekomendasi $\mathcal{Y}_{u,k}$ secara iteratif. Pada setiap langkah penambahan item ke dalam daftar rekomendasi final, algoritma memeriksa apakah penambahan item tersebut akan melanggar batasan $\alpha$ atau $\beta$.
+\begin{itemize}
+    \item Jika daftar rekomendasi saat ini kekurangan item \textit{favorable} (di bawah ambang $\alpha$), algoritma akan secara paksa mengambil item \textit{favorable} dari daftar cadangan, meskipun skor relevansinya sedikit lebih rendah, untuk menggantikan item non-favorable.
+    \item Mekanisme ini menjamin terjadinya "eksposur paksa" (\textit{forced exposure}) terhadap konten yang beragam, yang merupakan syarat utama untuk memecahkan \textit{filter bubble} secara efektif \autocite{DeBiasio2023}.
+\end{itemize}
+
+Keunggulan utama pendekatan ini adalah sifatnya yang \textit{model-agnostic} dan efisien secara komputasi karena menggunakan pendekatan \textit{greedy} pada tahap \textit{post-processing}, sebagaimana dijelaskan secara teknis oleh \textcite{DeBiasio2023}. Hal ini membuatnya lebih layak diimplementasikan pada kondisi data terbatas (\textit{cold-start}) dibandingkan metode berbasis \textit{Deep Learning} yang membutuhkan pelatihan ekstensif.
