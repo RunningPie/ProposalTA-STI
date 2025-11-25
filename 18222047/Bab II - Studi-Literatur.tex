@@ -136,6 +136,16 @@ Studi tersebut menunjukkan bahwa ketiga aspek ini saling berkorelasi.
     dan perilaku \autocite{Ihichr2024}.
 \end{enumerate}
 
+\subsection{Taksonomi Bloom dalam Asesmen Kognitif}
+
+Kerangka kerja fundamental yang digunakan untuk mengklasifikasikan tujuan pendidikan dan mengukur kedalaman kognitif siswa adalah \textit{Bloom's Revised Taxonomy}. Sebagaimana dijelaskan oleh \textcite{Gosselin2018}, taksonomi ini membagi domain kognitif menjadi enam tingkatan hierarkis, yang bergerak dari proses berpikir tingkat rendah (\textit{lower-order cognition}) menuju tingkat tinggi (\textit{high-level cognition}). Tingkatan tersebut dimulai dari \textit{Remembering} (mengingat) dan \textit{Understanding} (memahami) sebagai fondasi dasar, kemudian berlanjut ke \textit{Applying} (menerapkan), \textit{Analyzing} (menganalisis), \textit{Evaluating} (mengevaluasi), hingga puncaknya pada \textit{Creating} (mencipta). Dalam konteks asesmen, idealnya \textit{Performance Indicators} (PI) dirancang dengan memadukan berbagai level ini, sehingga siswa tidak hanya dituntut untuk mengingat fakta, tetapi juga menerapkan materi yang dipelajari dalam cara-cara yang kompleks. Penggunaan taksonomi ini memungkinkan penerjemahan luaran pembelajaran yang abstrak menjadi perilaku yang dapat diamati (\textit{observable behaviors}) dan diukur secara konkret.
+
+Penerapan taksonomi ini dalam sistem asesmen memerlukan instrumen yang presisi, seperti penggunaan \textit{descriptive rubrics} (rubrik deskriptif). \textcite{Gosselin2018} menekankan bahwa penggunaan rubrik deskriptif yang diselaraskan dengan kata kerja operasional Bloom dapat meningkatkan konsistensi penilaian antar-evaluator dan memberikan umpan balik yang lebih bermakna dibandingkan sekadar skala numerik generik. Rubrik ini mendeskripsikan variasi tingkat kinerja untuk setiap kriteria secara spesifik. Misalnya, dalam menilai kemampuan desain teknik, indikator kinerja direvisi dari sekadar berbasis topik menjadi berbasis level kognitif, seperti bergerak dari kemampuan "mengidentifikasi prinsip sains" (\textit{Understanding}) menuju kemampuan "membuat asumsi penyederhanaan dan mengevaluasi solusi" (\textit{Evaluating}). Pendekatan ini sangat relevan untuk asesmen sejawat (\textit{peer assessment}) karena rubrik yang terstruktur digunakan dalam asesmen untuk membantu siswa menilai kontribusi rekannya secara objektif berdasarkan deskripsi kinerja yang jelas, bukan sekadar persepsi subjektif.
+
+Dalam disiplin ilmu komputasi, penggunaan kata kerja standar Bloom sering kali tidak memadai untuk menangkap nuansa teknis dari tugas-tugas pemrograman dan sistem informasi. Untuk mengatasi keterbatasan ini, \textcite{ACM2023} melalui \textit{ACM Committee for Computing Education in Community Colleges} (CCECC) mengusulkan peningkatan taksonomi dengan menambahkan 56 kata kerja spesifik komputasi (\textit{enhanced verbs}). Modifikasi ini memetakan aktivitas teknis ke dalam level kognitif yang sesuai. Sebagai contoh, aktivitas \textit{Code} (mengodekan), \textit{Build} (membangun), dan \textit{Decrypt} (mendekripsi) dikategorikan ke dalam level \textit{Applying}. Sementara itu, aktivitas yang membutuhkan pemecahan masalah lebih dalam seperti \textit{Debug} (men-debug), \textit{Optimize} (mengoptimalkan), dan \textit{Refactor} diposisikan pada level \textit{Evaluating}. Aktivitas sintesis seperti \textit{Script} (membuat skrip), \textit{Virtualize} (memvirtualisasi), dan \textit{Program} (membuat program solusi) ditempatkan pada level tertinggi, yaitu \textit{Creating}.
+
+Integrasi kata kerja komputasi ini memungkinkan perancangan \textit{competencies} yang lebih akurat, yang didefinisikan sebagai integrasi antara pengetahuan (\textit{knowledge}), keterampilan (\textit{skills}), dan disposisi (\textit{dispositions}) dalam konteks tertentu \autocite{ACM2023}. Dalam lingkungan pembelajaran adaptif, pemetaan ini krusial untuk melacak progresi siswa. Seorang siswa mungkin memulai pembelajaran pada level \textit{Applying} dengan menerjemahkan spesifikasi menjadi kode, namun seiring waktu diharapkan berkembang ke level \textit{Creating} dengan mengimplementasikan solusi untuk masalah abstrak. \textcite{ACM2023} juga menyoroti bahwa disposisi atau aspek "sikap" (seperti \textit{collaborative} dan \textit{meticulous}) dapat dikaitkan dengan kompetensi teknis tersebut. Dengan demikian, sistem asesmen tidak hanya melacak kebenaran sintaksis kode, tetapi juga kedalaman pemahaman konseptual dan kemampuan kolaboratif siswa berdasarkan hierarki kognitif yang terstandarisasi.
+
 % =====================================================================
 % MULAI SUBBAB II.2 (BARU) - SISIPKAN SETELAH AKHIR SUBBAB II.1
 % =====================================================================
@@ -530,6 +540,54 @@ sosial. Prinsip-prinsip utamanya meliputi:
     jauh \autocite{Ryoo2021}.
 \end{enumerate}
 
+Meskipun prinsip pembentukan kelompok heterogen telah diakui kepentingannya,
+tantangan teknis dalam sistem adaptif adalah menentukan standar kuantitatif yang
+baku untuk menilai apakah perbedaan kemampuan antar-siswa sudah cukup signifikan
+untuk disebut heterogen.
+
+\subsection{Pengukuran Heterogenitas Kelompok dan \textit{Effect Size}}
+
+Dalam ranah ilmu perilaku dan pendidikan, pengukuran perbedaan antara dua kelompok
+atau individu tidak cukup hanya dengan melihat selisih nilai mentah (\textit{raw
+score differences}), karena nilai tersebut sangat bergantung pada satuan skala
+yang digunakan. Untuk mengatasi hal ini, \textcite{Cohen1988} memperkenalkan
+konsep \textit{Effect Size} (ES) sebagai indeks standar yang independen dari
+satuan pengukuran asal. Salah satu indeks ES yang paling fundamental dan banyak
+digunakan untuk membandingkan dua rata-rata adalah \textit{Cohen's d}. Secara
+konseptual, \textit{Cohen's d} didefinisikan sebagai selisih antara dua rata-rata
+populasi ($m_A - m_B$) yang dibagi dengan standar deviasi populasi ($\sigma$).
+Rasio ini merepresentasikan jarak antara dua rata-rata dalam satuan unit
+variabilitas standar, memberikan ukuran murni mengenai seberapa jauh dua
+distribusi nilai terpisah satu sama lain.
+
+Dalam praktiknya, ketika parameter populasi tidak diketahui, nilai $d$ diestimasi
+menggunakan statistik sampel. \textcite{Cohen1988} merumuskan penghitungan $d$
+untuk dua sampel independen dengan menggunakan \textit{pooled standard deviation}
+($\sigma_{pooled}$) sebagai penyebut, yang merupakan rata-rata akar kuadrat dari
+varians kedua kelompok. Rumus formal untuk menghitung jarak atau indeks perbedaan
+ini dinyatakan sebagai:
+
+\begin{align}
+    d &= \frac{| \bar{x}_A - \bar{x}_B |}{\sigma_{pooled}} \label{eq:cohen_d_basic} \\
+    \sigma_{pooled} &= \sqrt{\frac{(n_A-1)s_A^2 + (n_B-1)s_B^2}{n_A + n_B - 2}} \label{eq:sigma_pooled}
+\end{align}
+
+dengan $\bar{x}_A$ dan $\bar{x}_B$ adalah nilai rata-rata (atau skor kemampuan
+individu) dari dua entitas yang dibandingkan, $s_A^2$ dan $s_B^2$ adalah varians
+masing-masing, serta $n_A$ dan $n_B$ adalah ukuran sampel. Jika diaplikasikan pada
+perbandingan antar-individu (dengan $n=1$), penyebut dapat disederhanakan menjadi
+standar deviasi gabungan dari populasi referensi atau data historis sistem. Nilai
+$d$ yang dihasilkan adalah nilai skalar tak berdimensi yang memungkinkan
+perbandingan yang adil lintas konteks yang berbeda.
+
+Untuk memberikan makna interpretatif pada nilai numerik $d$, \textcite{Cohen1988} menetapkan standar konvensi yang telah menjadi rujukan universal dalam analisis kuantitatif. Konvensi ini dirancang untuk memetakan besaran statistik ke dalam dampak kualitatif yang dapat diamati di dunia nyata.
+\begin{itemize}
+    \item \textbf{Efek Kecil ($d = 0.2$):} Perbedaan yang nyata namun sulit dideteksi tanpa analisis statistik yang cermat.
+    \item \textbf{Efek Sedang ($d = 0.5$):} Perbedaan yang cukup besar untuk dapat dilihat oleh mata telanjang pengamat yang berpengalaman (\textit{visible to the naked eye}).
+    \item \textbf{Efek Besar ($d = 0.8$):} Perbedaan yang sangat mencolok, setara dengan perbedaan tinggi badan antara remaja usia 13 dan 18 tahun.
+\end{itemize}
+Standar operasional ini memberikan landasan teoretis yang kokoh untuk menetapkan ambang batas (\textit{threshold}) dalam menentukan apakah dua entitas (atau kelompok) dapat dikategorikan "berbeda secara signifikan" atau heterogen dalam konteks intervensi pendidikan.
+
 \subsection{Aktivitas Pembelajaran Sosial dan Dampaknya}
 \label{ssec:aktivitas_pembelajaran_sosial}
 Selain prinsip-prinsip umum yang telah dibahas pada Subbab
@@ -543,9 +601,33 @@ utama untuk diintegrasikan dan dinilai dalam sebuah sistem adaptif.
     % \label{sssec:peer_assessment}
     \item \textbf{Penilaian sejawat (\textit{Peer Assessment}):} Penilaian sejawat adalah aktivitas pendidikan yang mengajak siswa saling menilai
     pekerjaan rekannya, artinya dalam penilaian ini "penilai
-    (\textit{assessor}) dan yang dinilai (\textit{assessed}) memilii status
-    yang sama" \autocite{Ihichr2024}. Manfaat
-    pedagogisnya sering diasumsikan berasal dari umpan balik yang diterima siswa.
+    (\textit{assessor}) dan yang dinilai (\textit{assessed}) memiliki status
+    yang sama" \autocite{Ihichr2024}.
+    Evaluasi terhadap kinerja asesor dalam \textit{peer assessment} tidak cukup
+    hanya didasarkan pada akurasi skor (\textit{rating accuracy}), tetapi juga
+    harus meninjau kualitas umpan balik tekstual yang diberikan. \textcite{Wu2020}
+    mengusulkan kerangka kerja yang membedah fitur umpan balik ke dalam dua
+    dimensi utama: dimensi kognitif dan dimensi afektif. Dimensi kognitif
+    (\textit{cognitive feedback}) berkaitan dengan substansi perbaikan tugas,
+    yang terdiri atas empat kategori spesifik: (1) \textit{Identification}, yaitu
+    kemampuan asesor mendeteksi letak kesalahan; (2) \textit{Explanation}, yaitu
+    penyediaan alasan logis mengapa suatu bagian dianggap salah; (3)
+    \textit{Suggestion}, yaitu pemberian saran eksplisit untuk perbaikan; dan (4)
+    \textit{Solution}, yaitu penyediaan contoh koreksi langsung.
+
+    Di sisi lain, dimensi afektif (\textit{affective feedback}) mencakup nada
+    emosional dan interpresonal yang digunakan asesor, yang terbagi menjadi
+    kategori \textit{Praise} (pujian yang memvalidasi kelebihan) dan
+    \textit{Hedges} (penggunaan bahasa penyangga untuk memperhalus kritik).
+    Dalam sistem yang berorientasi pada pembelajaran kolaboratif, keberadaan
+    fitur kognitif tingkat tinggi seperti \textit{Explanation} dan
+    \textit{Suggestion} sering kali dijadikan indikator utama kompetensi asesor,
+    karena elemen-elemen inilah yang terbukti memicu perbaikan revisi yang
+    signifikan pada penerima umpan balik, sekaligus merefleksikan kedalaman
+    pemahaman konseptual dari pemberi umpan balik \autocite{Wu2020}.
+
+    Manfaat
+    pedagogis dari penilaian sejawat sering diasumsikan berasal dari umpan balik yang diterima siswa.
     Namun, sebuah studi pemodelan jalur (\textit{path model}) oleh \textcite{Lu2012}
     memberikan wawasan yang lebih mendalam mengenai mekanisme efektivitasnya. Studi
     tersebut menemukan bahwa manfaat kognitif terbesar \textbf{tidak diterima oleh
@@ -842,7 +924,7 @@ Dalam model \textcite{DeBiasio2023}, masalah \textit{echo chamber} tidak dipanda
     \end{enumerate}
 \end{itemize}
 
-Pendekatan ini sangat relevan untuk konteks pembelajaran adaptif, di mana "pengguna sensitif" dapat dipetakan sebagai siswa yang terisolasi secara akademik, dan "favorable items" sebagai interaksi dengan rekan yang memiliki kompetensi berbeda (heterogen).
+Pendekatan ini sangat relevan untuk konteks pembelajaran adaptif karena "pengguna sensitif" dapat dipetakan sebagai siswa yang terisolasi secara akademik, dan "favorable items" sebagai interaksi dengan rekan yang memiliki kompetensi berbeda (heterogen).
 
 % \subsubsection{Algoritma \textit{Re-ranking} Berbasis Batasan}
 Untuk memitigasi dampak negatif rekomendasi pada pengguna sensitif tanpa memerlukan pelatihan model ulang, \textcite{DeBiasio2023} mengusulkan algoritma \textit{greedy re-ranking}. Algoritma ini bekerja pada tahap pasca-pemrosesan dengan menyusun ulang daftar skor prediksi awal ($\hat{r}_u$) agar memenuhi batasan proporsi item tertentu.
@@ -891,7 +973,9 @@ END ALGORITHM
 \end{lstlisting}
 \end{minipage}
 
-Secara matematis, algoritma memastikan bahwa probabilitas terpilihnya suatu item $y_i$ dalam rekomendasi untuk pengguna sensitif ($s_u=1$) memenuhi pertidaksamaan berikut.
+Secara matematis, algoritma memastikan bahwa probabilitas terpilihnya
+suatu item $y_i$ dalam rekomendasi untuk pengguna sensitif ($s_u=1$) memenuhi
+pertidaksamaan berikut.
 
 \begin{align}
     \mathbb{P}(y_i=1 \mid s_u=1, f_i=1) &\geq \alpha \label{eq:constraint_favorable} \\
@@ -900,15 +984,73 @@ Secara matematis, algoritma memastikan bahwa probabilitas terpilihnya suatu item
 
 dengan:
 \begin{itemize}
-    \item Persamaan \eqref{eq:constraint_favorable} menetapkan bahwa proporsi item \textit{favorable} (yang memecah isolasi) harus lebih besar atau sama dengan ambang batas $\alpha$.
-    \item Persamaan \eqref{eq:constraint_controversial} menetapkan bahwa proporsi item \textit{controversial} (yang memperburuk isolasi) harus lebih kecil atau sama dengan ambang batas $\beta$.
+    \item Persamaan \eqref{eq:constraint_favorable} menetapkan bahwa proporsi
+    item \textit{favorable} (yang memecah isolasi) harus lebih besar atau sama
+    dengan ambang batas $\alpha$.
+    \item Persamaan \eqref{eq:constraint_controversial} menetapkan bahwa proporsi
+    item \textit{controversial} (yang memperburuk isolasi) harus lebih kecil
+    atau sama dengan ambang batas $\beta$.
 \end{itemize}
 
 % \subsubsection{Mekanisme Kerja Algoritma}
-Algoritma \textit{re-ranking} ini bekerja dengan menyusun ulang daftar rekomendasi $\mathcal{Y}_{u,k}$ secara iteratif. Pada setiap langkah penambahan item ke dalam daftar rekomendasi final, algoritma memeriksa apakah penambahan item tersebut akan melanggar batasan $\alpha$ atau $\beta$.
+Algoritma \textit{re-ranking} ini bekerja dengan menyusun ulang daftar
+rekomendasi $\mathcal{Y}_{u,k}$ secara iteratif. Pada setiap langkah penambahan
+item ke dalam daftar rekomendasi final, algoritma memeriksa apakah penambahan
+item tersebut akan melanggar batasan $\alpha$ atau $\beta$.
 \begin{itemize}
-    \item Jika daftar rekomendasi saat ini kekurangan item \textit{favorable} (di bawah ambang $\alpha$), algoritma akan secara paksa mengambil item \textit{favorable} dari daftar cadangan, meskipun skor relevansinya sedikit lebih rendah, untuk menggantikan item non-favorable.
-    \item Mekanisme ini menjamin terjadinya "eksposur paksa" (\textit{forced exposure}) terhadap konten yang beragam, yang merupakan syarat utama untuk memecahkan \textit{filter bubble} secara efektif \autocite{DeBiasio2023}.
+    \item Jika daftar rekomendasi saat ini kekurangan item \textit{favorable}
+    (di bawah ambang $\alpha$), algoritma akan secara paksa mengambil item
+    \textit{favorable} dari daftar cadangan, meskipun skor relevansinya sedikit
+    lebih rendah, untuk menggantikan item non-favorable.
+    \item Mekanisme ini menjamin terjadinya "eksposur paksa" (\textit{forced
+    exposure}) terhadap konten yang beragam, yang merupakan syarat utama untuk
+    memecahkan \textit{filter bubble} secara efektif \autocite{DeBiasio2023}.
 \end{itemize}
 
-Keunggulan utama pendekatan ini adalah sifatnya yang \textit{model-agnostic} dan efisien secara komputasi karena menggunakan pendekatan \textit{greedy} pada tahap \textit{post-processing}, sebagaimana dijelaskan secara teknis oleh \textcite{DeBiasio2023}. Hal ini membuatnya lebih layak diimplementasikan pada kondisi data terbatas (\textit{cold-start}) dibandingkan metode berbasis \textit{Deep Learning} yang membutuhkan pelatihan ekstensif.
+Keunggulan utama pendekatan ini adalah sifatnya yang \textit{model-agnostic} dan
+efisien secara komputasi karena menggunakan pendekatan \textit{greedy} pada
+tahap \textit{post-processing}, sebagaimana dijelaskan secara teknis oleh
+\textcite{DeBiasio2023}. Hal ini membuatnya lebih layak diimplementasikan pada
+kondisi data terbatas (\textit{cold-start}) dibandingkan metode berbasis
+\textit{Deep Learning} yang membutuhkan pelatihan ekstensif.
+
+\subsection{Evaluasi Efektivitas Pembelajaran dengan \textit{Normalized LearningGain}}
+
+Dalam ranah penelitian pendidikan fisika dan teknologi pembelajaran, pengukuran
+efektivitas intervensi instruksional sering kali menghadapi tantangan bias yang
+disebabkan oleh perbedaan tingkat pengetahuan awal siswa. Untuk mengatasi hal
+ini, Richard Hake memperkenalkan konsep \textit{average normalized gain} ($g$)
+sebagai metrik standar. Secara teoretis, \textit{normalized gain} didefinisikan
+sebagai rasio antara peningkatan skor aktual yang dicapai (\textit{actual gain})
+terhadap peningkatan skor maksimum yang mungkin dicapai (\textit{maximum possible
+gain}). Penggunaan metrik ini bertujuan untuk memisahkan efek pembelajaran dari
+pengaruh skor \textit{pre-test}, sehingga memungkinkan perbandingan yang objektif
+antara populasi siswa yang memiliki latar belakang kemampuan yang heterogen
+\autocite{Nissen2018}.
+
+Secara matematis, perhitungan \textit{normalized gain} untuk rata-rata kelas
+atau individu dinyatakan dalam persamaan berikut, dengan asumsi skor dinyatakan
+dalam persentase:
+
+\begin{align}
+    g &= \frac{\%\text{post} - \%\text{pre}}{100 - \%\text{pre}} \label{eq:normalized_gain_formula}
+\end{align}
+
+dengan $\%\text{pre}$ merepresentasikan persentase skor pada tes awal sebelum
+instruksi diberikan, dan $\%\text{post}$ adalah persentase skor pada tes akhir.
+\textcite{Coletta2020} menegaskan bahwa metrik ini memiliki keunggulan teoretis
+dibandingkan perhitungan selisih skor mentah atau \textit{effect size} standar
+(seperti Cohen's $d$), terutama dalam menangani distribusi data yang mengalami
+\textit{floor effect} atau \textit{ceiling effect} ekstrem, di mana siswa dengan
+skor awal tinggi memiliki ruang peningkatan yang lebih sempit dibandingkan siswa
+dengan skor rendah.
+
+Sebagai standar interpretasi efektivitas yang berlaku umum dalam literatur, Hake
+menetapkan kriteria ambang batas untuk mengkategorikan tingkat keberhasilan
+pembelajaran. Nilai $g$ diklasifikasikan ke dalam tiga kategori: (1)
+\textbf{Rendah} (\textit{Low-g}) jika $g < 0.3$; (2) \textbf{Sedang}
+(\textit{Medium-g}) jika $0.3 \leq g < 0.7$; dan (3) \textbf{Tinggi}
+(\textit{High-g}) jika $g \geq 0.7$. Klasifikasi ini menyediakan kerangka kerja
+komparatif yang konsisten bagi para peneliti untuk mengevaluasi apakah sebuah
+metode pedagogis mampu menghasilkan peningkatan pemahaman konsep yang substansial
+terlepas dari kesulitan materi yang diajarkan \autocite{Coletta2020}.
