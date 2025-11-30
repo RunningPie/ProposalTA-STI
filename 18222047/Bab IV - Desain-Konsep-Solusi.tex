@@ -1,65 +1,150 @@
-% ============================================================================================
+% ==========================================
 % BAB IV DESAIN KONSEP SOLUSI
-% ============================================================================================
-
+% ==========================================
 \chapter{DESAIN KONSEP SOLUSI}
-\label{chap:desain-konsep}
+\label{chap:desain-konsep-solusi}
 
-Bagian setelah ini mengilustrasikan desain konsep solusi yang diusulkan dalam bentuk model konseptual. Model ini dirancang untuk dapat dibandingkan secara langsung ("before and after") dengan arsitektur sistem saat ini yang telah dianalisis pada Bab II.
+Bab ini menguraikan rancangan konsep solusi yang diusulkan melalui dua perspektif pemodelan utama: pemodelan konteks-interaksi untuk menggambarkan batasan dan fungsionalitas sistem, serta pemodelan struktur-perilaku untuk merinci mekanisme kolaborasi antar-komponen internal.
 
-\section{Desain Konsep Solusi yang Diusulkan (\textit{After})}
-\label{sec:konsep_after}
+\section{Model Konteks dan Interaksi (\textit{Use Case Diagram})}
+\label{sec:context_interaction_model}
+Model ini mendefinisikan batasan sistem (\textit{system boundary}),
+mana saja yang menjadi fitur yang diimplementasikan di dalam sistem
+dan mana saja yang berada di luar sistem, terutama aktor.
+Selain itu, bisa dijelaskan juga interaksi yang terjadi antara aktor
+eksternal dengan fitur-fitur utama sistem.
 
-Dalam upaya menjembatani kesenjangan tersebut, diusulkan suatu desain solusi
-perangkat lunak yaitu, \textbf{Arsitektur Integrasi Dinamis} (atau "Model Umpan Balik Ganda"), sesuai dengan hasil analisis pada Subbab \ref{ssec:analisis_penentuan_solusi}. Model konseptual dari arsitektur solusi ini diilustrasikan pada Gambar \ref{fig:model-konseptual-solusi} dalam bentuk \textit{UML Activity Diagram}.
+\textit{Use case} didefinisikan berdasarkan pemetaan terhadap
+kebutuhan fungsional yang telah diuraikan pada subbab \ref{sec:analisis_kebutuhan}
+bisa dilihat pada tabel \ref{tbl:mapping_fr_uc}.
+
+\input{table/tabel_4_mapping_fr_uc.tex}
+
+Penggambaran dari setiap \textit{use case} di atas dan interaksinya dengan aktor
+luar, tercermin pada gambar \ref{fig:usecase_model} di bawah ini.
 
 \begin{figure}[H]
     \centering
-    \captionsetup{justification=centering}
-    \includegraphics[width=1\textwidth]{image/act_diag_babIV.png} 
-    \caption{Model Konseptual Solusi: Arsitektur Integrasi Dinamis (Umpan Balik Ganda) dalam Notasi UML Activity Diagram}
-    \label{fig:model-konseptual-solusi}
+    \includegraphics[width=0.8\textwidth]{image/usecase_diagram.png}
+    \caption{Use Case Diagram: Interaksi Siswa dengan Sistem Asesmen Adaptif Kolaboratif}
+    \label{fig:usecase_model}
 \end{figure}
 
-% \subsection{Penjelasan Model Konseptual (\textit{After})}
-Diagram pada Gambar \ref{fig:model-konseptual-solusi} memodelkan alur kerja solusi yang diusulkan, yang dibagi menjadi dua \textit{swimlanes} (jalur renang) yang merepresentasikan aktor: \textbf{Siswa} (di sisi kiri) dan \textbf{Sistem (Backend)} (di sisi kanan). Alur prosesnya adalah sebagai berikut.
+Adapun penjelasan dari setiap \textit{use case} secara lebih terperinci disajikan
+pada tabel-tabel berikut ini.
 
+\input{table/tabel_4_uc01.tex}
+\input{table/tabel_4_uc02.tex}
+\input{table/tabel_4_uc03.tex}
+\input{table/tabel_4_uc04.tex}
+\input{table/tabel_4_uc05.tex}
+\input{table/tabel_4_uc06.tex}
+
+Berdasarkan pemodelan \textit{use case} yang telah dijelaskan di atas, karakteristik interaksi sistem yang
+diusulkan menunjukkan pergeseran dari paradigma sistem yang pasif menjadi sistem dengan intervensi aktif.
+Perbedaan utamanya terletak pada mekanisme \textit{System-initiated Intervention}, khususnya pada UC-03.
+Berbeda dengan sistem pembelajaran konvensional yang mengandalkan motivasi atau kesadaran siswa untuk
+melakukan kolaborasi, sistem yang diusulkan ini akan secara proaktif memantau kondisi model kompetensi siswa
+melalui hasil algoritma Elo-rating. Ketika terjadi stagnasi dalam perubahan skor, maka sistem akan "mendorong"
+aktivitas kolaboratif sebagai response otomatis. Hal ini memperluas cakupan sistem dari sekadar penyaji konten
+pembelajaran adaptif menjadi fasilitator pembelajaran otonom yang menjamin terjadinya eksposur sosial
+terhadap keberagaman kompetensi.
+
+\section{Model Struktur dan Perilaku (Communication Diagram)}
+\label{sec:structure_behavior_model}
+
+Untuk memodelkan bagaimana komponen internal berkolaborasi dalam menjalankan logika asesmen adaptif, digunakan \textit{Communication Diagram} dengan pendekatan \textbf{\textit{Boundary-Control-Entity} (BCE)}.
+
+Pemilihan pola analisis BCE didasarkan pada kesesuaiannya dalam menjembatani spesifikasi \textit{Use Case} (fungsionalitas) menuju perancangan komponen logis, dengan karakteristik sebagai berikut:
 \begin{enumerate}
-    \item \textbf{Alur Paralel (Fork):} Setelah proses dimulai (node \textit{Start}), alur kerja langsung memasuki \textit{Fork Node}. Ini mengindikasikan bahwa Siswa dapat mengerjakan dua jenis tugas secara paralel atau dalam urutan yang tidak ditentukan: Tugas Individual dan Tugas Sosial.
-    
-    \item \textbf{Alur Personal (R1):} 
-    \begin{itemize}
-        \item \textbf{Aktivitas Siswa:} Siswa \textit{"Mengerjakan Tugas Individual (kuis/latihan)"}.
-        \item \textbf{Aliran Data:} Aksi ini menghasilkan \textit{"Data Kinerja Individual"} (misalnya, jawaban benar/salah, waktu pengerjaan).
-        \item \textbf{Aktivitas Sistem:} Data ini diterima oleh \textit{backend} dan dieksekusi oleh aktivitas \textbf{"Model Asesmen Personal (Elo-rating) Memberikan Penilaian Kemahiran Individu"}. Aktivitas ini secara spesifik akan dijalankan oleh \textbf{Modul Asesmen Personal} (FR-10) yang telah dipilih. Modul ini memenuhi \textbf{Kebutuhan R1} (Pemodelan Kemahiran Individu) dengan memperbarui skor \textit{Elo-rating} siswa.
-    \end{itemize}
-
-    \item \textbf{Alur Sosial (R2 \& R3):}
-    \begin{itemize}
-        \item \textbf{Aktivitas Siswa:} Siswa \textit{"Mengerjakan Tugas Sosial (peer assessment)"}. Ini memenuhi \textbf{Kebutuhan R2} (Fasilitasi Interaksi Kolaboratif).
-        \item \textbf{Aliran Data:} Aksi ini menghasilkan \textit{"Data Kinerja Sosial"} (misalnya, teks umpan balik yang diberikan ke rekan, skor rubrik yang diisi).
-        \item \textbf{Aktivitas Sistem:} Data ini diterima oleh \textit{backend} dan dieksekusi oleh aktivitas \textbf{"Model Asesmen Sosial (Kualitas Umpan Balik) Memberikan Penilaian Kontribusi Sosial"}. Aktivitas ini akan dijalankan oleh \textbf{Modul Asesmen Sosial} (FR-11) dan memenuhi \textbf{Kebutuhan R3} (Penilaian Kinerja Kolaboratif), dengan mengukur kualitas umpan balik yang diberikan siswa berdasarkan temuan \textcite{Lu2012}.
-    \end{itemize}
-
-    \item \textbf{Integrasi (Join) (R4):}
-    \begin{itemize}
-        \item \textbf{Aktivitas Sistem:} \textit{Join Node} (garis tebal kedua) menunjukkan bahwa sistem menunggu kedua alur (personal dan sosial) menghasilkan model kemahiran terbaru. Kedua model ini kemudian menjadi \textit{input} untuk aktivitas \textbf{"Memberikan Penilaian Terintegrasi..."}.
-        \item \textbf{Modul Pelaksana:} Aktivitas ini dijalankan oleh \textbf{Modul Integrasi Algoritmik} (FR-12). Inilah inti dari solusi yang menjembatani kesenjangan: modul ini secara matematis menggabungkan skor dari Modul Asesmen Personal (Elo) dan Modul Asesmen Sosial (Peer Assess) untuk menciptakan satu Model Kemahiran Holistik. Ini secara langsung memenuhi \textbf{Kebutuhan R4} (Integrasi Model Penilaian).
-    \end{itemize}
-    
-    \item \textbf{Adaptasi (R5):}
-    \begin{itemize}
-        \item \textbf{Aktivitas Sistem:} Model Kemahiran Holistik yang baru kemudian mengalir ke aktivitas \textbf{"Modul Adaptasi Merekomen..."}.
-        \item \textbf{Modul Pelaksana:} Aktivitas ini dijalankan oleh \textbf{Mesin Adaptasi} (FR-13, FR-14). Berdasarkan skor yang terintegrasi, modul ini menghasilkan \textit{"Umpan Balik"} adaptif. Umpan balik ini bisa berupa (a) rekomendasi konten individual, atau (b) intervensi sosial, sehingga memenuhi \textbf{Kebutuhan R5} (Sistem Adaptasi Terintegrasi).
-    \end{itemize}
-
-    \item \textbf{Siklus Selesai:} \textit{"Umpan Balik"} dikirimkan kembali ke Siswa, yang \textit{"Menerima Umpan Balik"}. Siswa kemudian dapat memutuskan (\textit{Decision Node}) apakah akan melanjutkan belajar (kembali ke \textit{Fork Node}) atau \textit{"[selesai belajar]"} (menuju node \textit{End}).
+    \item \textbf{Abstraksi Konseptual:} Berbeda dengan pola arsitektur implementasi seperti MVC (\textit{Model-View-Controller}) yang terikat pada kerangka kerja teknis, BCE berfokus pada peran semantik objek dalam menyelesaikan skenario bisnis tanpa bias teknologi.
+    \item \textbf{Pemisahan Logika Intervensi:} Pola ini secara eksplisit memisahkan objek \textit{Control} (pengendali alur logika) dari \textit{Entity} (data persisten). Hal ini krusial untuk menggambarkan letak algoritma \textit{Re-ranking} dan \textit{Elo-rating} yang bertindak sebagai "otak" sistem, terpisah dari data profil siswa.
 \end{enumerate}
 
-\section{Perbandingan (\textit{Before vs After})}
-Perbedaan utama antara sistem saat ini (Gambar \ref{fig:model-konseptual-individu} dan \ref{fig:model-konseptual-sosial}) dan solusi yang diusulkan (Gambar \ref{fig:model-konseptual-solusi}) adalah pada sifat integrasinya:
+Gambar \ref{fig:communication_diagram} memvisualisasikan kolaborasi objek menggunakan pola ini.
 
-\begin{itemize}
-    \item \textbf{\textit{Before} (Sistem Saat Ini):} Integrasi bersifat \textbf{visual} dan \textbf{pasif}. Model personal dan sosial adalah dua entitas terpisah yang hanya ditampilkan berdampingan di antarmuka pengguna (\textit{interface}) \autocite{Brusilovsky2016}.
-    \item \textbf{\textit{After} (Solusi yang Diusulkan):} Integrasi bersifat \textbf{algoritmik} dan \textbf{dinamis}. Seperti yang ditunjukkan oleh alur di Gambar \ref{fig:model-konseptual-solusi}, model personal dan sosial adalah dua sumber data yang secara matematis \textbf{digabungkan} di \textit{backend} (pada aktivitas "Memberikan Penilaian Terintegrasi") untuk menciptakan satu model kemahiran holistik yang baru. Model gabungan inilah yang kemudian secara aktif menggerakkan \textit{semua} bentuk adaptasi sistem.
-\end{itemize}
+\begin{figure}[H]
+    \centering
+    % Placeholder gambar Communication Diagram
+    \includegraphics[width=0.8\textwidth]{image/communication_diagram.png}
+    \caption{\textit{Communication Diagram} - Alur Interaksi pada Sistem}
+    \label{fig:communication_diagram}
+\end{figure}
+
+Diagram di atas menunjukkan interaksi yang diawali oleh Aktor \textbf{Siswa} dan melibatkan kolaborasi tiga jenis objek analisis:
+
+\begin{enumerate}
+    \item \textbf{Boundary Object (\texttt{:LearningInterface}):} 
+    Objek yang membatasi sistem dengan aktor luar. Bertanggung jawab menangkap pemicu kejadian (\textit{event}) berupa jawaban siswa dan menyajikan umpan balik visual.
+    
+    \item \textbf{Control Objects (\texttt{:AssessmentController} \& \texttt{:ReRankingService}):} 
+    Objek pengendali yang merepresentasikan logika bisnis dinamis. 
+    \begin{itemize}
+        \item \texttt{:AssessmentController} mengorkestrasi alur penilaian dan pengecekan kondisi stagnasi.
+        \item \texttt{:ReRankingService} secara spesifik mengenkapsulasi algoritma \textit{Constraint-based Re-ranking} \autocite{DeBiasio2023} untuk memproses logika seleksi mitra.
+    \end{itemize}
+    
+    \item \textbf{Entity Objects (\texttt{currentTask} \& \texttt{currentUser}):} 
+    Objek yang merepresentasikan konsep data persisten yang berumur panjang. Objek ini menyimpan \textbf{state} penting seperti parameter tingkat kesulitan soal ($D_j$) dan skor kemahiran siswa ($\theta$) yang menjadi basis perhitungan bagi objek \textit{Control}.
+\end{enumerate}
+
+Alur pesan (\textit{Message Flow}) pada diagram menunjukkan bahwa interaksi tidak hanya terjadi antar-modul, melainkan melibatkan manipulasi langsung terhadap objek data (\textit{Entities}). Misalnya, pesan \texttt{updateElo()} dikirimkan ke objek \texttt{currentUser}, dan pesan \texttt{getDifficulty()} diambil dari objek \texttt{currentTask}.
+
+Alur pertukaran pesan pada Gambar \ref{fig:communication_diagram} dirancang untuk menangani transisi mulus antara aktivitas pengerjaan tugas individu dan intervensi sosial. Berikut adalah penjelasan rasionalisasi untuk setiap tahapan interaksi:
+
+\begin{enumerate}
+    \item \textbf{Inisiasi dan Evaluasi (Pesan 1-4):}
+    Interaksi dimulai ketika aktor \textit{User} mengirimkan jawaban (\texttt{submitAnswer}) ke \texttt{:LearningInterface}. Antarmuka meneruskan data ke \texttt{:AssessmentController}, yang bertindak sebagai koordinator pusat. Kontroller kemudian meminta atribut kesulitan ($D_j$) dari objek \texttt{currentTask} untuk menghitung probabilitas keberhasilan. Setelah perhitungan selesai, kontroller memerintahkan objek \texttt{currentUser} untuk memperbarui skor Elo-nya (\texttt{updateElo}).
+    
+    \item \textbf{Deteksi Stagnasi (Pesan 5):}
+    Segera setelah pembaruan skor, kontroller mengirim pesan \texttt{checkStagnation()} ke objek \texttt{currentUser}. 
+    Langkah ini krusial untuk mengubah sifat sistem dari pasif menjadi aktif. Sistem tidak menunggu pengguna mengeluh bosan atau macet, melainkan secara proaktif memeriksa variabilitas skor (volatilitas) untuk mendeteksi tanda-tanda \textit{over-personalization} atau \textit{competency bubble} secara \textit{real-time}.
+    
+    \item \textbf{Delegasi Mitigasi (Pesan 6-7):}
+    Jika status stagnasi bernilai \textit{true}, kontroller tidak menangani pencarian mitra sendiri, melainkan mendelegasikannya ke objek \texttt{:ReRankingService} melalui pesan \texttt{findHeterogeneousPeer()}.
+    Pemisahan ini dilakukan untuk mengisolasi logika algoritma \textit{Constraint-based Re-ranking} \autocite{DeBiasio2023} yang kompleks. Layanan ini bertanggung jawab menerapkan batasan statistik (seperti jarak $>1\sigma$) untuk menyaring daftar kandidat mitra, memastikan bahwa rekan yang terpilih benar-benar dapat memecahkan isolasi kompetensi siswa.
+    
+    \item \textbf{Eksekusi Intervensi (Pesan 8):}
+    Setelah mendapatkan objek sesi reviu yang valid, kontroller mengirimkan pesan \texttt{showPeerTask()} ke \texttt{:LearningInterface}.
+    Pesan ini secara dinamis mengubah mode tampilan antarmuka dari "mode pengerjaan soal" menjadi "mode penilaian sejawat" beserta rubriknya. Perubahan konteks yang diinisiasi sistem ini memaksa siswa untuk terlibat dalam aktivitas sosial tanpa perlu menavigasi menu secara manual, menjamin terjadinya eksposur terhadap perspektif baru.
+\end{enumerate}
+
+\section{Perbandingan dengan Sistem Saat Ini}
+\label{sec:perbandingan}
+
+Berdasarkan pemodelan konteks, interaksi, struktur, dan perilaku yang telah diuraikan, Tabel \ref{tbl:perbandingan_sistem} merangkum transformasi fundamental dari desain sistem konvensional (\textit{As-Is}) menuju sistem yang diusulkan (\textit{To-Be}).
+
+\begin{table}[H]
+    \centering
+    \caption{Perbandingan Desain Sistem: \textit{As-Is} vs \textit{To-Be}}
+    \label{tbl:perbandingan_sistem}
+    \begin{tabular}{|p{0.20\textwidth}|p{0.37\textwidth}|p{0.37\textwidth}|}
+        \hline
+        \textbf{Dimensi Komparasi} & \textbf{Sistem Saat Ini (As-Is)} & \textbf{Sistem Usulan (To-Be)} \\
+        \hline
+        \textbf{Paradigma Interaksi} & 
+        \textbf{\textit{User-Pull / Passive System:}} \newline
+        Sistem menunggu inisiatif siswa untuk berkolaborasi. Fitur sosial (forum/diskusi) bersifat opsional dan terpisah dari alur belajar utama. & 
+        \textbf{\textit{System-Push / Proactive System:}} \newline
+        Sistem secara aktif menginterupsi alur belajar mandiri dengan tugas kolaboratif (\textit{mandated intervention}) ketika mendeteksi stagnasi, mengubah peran siswa menjadi responden aktif. \\
+        \hline
+        \textbf{Arsitektur Data \& Asesmen} & 
+        \textbf{\textit{Single-Update Silo:}} \newline
+        Model pengetahuan siswa hanya diperbarui oleh satu sumber data: hasil pengerjaan tugas individu. Aktivitas sosial tidak dikuantifikasi menjadi metrik kompetensi. & 
+        \textbf{\textit{Dual-Update Integrated Loop:}} \newline
+        Model pengetahuan diperbarui dari dua jalur: (1) skor tugas individu, dan (2) kualitas reviu sejawat. Aktivitas sosial dikonversi menjadi data kompetensi yang setara dengan tugas akademik. \\
+        \hline
+        \textbf{Logika Rekomendasi} & 
+        \textbf{\textit{Homophily Bias:}} \newline
+        Algoritma cenderung merekomendasikan konten yang "nyaman" (sesuai tingkat kemampuan), berisiko menciptakan \textit{competency bubble} dan kompetensi semu. & 
+        \textbf{\textit{Heterophily by Design:}} \newline
+        Algoritma \textit{Re-ranking} secara eksplisit memaksakan batasan statistik ($\alpha$) untuk menyuntikkan mitra belajar yang berbeda level ($>1\sigma$), memecahkan isolasi melalui eksposur diversitas. \\
+        \hline
+        \textbf{Mekanisme Mitigasi Isolasi} & 
+        \textbf{\textit{Manual Awareness:}} \newline
+        Mengandalkan kesadaran metakognitif siswa (misal: lewat grafik OSSM) untuk menyadari bahwa mereka perlu berinteraksi dengan orang lain. & 
+        \textbf{\textit{Automated Constraint:}} \newline
+        Menggunakan batasan algoritmik otomatis. Sistem tidak menunggu siswa "sadar", melainkan langsung mengubah antarmuka menjadi mode \textit{Peer Assessment} saat parameter stagnasi terpenuhi. \\
+        \hline
+    \end{tabular}
+\end{table}

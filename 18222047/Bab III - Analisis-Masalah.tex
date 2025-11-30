@@ -38,100 +38,19 @@ Berdasarkan analisis kondisi saat ini pada Subbab \ref{sec:kondisi_saat_ini}, si
 \label{ssec:kebutuhan_fungsional}
 Daftar kebutuhan fungsional sistem dari sisi pengguna (siswa) dan logika sistem disajikan pada Tabel \ref{tbl:kebutuhan-fungsional}.
 
-\begin{longtable}{@{\extracolsep{\fill}} l p{0.8\textwidth}}
-\caption{Kebutuhan Fungsional (FR) Sistem}\label{tbl:kebutuhan-fungsional} \\
-\toprule
-\textbf{Kode} & \textbf{Deskripsi Kebutuhan Fungsional} \\
-\midrule
-\endfirsthead
-
-\caption*{Tabel \ref{tbl:kebutuhan-fungsional} Kebutuhan Fungsional (FR) Sistem (lanjutan)} \\
-\toprule
-\textbf{Kode} & \textbf{Deskripsi Kebutuhan Fungsional} \\
-\midrule
-\endhead
-
-\midrule
-\multicolumn{2}{r}{\textit{Bersambung ke halaman berikutnya}} \\
-\bottomrule
-\endfoot
-
-\bottomrule
-\endlastfoot
-
-% === Data Tabel Kebutuhan Fungsional ===
-\multicolumn{2}{l}{\textbf{Interaksi Pengguna (Siswa)}} \\
-\addlinespace[0.3em]
-FR-01 & Sistem harus menyediakan mekanisme otentikasi bagi siswa untuk mengakses lingkungan pembelajaran personal mereka. \\
-FR-02 & Sistem harus menyajikan materi pembelajaran yang telah disesuaikan tingkat kesulitannya dengan kemahiran siswa saat ini. \\
-FR-03 & Sistem harus memfasilitasi \textbf{interaksi pembelajaran antar-pengguna} yang memungkinkan terjadinya pertukaran informasi atau kolaborasi akademik di dalam platform. \\
-FR-04 & Sistem harus menyediakan informasi mengenai konteks sosial pembelajaran (misalnya, aktivitas komunitas atau capaian kolektif) untuk membangun kesadaran sosial (\textit{social awareness}). \\
-\addlinespace[0.8em]
-
-\multicolumn{2}{l}{\textbf{Logika Adaptasi \& Pemrosesan Data (Sistem)}} \\
-\addlinespace[0.3em]
-FR-05 & Sistem harus memiliki algoritma untuk mengestimasi tingkat kemahiran pengetahuan individu siswa secara dinamis berdasarkan riwayat aktivitasnya. \\
-FR-06 & Sistem harus mampu \textbf{mengkuantifikasi data interaksi sosial} (dari FR-03) menjadi parameter numerik yang dapat diproses lebih lanjut (misalnya, skor keterlibatan atau skor kinerja kolaboratif). \\
-FR-07 & Sistem harus memiliki mekanisme untuk menggabungkan parameter kemahiran individu (FR-05) dan parameter sosial (FR-06) dalam satu model komputasi terpadu. \\
-FR-08 & Sistem harus menggunakan hasil penggabungan model (FR-07) untuk menentukan materi atau aktivitas berikutnya yang paling optimal bagi siswa. \\
-FR-09 & Sistem harus mampu merekomendasikan \textbf{intervensi sosial spesifik} (misalnya, merekomendasikan orang untuk berinteraksi atau topik untuk didiskusikan) guna mencegah isolasi pembelajaran. \\
-\end{longtable}
+\input{table/tabel_3_FR.tex}
 
 \subsection{Kebutuhan Nonfungsional}
 \label{ssec:kebutuhan_nonfungsional}
 Kebutuhan nonfungsional disesuaikan untuk mendukung interaksi sosial yang responsif tanpa menentukan metode spesifik.
 
-\begin{longtable}{@{\extracolsep{\fill}} l p{0.8\textwidth}}
-\caption{Kebutuhan Nonfungsional (NFR) Sistem}\label{tbl:kebutuhan-nonfungsional} \\
-\toprule
-\textbf{Kode} & \textbf{Deskripsi Kebutuhan Nonfungsional} \\
-\midrule
-\endfirsthead
-
-\caption*{Tabel \ref{tbl:kebutuhan-nonfungsional} Kebutuhan Nonfungsional (NFR) Sistem (lanjutan)} \\
-\toprule
-\textbf{Kode} & \textbf{Deskripsi Kebutuhan Nonfungsional} \\
-\midrule
-\endhead
-
-\midrule
-\multicolumn{2}{r}{\textit{Bersambung ke halaman berikutnya}} \\
-\bottomrule
-\endfoot
-
-\bottomrule
-\endlastfoot
-
-% === Data Tabel Kebutuhan Nonfungsional ===
-NFR-01 & \textbf{(Usability)} Antarmuka interaksi sosial harus terintegrasi secara intuitif dengan materi pembelajaran, meminimalkan beban kognitif siswa saat berpindah antara belajar mandiri dan berkolaborasi. \\
-NFR-02 & \textbf{(Interpretability)} Sistem harus mampu memberikan indikasi alasan di balik rekomendasi (baik materi maupun interaksi sosial) agar dapat dipahami oleh siswa. \\
-NFR-03 & \textbf{(Performance)} Pembaruan model pengguna (baik skor individu maupun sosial) harus terjadi dalam waktu nyata (\textit{near real-time}) setelah interaksi selesai dilakukan. \\
-NFR-04 & \textbf{(Scalability)} Sistem harus mampu menangani konkurensi interaksi sosial dari satu kelas (±50 pengguna) secara simultan. \\
-NFR-05 & \textbf{(Privacy)} Mekanisme interaksi sosial harus dirancang sedemikian rupa sehingga data privasi spesifik (seperti nilai ujian mentah) tidak terekspos ke pengguna lain tanpa izin. \\
-NFR-06 & \textbf{(Access)} Sistem dapat diakses melalui peramban web standar. \\
-\end{longtable}
+\input{table/tabel_3_NFR.tex}
 
 \subsection{Pemetaan Kebutuhan}
 \label{ssec:pemetaan_kebutuhan}
 Tabel \ref{tbl:pemetaan-kebutuhan} memetakan tujuan penanganan masalah ke fungsi spesifik yang telah digeneralisasi.
 
-\begin{table}[H]
-    \centering
-    \captionsetup{justification=centering}
-    \caption{Pemetaan Masalah dan Kebutuhan Fungsional}
-    \label{tbl:pemetaan-kebutuhan}
-    \begin{tabular}{@{\extracolsep{\fill}} l p{0.55\textwidth}}
-    \toprule
-    \textbf{Fokus Penanganan Masalah} & \textbf{Implementasi Fungsional (FR)} \\
-    \midrule
-    Model Kompetensi Individu & FR-02, FR-05 \\
-    Fasilitasi Interaksi Sosial & FR-01, FR-03, FR-04 \\
-    Kuantifikasi Aspek Sosial & FR-06 \\
-    Integrasi Model & FR-07 \\
-    Adaptasi & FR-08, FR-09 \\
-    \bottomrule
-    \end{tabular}
-\end{table}
+\input{table/tabel_3_pemetaan.tex}
 
 \section{Analisis Pemilihan Solusi}
 \subsection{Alternatif Solusi}
@@ -161,7 +80,7 @@ Komponen ini berfungsi memodelkan kompetensi siswa. Dalam konteks pencegahan \te
 
     \item \textbf{Sistem \textit{Elo-rating}:}
     Memodelkan interaksi siswa-konten sebagai kompetisi dengan rumus pembaruan sederhana: $R_{baru} = R_{lama} + K(S - E)$ \autocite{Vesin2022}.
-    \textbf{Analisis terhadap \textit{Over-personalization}:} Ini adalah kandidat terkuat karena keberadaan faktor $K$ (koefisien bobot). Faktor ini dapat dimodifikasi secara eksplisit menjadi fungsi dari aktivitas sosial (misalnya, siswa yang kurang bersosialisasi mendapat $K$ yang memaksa perubahan peringkat lebih cepat), memungkinkan integrasi langsung untuk melawan stagnasi algoritma.
+    \textbf{Analisis terhadap \textit{Over-personalization}:} Ini adalah kandidat terkuat karena keberadaan faktor $K$ (koefisien bobot). Faktor ini dapat dimodifikasi secara eksplisit menjadi fungsi dari aktivitas sosial (misalnya, siswa yang kurang bersosialisasi mendapat $K$ yang memaksa perubahan peringkat lebih cepat).
 \end{itemize}
 
 \subsubsection{Alternatif Teknik Interaksi dan Asesmen Sosial (R2 \& R3)}
@@ -218,122 +137,56 @@ Penentuan solusi teknis dilakukan menggunakan metode \textit{Weighted Decision M
 
 Analisis dibagi menjadi tiga keputusan terpisah untuk memilih: (1) Teknik Asesmen Individu, (2) Teknik Interaksi Sosial, dan (3) Teknik Mitigasi \textit{Over-personalization}.
 
-\subsubsection{Keputusan 1: Penentuan Teknik Asesmen Individu}
+\subsubsection{Keputusan 1 - Penentuan Teknik Asesmen Individu}
 \label{sssec:keputusan_asesmen_individu}
 Tujuannya adalah memilih algoritma pelacakan pengetahuan. Berdasarkan tinjauan literatur, kandidat utamanya adalah IRT, FA, BKT, DKT, dan Elo-rating.
 
-\begin{longtable}{@{\extracolsep{\fill}} p{3.0cm} c c c c c c}
-\caption{Matriks Keputusan: Teknik Asesmen Individu}\label{tbl:solusi-r1} \\
-\toprule
-\textbf{Kriteria} & \textbf{Bobot} & \textbf{IRT} & \textbf{FA} & \textbf{BKT} & \textbf{DKT} & \textbf{Elo} \\
-\midrule
-\endfirsthead
-\caption*{Tabel \ref{tbl:solusi-r1} (Lanjutan)} \\
-\toprule
-\textbf{Kriteria} & \textbf{Bobot} & \textbf{IRT} & \textbf{FA} & \textbf{BKT} & \textbf{DKT} & \textbf{Elo} \\
-\midrule
-\endhead
-\midrule
-\multicolumn{6}{r}{\textit{Bersambung ke halaman berikutnya}} \\
-\bottomrule
-\endfoot
-\bottomrule
-\endlastfoot
-
-% Data Penilaian
-Efisiensi Komputasi & 30\% & 2 & 1 & 3 & 1 & 5 \\
-Kebutuhan Data Awal (Cold Start) & 30\% & 2 & 2 & 3 & 2 & 5 \\
-Akurasi Pelacakan & 20\% & 4 & 3 & 3 & 5 & 4 \\
-Interpretabilitas & 20\% & 4 & 3 & 4 & 1 & 5 \\
-\midrule
-\textbf{Skor Terbobot} & \textbf{100\%} & \textbf{2.8} & \textbf{2.1} & \textbf{3.2} & \textbf{2.1} & \textbf{4.8} \\
-\end{longtable}
+\input{table/tabel_3_keputusan1.tex}
 
 \textbf{Rasionalisasi Objektif dan Analisis \textit{Trade-off}:}
 \begin{itemize}
     \item \textbf{Efisiensi \& Kebutuhan Data (Bobot Tinggi - 60\%):} Kriteria ini diberi bobot tertinggi mengingat batasan masalah pengembangan purwarupa yang mungkin tidak memiliki dataset historis besar. \textbf{Elo-rating} unggul mutlak (skor 5) karena algoritma ini dirancang untuk bekerja tanpa pra-kalibrasi yang rumit dan efisien secara komputasi \autocite{Vesin2022}. Sebaliknya, \textbf{IRT} dan \textbf{FA} membutuhkan sampel besar untuk kalibrasi parameter butir soal, dan \textbf{DKT} membutuhkan data pelatihan masif untuk melatih jaringan saraf \autocite{Minn2022}.
     
-    \item \textbf{Akurasi vs. Kelayakan (Trade-off):} \textbf{DKT} memiliki skor akurasi tertinggi (5) karena kemampuannya menangkap pola kompleks \autocite{Minn2022}. Namun, terjadi \textit{trade-off} signifikan pada aspek \textbf{Interpretabilitas} (skor 1) karena sifat \textit{black-box}-nya, yang menyulitkan sistem untuk menjelaskan alasan rekomendasi kepada siswa. \textbf{Elo-rating} dipilih bukan karena ia paling akurat, tetapi karena ia adalah solusi paling layak (\textit{feasible}) untuk diimplementasikan dalam skenario data terbatas dengan akurasi yang masih dapat diterima.
+    \item \textbf{Akurasi vs. Kelayakan (\textit{Trade-off}):} \textbf{DKT} memiliki skor akurasi tertinggi (5) karena kemampuannya menangkap pola kompleks \autocite{Minn2022}. Namun, terjadi \textit{trade-off} signifikan pada aspek \textbf{Interpretabilitas} (skor 1) karena sifat \textit{black-box}-nya, yang menyulitkan sistem untuk menjelaskan alasan rekomendasi kepada siswa. \textbf{Elo-rating} dipilih bukan karena ia paling akurat, tetapi karena ia adalah solusi paling layak (\textit{feasible}) untuk diimplementasikan dalam skenario data terbatas dengan akurasi yang masih dapat diterima.
 \end{itemize}
 
-\subsubsection{Keputusan 2: Penentuan Teknik Interaksi Sosial}
+\subsubsection{Keputusan 2 - Penentuan Teknik Interaksi Sosial}
 \label{sssec:keputusan_asesmen_sosial}
 Tujuannya adalah memilih bentuk aktivitas sosial yang dapat memfasilitasi kolaborasi sekaligus menghasilkan data yang dapat diolah sistem.
 
-\begin{longtable}{@{\extracolsep{\fill}} p{3.0cm} c c c c c c}
-\caption{Matriks Keputusan: Teknik Interaksi Sosial}\label{tbl:solusi-r2} \\
-\toprule
-\textbf{Kriteria} & \textbf{Bobot} & \textbf{PBL} & \textbf{Mentor} & \textbf{Group} & \textbf{Diskusi} & \textbf{Peer Assmt.} \\
-\midrule
-\endfirsthead
-\caption*{Tabel \ref{tbl:solusi-r2} (Lanjutan)} \\
-\toprule
-\textbf{Kriteria} & \textbf{Bobot} & \textbf{PBL} & \textbf{Mentor} & \textbf{Group} & \textbf{Diskusi} & \textbf{Peer Assmt.} \\
-\midrule
-\endhead
-\midrule
-\multicolumn{6}{r}{\textit{Bersambung ke halaman berikutnya}} \\
-\bottomrule
-\endfoot
-\bottomrule
-\endlastfoot
-
-% Data Penilaian
-Keterukuran Data (Measurability) & 35\% & 2 & 3 & 1 & 1 & 5 \\
-Kesetaraan Interaksi & 25\% & 5 & 2 & 5 & 5 & 5 \\
-Potensi Eksposur Keberagaman & 25\% & 4 & 2 & 3 & 3 & 5 \\
-Kompleksitas Implementasi & 15\% & 2 & 3 & 4 & 3 & 4 \\
-\midrule
-\textbf{Skor Terbobot} & \textbf{100\%} & \textbf{3.25} & \textbf{2.5} & \textbf{3.0} & \textbf{2.8} & \textbf{4.85} \\
-\end{longtable}
+\input{table/tabel_3_keputusan2.tex}
 
 \textbf{Rasionalisasi Objektif dan Analisis \textit{Trade-off}:}
 \begin{itemize}
     \item \textbf{Keterukuran Data (35\%):} Sistem membutuhkan input kuantitatif untuk algoritma (FR-06). \textbf{Peer Assessment} mendapatkan skor tertinggi (5) karena menghasilkan artefak terstruktur (skor rubrik dan teks umpan balik) yang mudah dikuantifikasi \autocite{Ihichr2024}. Sebaliknya, \textbf{Diskusi Terbuka} dan \textbf{PBL} (Project-Based Learning) sangat sulit dinilai kontribusi individunya secara otomatis tanpa intervensi manual dosen \autocite{Ryoo2021}.
     
-    \item \textbf{Kesetaraan \& Eksposur (Trade-off):} \textbf{Mentoring} mendapat skor rendah pada kesetaraan (2) karena sifatnya hierarkis (senior-junior) \autocite{Le2024}, yang kurang cocok untuk memecah \textit{echo chamber} dibandingkan interaksi setara. \textbf{PBL} sebenarnya sangat baik dalam kesetaraan dan kolaborasi mendalam (skor 5), namun dipilihnya \textbf{Peer Assessment} merupakan \textit{trade-off} logis karena PBL memiliki kompleksitas implementasi yang tinggi dan risiko \textit{free-rider} yang sulit dideteksi sistem \autocite{Zhang2023}. Peer Assessment dipilih karena memungkinkan sistem "mengatur" siapa menilai siapa untuk memaksa eksposur keberagaman.
+    \item \textbf{Kesetaraan \& Eksposur (\textit{Trade-off}):} \textbf{Mentoring} mendapat skor rendah pada kesetaraan (2) karena sifatnya hierarkis (senior-junior) \autocite{Le2024}, yang kurang cocok untuk memecah \textit{echo chamber} dibandingkan interaksi setara. \textbf{PBL} sebenarnya sangat baik dalam kesetaraan dan kolaborasi mendalam (skor 5), namun dipilihnya \textbf{Peer Assessment} merupakan \textit{trade-off} logis karena PBL memiliki kompleksitas implementasi yang tinggi dan risiko \textit{free-rider} yang sulit dideteksi sistem \autocite{Zhang2023}. Peer Assessment dipilih karena memungkinkan sistem "mengatur" siapa menilai siapa untuk memaksa eksposur keberagaman.
 \end{itemize}
 
-\subsubsection{Keputusan 3: Penentuan Teknik Mitigasi \textit{Over-personalization}}
+\subsubsection{Keputusan 3 - Penentuan Teknik Mitigasi \textit{Over-personalization}}
 \label{sssec:keputusan_mitigasi_bubble}
 Keputusan ini bertujuan memilih mekanisme teknis untuk memecahkan \textit{echo chamber} yang dapat beroperasi secara otomatis dan layak diimplementasikan segera tanpa data pelatihan (\textit{cold-start}).
 
-\begin{longtable}{@{\extracolsep{\fill}} p{3.5cm} c c c c c}
-\caption{Matriks Keputusan: Teknik Mitigasi Isolasi}\label{tbl:solusi-r3} \\
-\toprule
-\textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt A} & \textbf{Alt B} & \textbf{Alt C} & \textbf{Alt D} \\
-\textbf{} & \textbf{} & \textbf{(UCRS)} & \textbf{(GRS)} & \textbf{(FRediECH)} & \textbf{(Re-rank)} \\
-\midrule
-\endfirsthead
-\caption*{Tabel \ref{tbl:solusi-r3} (Lanjutan)} \\
-\toprule
-\textbf{Kriteria} & \textbf{Bobot} & \textbf{Alt A} & \textbf{Alt B} & \textbf{Alt C} & \textbf{Alt D} \\
-\midrule
-\endhead
-\midrule
-\multicolumn{6}{r}{\textit{Bersambung ke halaman berikutnya}} \\
-\bottomrule
-\endfoot
-\bottomrule
-\endlastfoot
-
-% Data Penilaian
-Otomasi Intervensi & 35\% & 1 & 4 & 5 & 5 \\
-Kelayakan Cold-Start & 35\% & 5 & 4 & 1 & 5 \\
-Preservasi Personalisasi & 30\% & 5 & 2 & 4 & 4 \\
-\midrule
-\textbf{Skor Terbobot} & \textbf{100\%} & \textbf{3.6} & \textbf{3.4} & \textbf{3.3} & \textbf{4.7} \\
-\end{longtable}
+\input{table/tabel_3_keputusan3.tex}
 
 \textbf{Rasionalisasi Objektif dan Analisis \textit{Trade-off}:}
 \begin{itemize}
-    \item \textbf{Otomasi Intervensi (35\%):} \textbf{Alt A (UCRS)} mendapat skor terendah (1) karena bergantung pada inisiatif pengguna yang seringkali bias atau pasif. \textbf{Alt C (FRediECH)} dan \textbf{Alt D (Re-ranking)} unggul (5) karena sistem secara proaktif melakukan intervensi untuk memecah \textit{bubble} tanpa menunggu tindakan pengguna.
+    \item \textbf{Automasi Intervensi (35\%):} \textbf{Alt A (UCRS)} mendapat skor terendah (1) karena bergantung pada inisiatif pengguna yang seringkali bias atau pasif. \textbf{Alt C (FRediECH)} dan \textbf{Alt D (Re-ranking)} unggul (5) karena sistem secara proaktif melakukan intervensi untuk memecah \textit{bubble} tanpa menunggu tindakan pengguna.
     
-    \item \textbf{Kelayakan Cold-Start (35\%):} Kriteria ini krusial untuk purwarupa. \textbf{Alt C (FRediECH)} mendapat penalti besar (1) karena berbasis \textit{Deep Learning} yang membutuhkan data historis masif untuk pelatihan awal. Sebaliknya, \textbf{Alt D (Re-ranking)} mendapat skor sempurna (5) karena algoritma ini bekerja secara \textit{greedy} pada daftar yang ada berdasarkan aturan logis, sehingga bisa langsung berjalan sejak hari pertama implementasi \autocite{DeBiasio2023}.
+    \item \textbf{Kelayakan \textit{Cold-Start} (35\%):} Kriteria ini krusial untuk purwarupa. \textbf{Alt C (FRediECH)} mendapat penalti besar (1) karena berbasis \textit{Deep Learning} yang membutuhkan data historis masif untuk pelatihan awal. Sebaliknya, \textbf{Alt D (Re-ranking)} mendapat skor sempurna (5) karena algoritma ini bekerja secara \textit{greedy} pada daftar yang ada berdasarkan aturan logis, sehingga bisa langsung berjalan sejak hari pertama implementasi \autocite{DeBiasio2023}.
     
     \item \textbf{Preservasi Personalisasi (30\%):} \textbf{Alt B (GRS)} cenderung menarik rekomendasi ke rata-rata kelompok, mengorbankan preferensi unik individu (skor 2). \textbf{Alt D (Re-ranking)} dinilai baik (4) karena hanya memodifikasi sebagian kecil daftar rekomendasi (sesuai parameter $\alpha$) untuk menyuntikkan keberagaman, sementara sisa daftar tetap mempertahankan personalisasi berbasis kompetensi individu.
     
-    \item \textbf{Kesimpulan:} \textbf{Constraint-based Re-ranking} \autocite{DeBiasio2023} dipilih. Metode ini menawarkan keseimbangan terbaik: ia seotomatis FRediECH dalam memecahkan isolasi, namun sefleksibel UCRS dalam hal implementasi tanpa data (\textit{cold-start}). Sistem akan menggunakan algoritma ini untuk memfilter calon mitra \textit{peer assessment}, memastikan setiap siswa terpapar pada rekan dengan tingkat kemahiran yang beragam (heterogen) sesuai batasan statistik yang ditentukan.
+    \item \textbf{Kesimpulan:} \textbf{Constraint-based Re-ranking}
+    \autocite{DeBiasio2023} dipilih. Metode ini menawarkan
+    keseimbangan terbaik karena merupakan metode yang
+    otomatis seperti FRediECH dalam memecahkan
+    isolasi, namun fleksibel seperti UCRS dalam hal implementasi tanpa
+    data (\textit{cold-start}). Sistem akan menggunakan algoritma
+    ini untuk memfilter calon pasangan \textit{peer assessment},
+    guna memastikan setiap siswa terpapar pada rekan dengan tingkat
+    kemahiran yang beragam (heterogen) sesuai batasan statistik yang
+    ditentukan.
 \end{itemize}
 
 \subsection{Keputusan Akhir Pemilihan Solusi}
@@ -345,4 +198,6 @@ Komponen pertama yang menjadi fondasi pelacakan kompetensi adalah \textbf{Sistem
 
 Sebagai mekanisme interaksi sosial, sistem akan mengimplementasikan \textbf{\textit{Peer Assessment}} (penilaian sejawat). Keputusan ini diambil karena aktivitas ini menawarkan keuntungan ganda: secara teknis, ia menghasilkan artefak data kuantitatif (skor penilaian) yang terstruktur dan mudah diolah oleh algoritma; secara pedagogis, ia memberikan manfaat metakognitif tertinggi bagi siswa yang berperan sebagai penilai (\textit{assessor}) \autocite{Lu2012}. Aktivitas ini menjadi wadah strategis bagi sistem untuk menyuntikkan intervensi sosial yang terukur, menggantikan interaksi diskusi bebas yang sulit dikuantifikasi.
 
-Komponen krusial yang mengikat kedua elemen di atas untuk memecahkan isolasi pembelajaran adalah algoritma \textbf{\textit{Constraint-based Re-ranking}}. Diadaptasi dari kerangka kerja \textcite{DeBiasio2023}, teknik ini dipilih sebagai strategi mitigasi utama karena keunggulannya dalam menangani masalah \textit{cold-start} dibandingkan pendekatan berbasis graf seperti FRediECH. Sistem akan menggunakan algoritma ini untuk memfilter daftar calon mitra \textit{peer assessment} dengan menerapkan batasan (\textit{constraint}) statistik $\alpha$. Batasan ini memastikan bahwa setiap siswa terpapar pada proporsi minimum rekan yang memiliki tingkat kemahiran berbeda (heterogen), yang dihitung berdasarkan jarak skor Elo mereka. Dengan demikian, sistem menjamin terjadinya diversifikasi perspektif dan pemecahan \textit{echo chamber} kompetensi secara otomatis sejak hari pertama operasional.
+Komponen krusial yang mengikat kedua elemen di atas untuk memecahkan isolasi pembelajaran adalah algoritma \textbf{\textit{Constraint-based Re-ranking}}. Diadaptasi dari kerangka kerja \textcite{DeBiasio2023}, teknik ini dipilih sebagai strategi mitigasi utama karena keunggulannya dalam menangani masalah \textit{cold-start} dibandingkan pendekatan berbasis neural network seperti FRediECH. Sistem akan menggunakan algoritma ini untuk memfilter daftar calon pasangan \textit{peer assessment} dengan menerapkan batasan (\textit{constraint}) statistik $\alpha$. Batasan ini memastikan bahwa setiap siswa terpapar pada proporsi minimum rekan yang memiliki tingkat kemahiran berbeda (heterogen), yang dihitung berdasarkan jarak skor Elo mereka. Dengan demikian, sistem menjamin terjadinya diversifikasi perspektif dan pemecahan \textit{echo chamber} kompetensi secara otomatis sejak hari pertama operasional.
+
+Penerapan mekanisme ini secara fundamental mengubah definisi "konten pembelajaran" dalam sistem. Umpan balik (\textit{feedback}) yang dihasilkan dari aktivitas penilaian sejawat diperlakukan sebagai \textbf{artefak pembelajaran dinamis}. Berbeda dengan soal latihan yang direkomendasikan secara personal (homogen) oleh algoritma Elo, umpan balik dari rekan sejawat yang dipilih secara heterogen merepresentasikan \textbf{eksposur terhadap konten yang tidak terpersonalisasi}. Hal ini memaksa siswa untuk menghadapi perspektif, logika penyelesaian masalah, atau kritik yang berada di luar "zona nyaman" yang terpersonalisasi oleh algoritma, sehingga secara efektif meminimalkan risiko \textit{over-personalization} tanpa merusak jalur belajar (\textit{learning path}) invididu.
