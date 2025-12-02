@@ -23,7 +23,7 @@ bisa dilihat pada tabel \ref{tbl:mapping_fr_uc}.
 Penggambaran dari setiap \textit{use case} di atas dan interaksinya dengan aktor
 luar, tercermin pada gambar \ref{fig:usecase_model} di bawah ini.
 
-\begin{figure}[H]
+\begin{figure}[!ht]
     \centering
     \includegraphics[width=0.8\textwidth]{image/usecase_diagram.png}
     \caption{Use Case Diagram - Interaksi Siswa dengan Sistem Asesmen Adaptif Kolaboratif}
@@ -45,7 +45,7 @@ diusulkan menunjukkan pergeseran dari paradigma sistem yang pasif menjadi sistem
 Perbedaan utamanya terletak pada mekanisme \textit{System-initiated Intervention}, khususnya pada UC-03.
 Berbeda dengan sistem pembelajaran konvensional yang mengandalkan motivasi atau kesadaran siswa untuk
 melakukan kolaborasi, sistem yang diusulkan ini akan secara proaktif memantau kondisi model kompetensi siswa
-melalui hasil algoritma Elo-rating. Ketika terjadi stagnasi dalam perubahan skor, maka sistem akan "mendorong"
+melalui hasil algoritma Elo rating. Ketika terjadi stagnasi dalam perubahan skor, maka sistem akan "mendorong"
 aktivitas kolaboratif sebagai response otomatis. Hal ini memperluas cakupan sistem dari sekadar penyaji konten
 pembelajaran adaptif menjadi fasilitator pembelajaran otonom yang menjamin terjadinya eksposur sosial
 terhadap keberagaman kompetensi.
@@ -58,12 +58,12 @@ Untuk memodelkan bagaimana komponen internal berkolaborasi dalam menjalankan log
 Pemilihan pola analisis BCE didasarkan pada kesesuaiannya dalam menjembatani spesifikasi \textit{Use Case} (fungsionalitas) menuju perancangan komponen logis, dengan karakteristik sebagai berikut:
 \begin{enumerate}
     \item \textbf{Abstraksi Konseptual:} Berbeda dengan pola arsitektur implementasi seperti MVC (\textit{Model-View-Controller}) yang terikat pada kerangka kerja teknis, BCE berfokus pada peran semantik objek dalam menyelesaikan skenario bisnis tanpa bias teknologi.
-    \item \textbf{Pemisahan Logika Intervensi:} Pola ini secara eksplisit memisahkan objek \textit{Control} (pengendali alur logika) dari \textit{Entity} (data persisten). Hal ini krusial untuk menggambarkan letak algoritma \textit{Re-ranking} dan \textit{Elo-rating} yang bertindak sebagai "otak" sistem, terpisah dari data profil siswa.
+    \item \textbf{Pemisahan Logika Intervensi:} Pola ini secara eksplisit memisahkan objek \textit{Control} (pengendali alur logika) dari \textit{Entity} (data persisten). Hal ini krusial untuk menggambarkan letak algoritma \textit{Re-ranking} dan \textit{Elo rating} yang bertindak sebagai "otak" sistem, terpisah dari data profil siswa.
 \end{enumerate}
 
 Gambar \ref{fig:communication_diagram} memvisualisasikan kolaborasi objek menggunakan pola ini.
 
-\begin{figure}[H]
+\begin{figure}[!ht]
     \centering
     % Placeholder gambar Communication Diagram
     \includegraphics[width=0.8\textwidth]{image/communication_diagram.png}
@@ -79,10 +79,10 @@ Diagram di atas menunjukkan interaksi yang diawali oleh Aktor \textbf{Siswa} dan
     
     \item \textbf{Control Objects (\texttt{:AssessmentController} \& \texttt{:ReRankingService}):} 
     Objek pengendali yang merepresentasikan logika bisnis dinamis. 
-    \begin{itemize}
+    \begin{enumerate}
         \item \texttt{:AssessmentController} mengorkestrasi alur penilaian dan pengecekan kondisi stagnasi.
         \item \texttt{:ReRankingService} adalah objek kontrol yang secara spesifik mengenkapsulasi algoritma \textit{Constraint-based Re-ranking} \autocite{DeBiasio2023} untuk memproses logika seleksi mitra.
-    \end{itemize}
+    \end{enumerate}
     
     \item \textbf{Entity Objects (\texttt{currentTask} \& \texttt{currentUser}):} 
     Objek yang merepresentasikan konsep data persisten yang berumur panjang. Objek ini menyimpan \textbf{state} penting seperti parameter tingkat kesulitan soal ($D_j$) dan skor kemahiran siswa ($\theta$) yang menjadi basis perhitungan bagi objek \textit{Control}.
@@ -98,7 +98,7 @@ Alur pertukaran pesan pada Gambar \ref{fig:communication_diagram} dirancang untu
     
     \item \textbf{Deteksi Stagnasi (Pesan 5):}
     Segera setelah pembaruan skor, kontroller mengirim pesan \texttt{checkStagnation()} ke objek \texttt{currentUser}. 
-    Langkah ini krusial untuk mengubah sifat sistem dari pasif menjadi aktif. Sistem tidak menunggu pengguna mengeluh bosan atau kemajuan belajarnya terhambat, melainkan secara proaktif memeriksa variabilitas skor (volatilitas) untuk mendeteksi tanda-tanda \textit{over-personalization} atau \textit{competency bubble} secara \textit{real-time}.
+    Langkah ini krusial untuk mengubah sifat sistem dari pasif menjadi aktif. Sistem tidak menunggu pengguna mengeluh bosan atau kemajuan belajarnya terhambat, melainkan secara proaktif memeriksa variabilitas skor (volatilitas) untuk mendeteksi tanda-tanda \textit{overpersonalization} atau \textit{competency bubble} secara \textit{real-time}.
     
     \item \textbf{Delegasi Mitigasi (Pesan 6-7):}
     Jika status stagnasi bernilai \textit{true}, kontroller tidak menangani pencarian mitra sendiri, melainkan mendelegasikannya ke objek \texttt{:ReRankingService} melalui pesan \texttt{findHeterogeneousPeer()}.
@@ -114,7 +114,7 @@ Alur pertukaran pesan pada Gambar \ref{fig:communication_diagram} dirancang untu
 
 Berdasarkan pemodelan konteks, interaksi, struktur, dan perilaku yang telah diuraikan, Tabel \ref{tbl:perbandingan_sistem} merangkum transformasi fundamental dari desain sistem konvensional (\textit{As-Is}) menuju sistem yang diusulkan (\textit{To-Be}).
 
-\begin{table}[H]
+\begin{table}[!ht]
     \centering
     \caption{Perbandingan Desain Sistem \textit{As-Is} vs \textit{To-Be}}
     \label{tbl:perbandingan_sistem}
